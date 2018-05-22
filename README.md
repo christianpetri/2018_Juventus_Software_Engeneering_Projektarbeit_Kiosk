@@ -1,0 +1,1 @@
+Es soll eine Applikation erstellt werden, welche einen Kiosk simuliert.
