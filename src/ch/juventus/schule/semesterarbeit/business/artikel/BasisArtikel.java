@@ -1,7 +1,6 @@
-package ch.juventus.schule.semesterarbeit.artikel;
+package ch.juventus.schule.semesterarbeit.business.artikel;
 
 import java.util.Objects;
-import java.util.Scanner;
 
 /**
  * @author : ${user}
@@ -10,12 +9,10 @@ import java.util.Scanner;
  public class BasisArtikel {
     protected String bezeichung;
     protected int preis;
-    protected boolean alterMussUeberprueftWerden;
 
-    public BasisArtikel(String bezeichung, int preis, boolean alterMussUeberprueftWerden) {
+    public BasisArtikel(String bezeichung, int preis) {
         this.bezeichung = bezeichung;
         this.preis = preis;
-        this.alterMussUeberprueftWerden = alterMussUeberprueftWerden;
     }
 
     public String getBezeichung() {
@@ -24,10 +21,6 @@ import java.util.Scanner;
 
     public int getPreis() {
         return preis;
-    }
-
-    public boolean isAlterMussUeberprueftWerden() {
-        return alterMussUeberprueftWerden;
     }
 
     @Override
@@ -44,13 +37,12 @@ import java.util.Scanner;
         if (!(o instanceof BasisArtikel)) return false;
         BasisArtikel that = (BasisArtikel) o;
         return preis == that.preis &&
-                alterMussUeberprueftWerden == that.alterMussUeberprueftWerden &&
                 Objects.equals(bezeichung, that.bezeichung);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(bezeichung, preis, alterMussUeberprueftWerden);
+        return Objects.hash(bezeichung, preis);
     }
 }

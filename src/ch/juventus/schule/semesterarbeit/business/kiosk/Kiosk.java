@@ -1,13 +1,11 @@
-package ch.juventus.schule.semesterarbeit.kiosk;
+package ch.juventus.schule.semesterarbeit.business.kiosk;
 
-import ch.juventus.schule.semesterarbeit.artikel.BasisArtikel;
-import ch.juventus.schule.semesterarbeit.lieferant.Lieferant;
-import ch.juventus.schule.semesterarbeit.mitarbeiter.Mitarbeiter;
+import ch.juventus.schule.semesterarbeit.business.artikel.BasisArtikel;
+import ch.juventus.schule.semesterarbeit.business.lieferant.Lieferant;
+import ch.juventus.schule.semesterarbeit.business.mitarbeiter.Mitarbeiter;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
 /**
  * @author : ${user}
@@ -44,25 +42,4 @@ public class Kiosk {
                 ", lieferant=" + lieferant +
                 '}';
     }
-
-    public boolean alterUeberpruefen() {
-        System.out.println("Ist die Person mindestens 18 Jahre Alt?\n Geben Sie bitte \"Ja\" oder \"Nein\" ein");
-        Scanner scan = new Scanner(System.in);
-        boolean istNichtEineValideAntwort = true;
-        while (istNichtEineValideAntwort) {
-            String antwort = scan.next();
-            if (antwort.toLowerCase().equals("j") || antwort.toLowerCase().equals("ja")) {
-                istNichtEineValideAntwort = false;
-                return true;
-            } else if (antwort.toLowerCase().equals("n") || antwort.toLowerCase().equals("nein")) {
-                istNichtEineValideAntwort = false;
-                return false;
-            } else {
-                System.out.println("Bitte geben Sie Ja oder Nein ein ");
-                System.out.println("Ihre Eingabe: "+ antwort);
-            }
-        }
-        return false;
-    }
-
 }

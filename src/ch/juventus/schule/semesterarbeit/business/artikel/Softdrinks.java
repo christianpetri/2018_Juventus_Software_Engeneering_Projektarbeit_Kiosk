@@ -1,4 +1,4 @@
-package ch.juventus.schule.semesterarbeit.artikel;
+package ch.juventus.schule.semesterarbeit.business.artikel;
 
 /**
  * @author : ${user}
@@ -6,8 +6,8 @@ package ch.juventus.schule.semesterarbeit.artikel;
  */
 public class Softdrinks extends Getraenk {
 
-    public Softdrinks(String bezeichung, int preis, boolean alterMussUeberprueftWerden, int deciliter) {
-        super(bezeichung, preis, alterMussUeberprueftWerden, deciliter);
+    public Softdrinks(String bezeichung, int preis, int deciliter) {
+        super(bezeichung, preis, deciliter);
     }
 
     @Override
@@ -16,7 +16,6 @@ public class Softdrinks extends Getraenk {
                 "deciliter=" + deciliter +
                 ", bezeichung='" + bezeichung + '\'' +
                 ", preis=" + preis +
-                ", alterMussUeberprueftWerden=" + alterMussUeberprueftWerden +
                 '}';
     }
 }

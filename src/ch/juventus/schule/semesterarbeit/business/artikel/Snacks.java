@@ -1,4 +1,4 @@
-package ch.juventus.schule.semesterarbeit.artikel;
+package ch.juventus.schule.semesterarbeit.business.artikel;
 
 /**
  * @author : ${user}
@@ -7,8 +7,8 @@ package ch.juventus.schule.semesterarbeit.artikel;
 public class Snacks extends BasisArtikel {
     private Snacks_Typ typ;
 
-    public Snacks(String bezeichung, int preis, boolean alterMussUeberprueftWerden, Snacks_Typ typ) {
-        super(bezeichung, preis, alterMussUeberprueftWerden);
+    public Snacks(String bezeichung, int preis, Snacks_Typ typ) {
+        super(bezeichung, preis);
         this.typ = typ;
     }
 
@@ -18,7 +18,6 @@ public class Snacks extends BasisArtikel {
                 "typ=" + typ +
                 ", bezeichung='" + bezeichung + '\'' +
                 ", preis=" + preis +
-                ", alterMussUeberprueftWerden=" + alterMussUeberprueftWerden +
                 '}';
     }
 }

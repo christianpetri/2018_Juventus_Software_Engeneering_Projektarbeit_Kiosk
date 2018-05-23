@@ -1,9 +1,7 @@
-package ch.juventus.schule.semesterarbeit.lieferant;
+package ch.juventus.schule.semesterarbeit.business.lieferant;
 
-import ch.juventus.schule.semesterarbeit.artikel.BasisArtikel;
+import ch.juventus.schule.semesterarbeit.business.artikel.BasisArtikel;
 
-import java.util.List;
-import java.util.List;
 import java.util.Map;
 
 /**
