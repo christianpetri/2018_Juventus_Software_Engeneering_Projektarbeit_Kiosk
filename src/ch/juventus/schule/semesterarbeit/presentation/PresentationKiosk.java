@@ -1,25 +1,28 @@
 package ch.juventus.schule.semesterarbeit.presentation;
 
 import ch.juventus.schule.semesterarbeit.business.artikel.*;
+import ch.juventus.schule.semesterarbeit.business.artikelFactory.ArtikelFactory;
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
-import ch.juventus.schule.semesterarbeit.business.kunde.Kunde;
 import ch.juventus.schule.semesterarbeit.business.lieferant.Lieferant;
 import ch.juventus.schule.semesterarbeit.business.mitarbeiter.Mitarbeiter;
-import ch.juventus.schule.semesterarbeit.persistence.DataAccessMock;
+import ch.juventus.schule.semesterarbeit.persistence.DatenverbindungAttrappe;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.*;
-
-import static ch.juventus.schule.semesterarbeit.business.artikelFactory.ArtikelFactory.*;
-import static ch.juventus.schule.semesterarbeit.business.artikelFactory.ArtikelFactory.erzeugeGrosserApfelsaft;
-import static ch.juventus.schule.semesterarbeit.business.artikelFactory.ArtikelFactory.erzeugeMars;
 
 /**
  * @author : ${user}
  * @since: ${date}
  */
-public class Controller {
-    DataAccessMock db = new DataAccessMock();
-    public Controller() {
+public class PresentationKiosk {
+
+    public PresentationKiosk() {
 
         /*
         List<Mitarbeiter> mitarbeiter = new ArrayList<>();
@@ -81,36 +84,14 @@ public class Controller {
          */
     }
     public void kioskErstellen(){
-        System.out.println("kioskErstellen");
-        Mitarbeiter mitarbeiter = new Mitarbeiter("Hans");
-
-        Map<BasisArtikel, Integer> lagerbestandKiosk = new HashMap<>();
-        lagerbestandKiosk.put( erzeugeGrosserApfelsaft(), 5 );
-        lagerbestandKiosk.put( erzeugeMars()            , 8 );
-        lagerbestandKiosk.put( erzeugeGrossesBier()     , 9 );
-        lagerbestandKiosk.put( erzeugeZigarettenPack()  , 9 );
-        lagerbestandKiosk.put( erzeugeGrosserVodka()    , 9 );
-        lagerbestandKiosk.put( erzeugeGlamourMagazin()  , 9 );
-
-
-        Map<BasisArtikel, Integer> lagerbestadLieferant = new HashMap<>();
-        lagerbestadLieferant.put(erzeugeGrosserApfelsaft(), 5);
-        lagerbestadLieferant.put(erzeugeMars(),4);
-        lagerbestadLieferant.put(erzeugeGrossesBier(),4);
-
-        Kiosk kiosk = db.kioskHinzufuegen(new Kiosk("Engelgasse",
-                "Rapperswil SG",
-                false,
-                mitarbeiter,
-                lagerbestandKiosk,
-                0,
-                db.lieferantHinzufuegen(new Lieferant("Meier", lagerbestadLieferant))
-        ));
-        System.out.println("Controller: " + kiosk);
+        System.out.println("Kiosk erstellen");
+        DatenverbindungAttrappe datenverbindungAttrappe = DatenverbindungAttrappe.getInstance();
+        datenverbindungAttrappe.kioskHinzufuegen();
     }
 
     public void alleKiosksAnzeigen(){
-        Set<Kiosk> kisoks = db.getKiosks();
+        /*
+        Set<Kiosk> kisoks = datenSpeicher.getKiosks();
         if(kisoks.isEmpty()){
             System.out.println("Noch keine Kiosks vorhanden");
         } else {
@@ -118,6 +99,15 @@ public class Controller {
                 System.out.println(kiosk);
             }
         }
+        */
     }
 
+    public void warenkorbErstellen(ActionEvent actionEvent) throws IOException {
+        Node node=(Node) actionEvent.getSource();
+        Stage stage=(Stage) node.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("warenkorbKundeErstellen.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 }

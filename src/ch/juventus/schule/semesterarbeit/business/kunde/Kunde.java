@@ -1,5 +1,7 @@
 package ch.juventus.schule.semesterarbeit.business.kunde;
 
+import java.util.Objects;
+
 /**
  * @author : ${user}
  * @since: ${date}
@@ -34,5 +36,20 @@ public class Kunde {
                 ", alter=" + alter +
                 ", warenkorb=" + warenkorb +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Kunde)) return false;
+        Kunde kunde = (Kunde) o;
+        return alter == kunde.alter &&
+                Objects.equals(name, kunde.name);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(name, alter);
     }
 }
