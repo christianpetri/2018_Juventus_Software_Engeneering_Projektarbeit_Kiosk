@@ -1,5 +1,6 @@
 package ch.juventus.schule.semesterarbeit.business.artikel;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 /**

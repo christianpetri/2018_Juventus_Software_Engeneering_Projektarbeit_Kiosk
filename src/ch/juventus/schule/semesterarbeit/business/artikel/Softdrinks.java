@@ -13,9 +13,9 @@ public class Softdrinks extends Getraenk {
     @Override
     public String toString() {
         return "Softdrinks{" +
-                "deciliter=" + deciliter +
-                ", bezeichung='" + bezeichung + '\'' +
-                ", preis=" + preis +
+                "Deciliter=" + deciliter +
+                ", Bezeichung='" + bezeichung + '\'' +
+                ", Preis=" + preis +
                 '}';
     }
 }

@@ -11,4 +11,13 @@ public class Getraenk extends BasisArtikel {
         super(bezeichung, preis);
         this.deciliter = deciliter;
     }
+
+    @Override
+    public String toString() {
+        return "Getraenk{" +
+                "deciliter=" + deciliter +
+                ", bezeichung='" + bezeichung + '\'' +
+                ", preis=" + preis +
+                '}';
+    }
 }
