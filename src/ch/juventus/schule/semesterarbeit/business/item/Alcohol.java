@@ -1,26 +1,25 @@
-package ch.juventus.schule.semesterarbeit.business.artikel;
+package ch.juventus.schule.semesterarbeit.business.item;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 /**
  * @author : ${user}
  * @since: ${date}
  */
-public class Alkohol extends Getraenk {
+public class Alcohol extends Drink {
     private int mindestAlter;
 
-    public Alkohol(String bezeichung, int preis, int deciliter, int mindestAlter) {
+    public Alcohol(String bezeichung, int preis, int deciliter, int mindestAlter) {
         super(bezeichung, preis, deciliter);
         this.mindestAlter = mindestAlter;
     }
 
     @Override
     public String toString() {
-        return "Alkohol{" +
+        return "Alcohol{" +
                 "Deciliter=" + deciliter +
-                ", Bezeichung='" + bezeichung + '\'' +
-                ", Preis=" + preis +
+                ", Bezeichung='" + description + '\'' +
+                ", Preis=" + price +
                 '}';
     }
 

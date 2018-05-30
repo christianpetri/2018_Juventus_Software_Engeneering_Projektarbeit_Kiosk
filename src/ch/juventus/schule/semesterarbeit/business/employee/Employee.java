@@ -1,13 +1,13 @@
-package ch.juventus.schule.semesterarbeit.business.mitarbeiter;
+package ch.juventus.schule.semesterarbeit.business.employee;
 
 /**
  * @author : ${user}
  * @since: ${date}
  */
-public class Mitarbeiter {
+public class Employee {
     private String name;
 
-    public Mitarbeiter(String name) {
+    public Employee(String name) {
         this.name = name;
     }
 
@@ -17,7 +17,7 @@ public class Mitarbeiter {
 
     @Override
     public String toString() {
-        return "Mitarbeiter{" +
+        return "Employee{" +
                 "name='" + name + '\'' +
                 '}';
     }

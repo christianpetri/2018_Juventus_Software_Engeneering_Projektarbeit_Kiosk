@@ -1,8 +1,8 @@
 package ch.juventus.schule.semesterarbeit.business.kiosk;
 
-import ch.juventus.schule.semesterarbeit.business.artikel.BasisArtikel;
-import ch.juventus.schule.semesterarbeit.business.lieferant.Lieferant;
-import ch.juventus.schule.semesterarbeit.business.mitarbeiter.Mitarbeiter;
+import ch.juventus.schule.semesterarbeit.business.employee.Employee;
+import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
+import ch.juventus.schule.semesterarbeit.business.supplier.Supplier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,30 +17,30 @@ public class Kiosk {
     private String name;
     private String standort;
     private boolean kisokIstOffen;
-    private List<Mitarbeiter> mitarbeiter = new ArrayList<>();
-    private Map<BasisArtikel, Integer> lager;
+    private List<Employee> employee = new ArrayList<>();
+    private Map<BaseArticle, Integer> lager;
     private int geldsummeDieInDerKasseIst;
-    private Lieferant lieferant;
+    private Supplier supplier;
 
-    public Kiosk(String name, String standort, boolean kisokIstOffen,Mitarbeiter mitarbeiter, Map<BasisArtikel, Integer> lager, int geldsummeDieInDerKasseIst, Lieferant lieferant) {
+    public Kiosk(String name, String standort, boolean kisokIstOffen, Employee employee, Map<BaseArticle, Integer> lager, int geldsummeDieInDerKasseIst, Supplier supplier) {
         this.name = name;
         this.standort = standort;
         this.kisokIstOffen = kisokIstOffen;
-        this.mitarbeiter.add(mitarbeiter);
+        this.employee.add(employee);
         this.lager = lager;
         this.geldsummeDieInDerKasseIst = geldsummeDieInDerKasseIst;
-        this.lieferant = lieferant;
+        this.supplier = supplier;
     }
 
-    public List<Mitarbeiter> getMitarbeiter() {
-        return mitarbeiter;
+    public List<Employee> getEmployee() {
+        return employee;
     }
 
-    public void setMitarbeiter(Mitarbeiter mitarbeiter) {
-        this.mitarbeiter.add(mitarbeiter);
+    public void setEmployee(Employee employee) {
+        this.employee.add(employee);
     }
 
-    public Map<BasisArtikel, Integer> getLager() {
+    public Map<BaseArticle, Integer> getLager() {
         return lager;
     }
 
@@ -50,10 +50,10 @@ public class Kiosk {
                 "name='" + name + '\'' +
                 ", Standort='" + standort + '\'' +
                 ", Ist der Kiosk geöffnet=" + kisokIstOffen +
-                ", Mitarbeiter=" + mitarbeiter +
+                ", Employee=" + employee +
                 ", Lager=" + lager +
                 ", Geldsumme in der Kasse=" + geldsummeDieInDerKasseIst +
-                ", Lieferant=" + lieferant +
+                ", Supplier=" + supplier +
                 '}';
     }
 

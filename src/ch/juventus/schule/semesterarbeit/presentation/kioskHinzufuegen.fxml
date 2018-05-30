@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="buttonLeft" alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.juventus.schule.semesterarbeit.presentation.PresentationKiosk">
+<GridPane fx:id="buttonLeft" alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.juventus.schule.semesterarbeit.presentation.kioskHinzufuegen">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
@@ -31,8 +31,9 @@
             <Label layoutX="11.0" layoutY="147.0" text="Mitarbeiter" />
             <TextField fx:id="kioskStartkapital" layoutX="14.0" layoutY="112.0" text="Startkapital in CHF" />
             <TextField fx:id="kioskMitarbeiterName" layoutX="14.0" layoutY="164.0" text="Name" />
+            <Button layoutX="126.0" layoutY="255.0" mnemonicParsing="false" onAction="#kioskHinzufuegen" text="Ok" />
+            <Button layoutX="15.0" layoutY="255.0" mnemonicParsing="false" onAction="#geheZurueckZumHauptfenster" text="Abbrechen" />
          </children>
       </Pane>
-      <Button mnemonicParsing="false" text="Ok" GridPane.columnIndex="2" GridPane.rowIndex="3" />
    </children>
 </GridPane>

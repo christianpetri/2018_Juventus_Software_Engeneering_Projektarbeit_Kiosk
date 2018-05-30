@@ -1,6 +1,6 @@
-package ch.juventus.schule.semesterarbeit.business.lieferant;
+package ch.juventus.schule.semesterarbeit.business.supplier;
 
-import ch.juventus.schule.semesterarbeit.business.artikel.BasisArtikel;
+import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
 
 import java.util.Map;
 import java.util.Objects;
@@ -9,11 +9,11 @@ import java.util.Objects;
  * @author : ${user}
  * @since: ${date}
  */
-public class Lieferant {
+public class Supplier {
     private String name;
-    private Map<BasisArtikel, Integer> artikel;
+    private Map<BaseArticle, Integer> artikel;
 
-    public Lieferant(String name, Map<BasisArtikel, Integer> artikel) {
+    public Supplier(String name, Map<BaseArticle, Integer> artikel) {
         this.name = name;
         this.artikel = artikel;
     }
@@ -22,24 +22,24 @@ public class Lieferant {
         return name;
     }
 
-    public Map<BasisArtikel, Integer> getArtikel() {
+    public Map<BaseArticle, Integer> getArtikel() {
         return artikel;
     }
 
     @Override
     public String toString() {
-        return "Lieferant{" +
+        return "Supplier{" +
                 "name='" + name + '\'' +
-                ", artikel=" + artikel +
+                ", item=" + artikel +
                 '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Lieferant)) return false;
-        Lieferant lieferant = (Lieferant) o;
-        return Objects.equals(name, lieferant.name);
+        if (!(o instanceof Supplier)) return false;
+        Supplier supplier = (Supplier) o;
+        return Objects.equals(name, supplier.name);
     }
 
     @Override

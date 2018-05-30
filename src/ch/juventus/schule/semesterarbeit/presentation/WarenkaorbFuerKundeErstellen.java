@@ -6,8 +6,6 @@ import javafx.event.ActionEvent;
  * @author : ${user}
  * @since: ${date}
  */
-public class Einkaufen {
+public class WarenkaorbFuerKundeErstellen {
 
-    public void kundeErstellen(ActionEvent actionEvent) {
-    }
 }

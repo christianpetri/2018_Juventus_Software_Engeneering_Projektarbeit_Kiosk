@@ -1,4 +1,4 @@
-package ch.juventus.schule.semesterarbeit.business.artikel;
+package ch.juventus.schule.semesterarbeit.business.item;
 
 import java.util.Scanner;
 
@@ -6,9 +6,9 @@ import java.util.Scanner;
  * @author : ${user}
  * @since: ${date}
  */
-public class Tabak extends BasisArtikel {
+public class Tobacco extends BaseArticle {
 
-    public Tabak(String bezeichung, int preis) {
+    public Tobacco(String bezeichung, int preis) {
         super(bezeichung, preis);
     }
 
