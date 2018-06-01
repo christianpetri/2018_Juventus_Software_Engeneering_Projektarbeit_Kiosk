@@ -18,7 +18,7 @@ import java.util.*;
  * @author : ${user}
  * @since: ${date}
  */
-public class Hauptfenster {
+public class mainWindow {
     private DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
 
     @FXML
@@ -26,7 +26,7 @@ public class Hauptfenster {
 
     @FXML
     private void initialize() {
-
+        dataBaseAccessMock.addKiosk("Haselgasse", "Wald", "Hansi", 1000);
         Set<Kiosk> kiosks = dataBaseAccessMock.getKiosks();
         if(kiosks.isEmpty()){
             System.out.println("Noch keine Kiosks vorhanden");
@@ -40,7 +40,7 @@ public class Hauptfenster {
         }
     }
 
-    public Hauptfenster() {
+    public mainWindow() {
 
 
         /*
@@ -50,25 +50,25 @@ public class Hauptfenster {
         System.out.println(employee);
 
         Map<BaseArticle, Integer> lagerbestandKiosk = new HashMap<>();
-        lagerbestandKiosk.put( erzeugeGrosserApfelsaft(), 5 );
-        lagerbestandKiosk.put( erzeugeMars()            , 8 );
-        lagerbestandKiosk.put( erzeugeGrossesBier()     , 9 );
-        lagerbestandKiosk.put( erzeugeZigarettenPack()  , 9 );
-        lagerbestandKiosk.put( erzeugeGrosserVodka()    , 9 );
-        lagerbestandKiosk.put( erzeugeGlamourMagazin()  , 9 );
+        lagerbestandKiosk.put( createBigAppleJuice(), 5 );
+        lagerbestandKiosk.put( createMars()            , 8 );
+        lagerbestandKiosk.put( createBigBeer()     , 9 );
+        lagerbestandKiosk.put( createCigarettePack()  , 9 );
+        lagerbestandKiosk.put( createBigVodka()    , 9 );
+        lagerbestandKiosk.put( createGlamourMagazin()  , 9 );
         */
         /*
         Map<BaseArticle, Integer> lagerbestadLieferant = new HashMap<>();
-        lagerbestadLieferant.put(erzeugeGrosserApfelsaft(), 5);
-        lagerbestadLieferant.put(erzeugeMars(),4);
-        lagerbestadLieferant.put(erzeugeGrossesBier(),4);
+        lagerbestadLieferant.put(createBigAppleJuice(), 5);
+        lagerbestadLieferant.put(createMars(),4);
+        lagerbestadLieferant.put(createBigBeer(),4);
 
         List<Supplier> supplier = new ArrayList<>();
         supplier.add(new Supplier("Meier", lagerbestadLieferant));
 
        Kiosk kiosk = new Kiosk("Engelgasse", "Rapperswil SG", false, hans, lagerbestandKiosk, 0, supplier.get(0));
 
-        System.out.println(lagerbestadLieferant.containsKey(erzeugeGrossesBier()));
+        System.out.println(lagerbestadLieferant.containsKey(createBigBeer()));
         /*
         if(bier.isAlterMussUeberprueftWerden() && customerAge >= bier)
         System.out.println(lagerbestadLieferant.keySet());
@@ -76,7 +76,7 @@ public class Hauptfenster {
         /*
        //System.out.println(kiosk);
        System.out.println(lagerbestandKiosk.size());
-       Alcohol bier = erzeugeGrossesBier();
+       Alcohol bier = createBigBeer();
        */
 /*
         for (Map.Entry<BaseArticle, Integer> entry : lagerbestandKiosk.entrySet()) {
@@ -87,17 +87,17 @@ public class Hauptfenster {
         Customer walter = new Customer("Walter" , 18);
 
         System.out.println(lagerbestandKiosk);
-        walter.getShoppingCart().artikelHinzufuegen(lagerbestandKiosk,erzeugeGrosserApfelsaft(),4);
-        walter.getShoppingCart().artikelHinzufuegen(lagerbestandKiosk,erzeugeGrosserApfelsaft(),1);
-        walter.getShoppingCart().artikelHinzufuegen(lagerbestandKiosk,erzeugeMars(),4);
-        walter.getShoppingCart().artikelHinzufuegen(lagerbestandKiosk,erzeugeZigarettenPack(),4);
-        walter.getShoppingCart().artikelHinzufuegen(lagerbestandKiosk,erzeugeGrossesBier(),4);
+        walter.getShoppingCart().artikelHinzufuegen(lagerbestandKiosk,createBigAppleJuice(),4);
+        walter.getShoppingCart().artikelHinzufuegen(lagerbestandKiosk,createBigAppleJuice(),1);
+        walter.getShoppingCart().artikelHinzufuegen(lagerbestandKiosk,createMars(),4);
+        walter.getShoppingCart().artikelHinzufuegen(lagerbestandKiosk,createCigarettePack(),4);
+        walter.getShoppingCart().artikelHinzufuegen(lagerbestandKiosk,createBigBeer(),4);
 
 
         System.out.println(walter);
 
         walter.getShoppingCart().artikelBezahlen();
-        //System.out.println(lagerbestandKiosk.get(erzeugeGrossesBier()));
+        //System.out.println(lagerbestandKiosk.get(createBigBeer()));
         System.out.println(lagerbestandKiosk);
         //ListIterator iterator = lagerbestandKiosk.values();
          */
@@ -107,19 +107,30 @@ public class Hauptfenster {
 
     }
 
-    public void geheZuWarenkorbErstellen(ActionEvent actionEvent) throws IOException {
+    public void goToCreateShoppingCart(ActionEvent actionEvent) throws IOException {
+        /*
+         Node node=(Node) actionEvent.getSource();
+                Stage stage=(Stage) node.getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("addArticleToShoppingBasket.fxml"));
+                Parent root = loader.load();
+                addArticleToShoppingBasket display = loader.getController();
+                display.setCustomer(customerName.getText(),Integer.parseInt(customerAge.getText()));
+         */
         Node node=(Node) actionEvent.getSource();
         Stage stage=(Stage) node.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("warenkorbKundeErstellen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("addCustomer.fxml"));
+        Parent root = loader.load();
+        addCustomer ctrl = loader.getController();
+        ctrl.setKiosk("Haselgasse", "Wald");
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void geheZuKioskHinzufuegen(ActionEvent actionEvent) throws IOException {
+    public void goToAddKiosk(ActionEvent actionEvent) throws IOException {
         Node node=(Node) actionEvent.getSource();
         Stage stage=(Stage) node.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("kioskHinzufuegen.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("addKiosk.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

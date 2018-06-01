@@ -1,6 +1,8 @@
 package ch.juventus.schule.semesterarbeit.presentation;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -20,6 +22,14 @@ public class SceneHandler {
         window.setScene(scene);
         window.setTitle(sceneName);
         window.show();
+    }
 
+    public void goBackToTheMainMenu(ActionEvent actionEvent) throws IOException {
+        Node node=(Node) actionEvent.getSource();
+        Stage stage=(Stage) node.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }

@@ -1,5 +1,7 @@
 package ch.juventus.schule.semesterarbeit.business.item;
 
+import ch.juventus.schule.semesterarbeit.business.customer.Customer;
+
 import java.util.Scanner;
 
 /**
@@ -8,28 +10,16 @@ import java.util.Scanner;
  */
 public class Tobacco extends BaseArticle {
 
-    public Tobacco(String bezeichung, int preis) {
-        super(bezeichung, preis);
+    public Tobacco(String description, int price) {
+        super(description, price);
     }
 
-    public boolean alterUeberpruefen() {
-        System.out.println("Ist die Person mindestens 16 Jahre Alt?\n Geben Sie bitte \"Ja\", \"Nein\" oder \"Abbrechen\" ein. (Abkürzung: j, n oder a)");
-        Scanner scan = new Scanner(System.in);
-        while (true){
-            String antwort = scan.next();
-            if(antwort.toLowerCase().equals("j") || antwort.toLowerCase().equals("ja")){
-                System.out.println("Die Person darf den Artikel kaufen");
-                return true;
-            } else if (antwort.toLowerCase().equals("n") || antwort.toLowerCase().equals("nein")){
-                System.out.println("Die Person darf den NICHT Artikel kaufen");
-                return false;
-            }else if (antwort.toLowerCase().equals("a") || antwort.toLowerCase().equals("abbrechen")){
-                System.out.println("Abgebrochen, Artikel wurde nicht hinzugefügt");
-                return false;
-            } else{
-                System.out.println("Bitte geben Sie Ja oder Nein ein");
-                System.out.println(antwort);
-            }
+    public boolean checkLegalAge(Customer customer) {
+        System.out.println("Check Legal Age");
+        if(customer.getAge() >= 16){
+            return true;
+        } else {
+            return false;
         }
     }
 }

@@ -4,15 +4,16 @@ package ch.juventus.schule.semesterarbeit.business.item;
  * @author : ${user}
  * @since: ${date}
  */
-public class Softdrinks extends Drink {
+public class Softdrink extends Drink {
 
-    public Softdrinks(String bezeichung, int preis, int deciliter) {
-        super(bezeichung, preis, deciliter);
+
+    public Softdrink(String description, int price, int deciliter) {
+        super(description, price, deciliter);
     }
 
     @Override
     public String toString() {
-        return "Softdrinks{" +
+        return "Softdrink{" +
                 "Deciliter=" + deciliter +
                 ", Bezeichung='" + description + '\'' +
                 ", Preis=" + price +

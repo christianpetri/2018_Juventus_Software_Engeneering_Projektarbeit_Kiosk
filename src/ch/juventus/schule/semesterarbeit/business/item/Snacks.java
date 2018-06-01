@@ -5,17 +5,17 @@ package ch.juventus.schule.semesterarbeit.business.item;
  * @since: ${date}
  */
 public class Snacks extends BaseArticle {
-    private SnacksType typ;
+    private SnacksType type;
 
-    public Snacks(String bezeichung, int preis, SnacksType typ) {
-        super(bezeichung, preis);
-        this.typ = typ;
+    public Snacks(String description, int price, SnacksType type) {
+        super(description, price);
+        this.type = type;
     }
 
     @Override
     public String toString() {
         return "Snacks{" +
-                "typ=" + typ +
+                "type=" + type +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 '}';

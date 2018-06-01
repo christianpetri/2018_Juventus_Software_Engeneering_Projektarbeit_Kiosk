@@ -7,8 +7,8 @@ package ch.juventus.schule.semesterarbeit.business.item;
 public class Drink extends BaseArticle {
     protected int deciliter;
 
-    public Drink(String bezeichung, int preis, int deciliter) {
-        super(bezeichung, preis);
+    public Drink(String description, int price, int deciliter) {
+        super(description, price);
         this.deciliter = deciliter;
     }
 
