@@ -16,16 +16,16 @@ import java.util.Objects;
 public class Kiosk {
     private String name;
     private String standort;
-    private boolean kisokIstOffen;
+    private boolean kisokIsOpen;
     private List<Employee> employee = new ArrayList<>();
     private Map<BaseArticle, Integer> lager;
     private int geldsummeDieInDerKasseIst;
     private Supplier supplier;
 
-    public Kiosk(String name, String standort, boolean kisokIstOffen, Employee employee, Map<BaseArticle, Integer> lager, int geldsummeDieInDerKasseIst, Supplier supplier) {
+    public Kiosk(String name, String standort, boolean kisokIsOpen, Employee employee, Map<BaseArticle, Integer> lager, int geldsummeDieInDerKasseIst, Supplier supplier) {
         this.name = name;
         this.standort = standort;
-        this.kisokIstOffen = kisokIstOffen;
+        this.kisokIsOpen = kisokIsOpen;
         this.employee.add(employee);
         this.lager = lager;
         this.geldsummeDieInDerKasseIst = geldsummeDieInDerKasseIst;
@@ -44,12 +44,24 @@ public class Kiosk {
         return lager;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public String getStandort() {
+        return standort;
+    }
+
+    public boolean isKisokIsOpen() {
+        return kisokIsOpen;
+    }
+
     @Override
     public String toString() {
         return "Kiosk{" +
                 "name='" + name + '\'' +
                 ", Standort='" + standort + '\'' +
-                ", Ist der Kiosk geöffnet=" + kisokIstOffen +
+                ", Ist der Kiosk geöffnet=" + kisokIsOpen +
                 ", Employee=" + employee +
                 ", Lager=" + lager +
                 ", Geldsumme in der Kasse=" + geldsummeDieInDerKasseIst +

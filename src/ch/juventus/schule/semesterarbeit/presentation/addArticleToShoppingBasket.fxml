@@ -19,9 +19,9 @@
          <children>
             <Label fx:id="customerName" layoutX="69.0" layoutY="9.0" prefHeight="17.0" prefWidth="44.0" />
             <Label fx:id="customerAge" layoutX="135.0" layoutY="18.0" prefHeight="17.0" prefWidth="44.0" />
-            <Label fx:id="kisokName" layoutX="91.0" layoutY="37.0" prefHeight="17.0" prefWidth="44.0" />
+            <Label fx:id="kioskName" layoutX="91.0" layoutY="37.0" prefHeight="17.0" prefWidth="44.0" />
             <Label fx:id="kioskLocation" layoutX="20.0" layoutY="37.0" prefHeight="17.0" prefWidth="44.0" />
-            <Button fx:id="artikelBezahlen" layoutX="91.0" layoutY="161.0" mnemonicParsing="false" onAction="#geheZuArtikelBezahlen" text="Ware bezahlen" />
+            <Button fx:id="artikelBezahlen" layoutX="91.0" layoutY="161.0" mnemonicParsing="false" onAction="#goToPayShoppingCart" text="Ware bezahlen" />
             <Button fx:id="artikelHinzufuegen" layoutX="10.0" layoutY="75.0" mnemonicParsing="false" onAction="#artikelHinzufuegen" text="Artikel hinzufuegen" />
          </children>
       </Pane>

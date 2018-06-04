@@ -9,12 +9,12 @@ import java.util.Objects;
 public class Customer {
     private String name;
     private int age;
-    private ShoppingCart shoppingCart;
+    private ShoppingBasket shoppingBasket;
 
     public Customer(String name, int age) {
         this.name = name;
         this.age = age;
-        this.shoppingCart = new ShoppingCart();
+        this.shoppingBasket = new ShoppingBasket();
     }
 
     public String getName() {
@@ -25,8 +25,8 @@ public class Customer {
         return age;
     }
 
-    public ShoppingCart getShoppingCart() {
-        return shoppingCart;
+    public ShoppingBasket getShoppingBasket() {
+        return shoppingBasket;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class Customer {
         return "Customer{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
-                ", shoppingCart=" + shoppingCart +
+                ", shoppingBasket=" + shoppingBasket +
                 '}';
     }
 

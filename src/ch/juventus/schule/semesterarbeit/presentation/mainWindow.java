@@ -2,30 +2,51 @@ package ch.juventus.schule.semesterarbeit.presentation;
 
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
 import ch.juventus.schule.semesterarbeit.persistence.DataBaseAccessMock;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.Set;
 
 /**
  * @author : ${user}
  * @since: ${date}
  */
 public class mainWindow {
+    public String kioskClosed;
+    public String kioskOpen;
+    public ChoiceBox kioskOpenClosed;
+    @FXML
+    private TableView<Kiosk> tableViewKiosk;
+    @FXML
+    private TableColumn<Kiosk, String> kioskName, kioskLocation, kioskStatus;
     private DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
+    private SceneHandler sceneHandler = SceneHandler.getInstance();
 
     @FXML
     private Label lblTest;
 
+
     @FXML
     private void initialize() {
+
+
+        kioskName.setCellValueFactory(new PropertyValueFactory<Kiosk, String>("name"));
+        kioskLocation.setCellValueFactory(new PropertyValueFactory<Kiosk, String>("Standort"));
+        kioskStatus.setCellValueFactory(new PropertyValueFactory<Kiosk, String>("kisokIsOpen"));
+        tableViewKiosk.getItems().setAll(parseKioskList());
         dataBaseAccessMock.addKiosk("Haselgasse", "Wald", "Hansi", 1000);
         Set<Kiosk> kiosks = dataBaseAccessMock.getKiosks();
         if(kiosks.isEmpty()){
@@ -38,6 +59,23 @@ public class mainWindow {
                 lblTest.setText(text);
             }
         }
+        kioskOpenClosed.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                String[] kioskStatus = {"Offen", "Geschlossen"};
+                System.out.println(kioskStatus[newValue.intValue()]);
+                if(newValue.equals(1)){
+                    //closed
+                } else {
+                   //open
+                }
+            }
+        });
+
+    }
+
+    private Set<Kiosk> parseKioskList() {
+        return dataBaseAccessMock.getKiosks();
     }
 
     public mainWindow() {
@@ -87,27 +125,27 @@ public class mainWindow {
         Customer walter = new Customer("Walter" , 18);
 
         System.out.println(lagerbestandKiosk);
-        walter.getShoppingCart().artikelHinzufuegen(lagerbestandKiosk,createBigAppleJuice(),4);
-        walter.getShoppingCart().artikelHinzufuegen(lagerbestandKiosk,createBigAppleJuice(),1);
-        walter.getShoppingCart().artikelHinzufuegen(lagerbestandKiosk,createMars(),4);
-        walter.getShoppingCart().artikelHinzufuegen(lagerbestandKiosk,createCigarettePack(),4);
-        walter.getShoppingCart().artikelHinzufuegen(lagerbestandKiosk,createBigBeer(),4);
+        walter.getShoppingBasket().artikelHinzufuegen(lagerbestandKiosk,createBigAppleJuice(),4);
+        walter.getShoppingBasket().artikelHinzufuegen(lagerbestandKiosk,createBigAppleJuice(),1);
+        walter.getShoppingBasket().artikelHinzufuegen(lagerbestandKiosk,createMars(),4);
+        walter.getShoppingBasket().artikelHinzufuegen(lagerbestandKiosk,createCigarettePack(),4);
+        walter.getShoppingBasket().artikelHinzufuegen(lagerbestandKiosk,createBigBeer(),4);
 
 
         System.out.println(walter);
 
-        walter.getShoppingCart().artikelBezahlen();
+        walter.getShoppingBasket().artikelBezahlen();
         //System.out.println(lagerbestandKiosk.get(createBigBeer()));
         System.out.println(lagerbestandKiosk);
         //ListIterator iterator = lagerbestandKiosk.values();
          */
     }
 
-    public void alleKiosksAnzeigen(){
+    public void multithreading(){
 
     }
 
-    public void goToCreateShoppingCart(ActionEvent actionEvent) throws IOException {
+    public void goToCreateShoppingBasket(ActionEvent actionEvent) throws IOException {
         /*
          Node node=(Node) actionEvent.getSource();
                 Stage stage=(Stage) node.getScene().getWindow();
@@ -128,11 +166,6 @@ public class mainWindow {
     }
 
     public void goToAddKiosk(ActionEvent actionEvent) throws IOException {
-        Node node=(Node) actionEvent.getSource();
-        Stage stage=(Stage) node.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("addKiosk.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        sceneHandler.renderNextScene(actionEvent, "addKiosk");
     }
 }

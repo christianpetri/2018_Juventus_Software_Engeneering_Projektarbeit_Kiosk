@@ -12,8 +12,8 @@ import java.io.IOException;
  * @author : ${user}
  * @since: ${date}
  */
-public class addKioskController {
-    SceneHandler sceneHandler = new SceneHandler();
+public class AddKioskController {
+    SceneHandler sceneHandler = SceneHandler.getInstance();
     DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
     @FXML private TextField kioskName;
     @FXML private TextField kioskLocation;
@@ -42,6 +42,7 @@ public class addKioskController {
     public void goBackToTheMainMenu(ActionEvent actionEvent) throws IOException {
         sceneHandler.goBackToTheMainMenu(actionEvent);
     }
+
 
 
 }

@@ -18,21 +18,12 @@ import java.io.IOException;
  * @since: ${date}
  */
 public class addCustomer {
+    private SceneHandler sceneHandler = SceneHandler.getInstance();
     @FXML TextField customerName , customerAge;
     @FXML private Label customerInfoLabel, kioskName, kioskLocation;
-    private SceneHandler sceneHandler = new SceneHandler();
-    private DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
-    /*
-    public Customer createCustomer(String name, int alter){
-        this.Customer = new Customer(name, alter);
-        return this.Customer;
-    }
-    */
-    @FXML
-    private void initialize(){}
 
     public void createCustomer(ActionEvent actionEvent) throws IOException {
-        System.out.println("Customer erstellen");
+        System.out.println("Kunde erstellen");
         customerInfoLabel.setText("");
         if(!customerName.getText().isEmpty() && !customerAge.getText().isEmpty()){
             if(customerAge.getText().matches("\\d+")){
@@ -41,17 +32,15 @@ public class addCustomer {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("addArticleToShoppingBasket.fxml"));
                 Parent root = loader.load();
                 addArticleToShoppingBasket display = loader.getController();
-
                 display.setCustomer(customerName.getText(),Integer.parseInt(customerAge.getText()));
                 display.setKiosk(kioskName.getText(),kioskLocation.getText());
-
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
             }
-            customerInfoLabel.setText(" Alter ist eine Zahl");
+            customerInfoLabel.setText("Alter muss eine Zahl sein");
         } else{
-            customerInfoLabel.setText(" Name und Alter ist erforderlich");
+            customerInfoLabel.setText("Name und Alter ist erforderlich");
         }
     }
 

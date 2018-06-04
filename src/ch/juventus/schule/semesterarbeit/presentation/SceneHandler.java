@@ -14,6 +14,16 @@ import java.io.IOException;
  * @since: ${date}
  */
 public class SceneHandler {
+    private static SceneHandler instance;
+    private SceneHandler(){
+
+    }
+    public static SceneHandler getInstance(){
+        if(SceneHandler.instance == null){
+            SceneHandler.instance = new SceneHandler();
+        }
+        return SceneHandler.instance;
+    }
 
     public void renderScene(Stage primaryStage , String fileName, String sceneName) throws IOException {
         Stage window = primaryStage;
@@ -28,6 +38,15 @@ public class SceneHandler {
         Node node=(Node) actionEvent.getSource();
         Stage stage=(Stage) node.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void renderNextScene(ActionEvent actionEvent, String fileName) throws IOException {
+        Node node=(Node) actionEvent.getSource();
+        Stage stage=(Stage) node.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource(fileName + ".fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
