@@ -15,21 +15,27 @@ import java.util.Objects;
  */
 public class Kiosk {
     private String name;
-    private String standort;
-    private boolean kisokIsOpen;
+    private String location;
+    private boolean isKioskOpen;
     private List<Employee> employee = new ArrayList<>();
-    private Map<BaseArticle, Integer> lager;
-    private int geldsummeDieInDerKasseIst;
+    private Map<BaseArticle, Integer> storage;
+    private int amountOfMoneyInTheCashRegister;
     private Supplier supplier;
+    private String createShoppingBasket;
+    private String orderArticles;
+    private String getInventroy;
 
-    public Kiosk(String name, String standort, boolean kisokIsOpen, Employee employee, Map<BaseArticle, Integer> lager, int geldsummeDieInDerKasseIst, Supplier supplier) {
+    public Kiosk(String name, String location, boolean isKioskOpen, Employee employee, Map<BaseArticle, Integer> storage, int amountOfMoneyInTheCashRegister, Supplier supplier) {
         this.name = name;
-        this.standort = standort;
-        this.kisokIsOpen = kisokIsOpen;
+        this.location = location;
+        this.isKioskOpen = isKioskOpen;
         this.employee.add(employee);
-        this.lager = lager;
-        this.geldsummeDieInDerKasseIst = geldsummeDieInDerKasseIst;
+        this.storage = storage;
+        this.amountOfMoneyInTheCashRegister = amountOfMoneyInTheCashRegister;
         this.supplier = supplier;
+        this.createShoppingBasket = "Warenkorb erstellen";
+        this.orderArticles = "Artikel bestellen";
+        this.getInventroy = "Inventar";
     }
 
     public List<Employee> getEmployee() {
@@ -40,31 +46,51 @@ public class Kiosk {
         this.employee.add(employee);
     }
 
-    public Map<BaseArticle, Integer> getLager() {
-        return lager;
+    public Map<BaseArticle, Integer> getStorage() {
+        return storage;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getStandort() {
-        return standort;
+    public String getLocation() {
+        return location;
     }
 
-    public boolean isKisokIsOpen() {
-        return kisokIsOpen;
+    public boolean isKioskOpen() {
+        return isKioskOpen;
+    }
+
+    public String getCreateShoppingBasket() {
+        return createShoppingBasket;
+    }
+
+    public String getOrderArticles() {
+        return orderArticles;
+    }
+
+    public String getGetInventroy() {
+        return getInventroy;
+    }
+
+    public void toggleKioskIsOpen() {
+        if(isKioskOpen){
+            this.isKioskOpen = false;
+        } else {
+            this.isKioskOpen = true;
+        }
     }
 
     @Override
     public String toString() {
         return "Kiosk{" +
                 "name='" + name + '\'' +
-                ", Standort='" + standort + '\'' +
-                ", Ist der Kiosk geöffnet=" + kisokIsOpen +
+                ", Standort='" + location + '\'' +
+                ", Ist der Kiosk geöffnet=" + isKioskOpen +
                 ", Employee=" + employee +
-                ", Lager=" + lager +
-                ", Geldsumme in der Kasse=" + geldsummeDieInDerKasseIst +
+                ", Lager=" + storage +
+                ", Geldsumme in der Kasse=" + amountOfMoneyInTheCashRegister +
                 ", Supplier=" + supplier +
                 '}';
     }
@@ -75,11 +101,11 @@ public class Kiosk {
         if (!(o instanceof Kiosk)) return false;
         Kiosk kiosk = (Kiosk) o;
         return Objects.equals(name, kiosk.name) &&
-                Objects.equals(standort, kiosk.standort);
+                Objects.equals(location, kiosk.location);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, standort);
+        return Objects.hash(name, location);
     }
 }

@@ -14,9 +14,9 @@ public class Tobacco extends BaseArticle {
         super(description, price);
     }
 
-    public boolean checkLegalAge(Customer customer) {
+    public boolean checkLegalAge(int customerAge) {
         System.out.println("Check Legal Age");
-        if(customer.getAge() >= 16){
+        if(customerAge >= 16){
             return true;
         } else {
             return false;

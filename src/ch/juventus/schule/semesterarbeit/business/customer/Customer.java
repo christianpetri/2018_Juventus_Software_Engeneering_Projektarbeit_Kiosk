@@ -14,7 +14,7 @@ public class Customer {
     public Customer(String name, int age) {
         this.name = name;
         this.age = age;
-        this.shoppingBasket = new ShoppingBasket();
+        this.shoppingBasket = new ShoppingBasket(this.age);
     }
 
     public String getName() {

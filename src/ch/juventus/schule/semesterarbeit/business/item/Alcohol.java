@@ -14,9 +14,9 @@ public class Alcohol extends Drink {
         this.legalAge = legalAge;
     }
 
-    public boolean checkLegalAge(Customer customer) {
+    public boolean checkLegalAge(final int customerAge) {
         System.out.println("Check Legal Age");
-        if(customer.getAge() >= this.legalAge){
+        if(customerAge >= this.legalAge){
             return true;
         } else {
             return false;

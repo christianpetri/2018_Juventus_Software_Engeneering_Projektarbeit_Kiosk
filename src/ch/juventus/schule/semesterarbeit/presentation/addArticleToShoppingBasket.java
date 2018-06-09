@@ -24,6 +24,7 @@ public class addArticleToShoppingBasket {
     private ArticleFactory articleFactory = new ArticleFactory();
     private Customer customer;
     private Kiosk kiosk;
+    private SceneHandler sceneHandler = SceneHandler.getInstance();
     @FXML
     private Label customerName, customerAge, kioskName, kioskLocation;
     public addArticleToShoppingBasket(){
@@ -31,10 +32,8 @@ public class addArticleToShoppingBasket {
     }
 
     public void artikelHinzufuegen(ActionEvent actionEvent) {
-        //Kiosk kiosk, BaseArticle item, int menge
-        //this.Customer.getShoppingBasket().artikelHinzufuegen(kiosk.getLager(), item,menge);
         System.out.println("Artikel hinzugefuegt");
-        this.customer.getShoppingBasket().addArticles(kiosk.getLager(),articleFactory.createBigBeer(), 1);
+        this.customer.getShoppingBasket().addArticles(kiosk.getStorage(),articleFactory.createBigBeer(), 1);
     }
 
     public void setCustomer(String name, Integer age){
@@ -52,6 +51,7 @@ public class addArticleToShoppingBasket {
     }
 
     public void goToPayShoppingCart(ActionEvent actionEvent) throws IOException {
+        System.out.println("Artikel bezahlen");
         Node node=(Node) actionEvent.getSource();
         Stage stage=(Stage) node.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("payShoppingBasket.fxml"));
@@ -62,7 +62,10 @@ public class addArticleToShoppingBasket {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-            System.out.println("Artikel bezahlen");
-            //this.customer.getShoppingBasket().payArticles();
+    }
+
+    public void cancelAndGoBackToMainWindow(ActionEvent actionEvent) throws IOException {
+        customer.getShoppingBasket().deleteAllArticels();
+        sceneHandler.goBackToTheMainMenu(actionEvent);
     }
 }

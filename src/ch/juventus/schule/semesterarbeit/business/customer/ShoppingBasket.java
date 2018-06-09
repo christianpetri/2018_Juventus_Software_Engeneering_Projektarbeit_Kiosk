@@ -12,25 +12,33 @@ import java.util.Map;
  * @since: ${date}
  */
 public class ShoppingBasket {
+    private final int customerAge;
     private Map<BaseArticle, Integer> shoppingBasket = new HashMap<>();
 
-    public void addArticles(Map<BaseArticle, Integer> storage, BaseArticle artikel, int menge){
-        boolean alterIstOk = true;
-        if ((artikel instanceof Alcohol)){
+
+    public ShoppingBasket(final int customerAge) {
+        this.customerAge = customerAge;
+
+    }
+
+    public void addArticles(Map<BaseArticle, Integer> storage, BaseArticle article, int amount){
+        boolean isCustomerAbleToBuyArticleAgeWise = true;
+        if ((article instanceof Alcohol)){
             System.out.println("Alk!");
-            Alcohol that = (Alcohol) artikel;
-            //alterIstOk = that.checkLegalAge();
-        } else if ((artikel instanceof Tobacco)){
+            Alcohol that = (Alcohol) article;
+            isCustomerAbleToBuyArticleAgeWise = that.checkLegalAge(customerAge);
+        } else if ((article instanceof Tobacco)){
             System.out.println("Tobacco!");
-            Tobacco that = (Tobacco) artikel;
-            //alterIstOk = that.checkLegalAge();
+            Tobacco that = (Tobacco) article;
+            isCustomerAbleToBuyArticleAgeWise = that.checkLegalAge(customerAge);
         }
-        if(menge + ((shoppingBasket.get(artikel) == null) ? 0 : shoppingBasket.get(artikel)) <= storage.get(artikel)){
-            shoppingBasket.put(artikel,menge + ((shoppingBasket.get(artikel) == null) ? 0 : shoppingBasket.get(artikel)));
+
+        if(amount + ((shoppingBasket.get(article) == null) ? 0 : shoppingBasket.get(article)) <= storage.get(article) && isCustomerAbleToBuyArticleAgeWise){
+            shoppingBasket.put(article,amount + ((shoppingBasket.get(article) == null) ? 0 : shoppingBasket.get(article)));
             //storage.put(artikel,storage.get(artikel) - menge );
-            System.out.println("Es sind " + shoppingBasket.get(artikel) + " Artikel von Typ " + artikel +" im addCustomer");
+            System.out.println("Es sind " + shoppingBasket.get(article) + " Artikel von Typ " + article +" im Warenkorb");
         } else {
-            System.out.println("Es sind noch " + storage.get(artikel) + " " + artikel.getDescription() +" verfügbar");
+            System.out.println("Es sind noch " + storage.get(article) + " " + article.getDescription() +" verfügbar");
         }
         /*
         if(menge <= storage.get(artikel)){

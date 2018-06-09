@@ -2,6 +2,7 @@ package ch.juventus.schule.semesterarbeit.presentation;
 
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
 import ch.juventus.schule.semesterarbeit.persistence.DataBaseAccessMock;
+import ch.juventus.schule.semesterarbeit.presentation.customer.buy.addCustomer;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -10,10 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -29,36 +27,86 @@ public class mainWindow {
     public String kioskOpen;
     public ChoiceBox kioskOpenClosed;
     @FXML
+    public Button createKiosk, createShoppingBasket;
+    @FXML
     private TableView<Kiosk> tableViewKiosk;
     @FXML
-    private TableColumn<Kiosk, String> kioskName, kioskLocation, kioskStatus;
+    private TableColumn<Kiosk, String> kioskName, kioskLocation, kioskStatus,createCustomerForShoppingBasket, orderArticles , getInventory;
+
     private DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
     private SceneHandler sceneHandler = SceneHandler.getInstance();
 
     @FXML
-    private Label lblTest;
-
-
-    @FXML
     private void initialize() {
-
-
-        kioskName.setCellValueFactory(new PropertyValueFactory<Kiosk, String>("name"));
-        kioskLocation.setCellValueFactory(new PropertyValueFactory<Kiosk, String>("Standort"));
-        kioskStatus.setCellValueFactory(new PropertyValueFactory<Kiosk, String>("kisokIsOpen"));
-        tableViewKiosk.getItems().setAll(parseKioskList());
+        //dataBaseAccessMock.addKiosk("Haselgasse", "Wald", "Hansi", 1000);
         dataBaseAccessMock.addKiosk("Haselgasse", "Wald", "Hansi", 1000);
-        Set<Kiosk> kiosks = dataBaseAccessMock.getKiosks();
-        if(kiosks.isEmpty()){
-            System.out.println("Noch keine Kiosks vorhanden");
-            lblTest.setText("Noch keine Kiosks vorhanden");
-        } else {
-            for(Kiosk kiosk : kiosks){
-                System.out.println(kiosk);
-                String text = kiosk.toString();
-                lblTest.setText(text);
+        dataBaseAccessMock.addKiosk("s", "Wald", "Hansi", 1000);
+
+        tableViewKiosk.setOnMouseClicked( event -> {
+            if( event.getClickCount() == 2 ) {
+                System.out.println("Doppel Klick");
+
+                //System.out.println( tableViewKiosk.getSelectionModel().getSelectedItem());
+                //System.out.println(event.getPickResult());
+                Kiosk kiosk = tableViewKiosk.getSelectionModel().getSelectedItem();
+                //System.out.println("Name " +kiosk.getName() + " Ort: " + kiosk.getLocation());
+                System.out.println(event.getPickResult().getIntersectedNode().getId());
+
+                boolean isKioskOpen = dataBaseAccessMock.getKiosk(kiosk.getName(), kiosk.getLocation()).isKioskOpen();
+                System.out.println(" Before: " + isKioskOpen);
+
+                if(event.getPickResult().getIntersectedNode().getId().equals("kioskStatus")){
+                    System.out.println("Kiosk");
+                    dataBaseAccessMock.getKiosk(kiosk.getName(), kiosk.getLocation()).toggleKioskIsOpen();
+                    tableViewKiosk.getItems().setAll(parseKioskList());
+                    System.out.println(dataBaseAccessMock.getKiosk(kiosk.getName(), kiosk.getLocation()).isKioskOpen());
+                } else if(event.getPickResult().getIntersectedNode().getId().equals("orderArticles") && isKioskOpen){
+                    System.out.println("Artikel bestellen");
+                 } else if(event.getPickResult().getIntersectedNode().getId().equals("getInventory")&& isKioskOpen){
+                    System.out.println("Get Inventory");
+                }else if(event.getPickResult().getIntersectedNode().getId().equals("createCustomerForShoppingBasket")&& isKioskOpen){
+                    System.out.println("Warenkorb für Kunden erstellen");
+                } else{
+                     System.out.println("Kiosk ist noch geschlossen");
+                 }
             }
-        }
+        });
+
+
+        kioskName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        kioskLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
+        kioskStatus.setCellValueFactory(new PropertyValueFactory<>("isKioskOpen"));
+        createCustomerForShoppingBasket.setCellValueFactory(new PropertyValueFactory<>("createShoppingBasket"));
+        orderArticles.setCellValueFactory(new PropertyValueFactory<>("orderArticles"));
+
+        getInventory.setCellValueFactory(new PropertyValueFactory<>("getInventroy"));
+
+       // createCustomerForShoppingBasket.setCellValueFactory(new PropertyValueFactory<>("createShoppingBasket"));
+
+        //createCustomerForShoppingBasket.setCellValueFactory(data -> data.getValue().);
+
+
+
+
+        /*
+        createCustomerForShoppingBasket.setText("Warenkorb erstellen");
+        orderArticles.setText("Artikel bestellen");
+        getInventory.setText("Inventar");
+        */
+
+        tableViewKiosk.getItems().setAll(parseKioskList());
+
+
+        tableViewKiosk.getSelectionModel().selectedIndexProperty().addListener(((observable, oldValue, newValue) ->{
+            if(tableViewKiosk.getSelectionModel().getSelectedItem() != null){
+                /*
+                System.out.println(tableViewKiosk.getSelectionModel().getSelectedItem().getLocation());
+                System.out.println(tableViewKiosk.getSelectionModel().getSelectedItem().getName());
+                System.out.println(tableViewKiosk.getSelectionModel().getSelectedItem().getCreateCustomerForShoppingBasket());
+                */
+            }
+        } ));
+
         kioskOpenClosed.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -74,13 +122,12 @@ public class mainWindow {
 
     }
 
+
     private Set<Kiosk> parseKioskList() {
         return dataBaseAccessMock.getKiosks();
     }
 
     public mainWindow() {
-
-
         /*
         List<Employee> employee = new ArrayList<>();
         Employee hans = new Employee("Hans");
@@ -88,16 +135,11 @@ public class mainWindow {
         System.out.println(employee);
 
         Map<BaseArticle, Integer> lagerbestandKiosk = new HashMap<>();
-        lagerbestandKiosk.put( createBigAppleJuice(), 5 );
-        lagerbestandKiosk.put( createMars()            , 8 );
-        lagerbestandKiosk.put( createBigBeer()     , 9 );
-        lagerbestandKiosk.put( createCigarettePack()  , 9 );
         lagerbestandKiosk.put( createBigVodka()    , 9 );
         lagerbestandKiosk.put( createGlamourMagazin()  , 9 );
-        */
-        /*
+
         Map<BaseArticle, Integer> lagerbestadLieferant = new HashMap<>();
-        lagerbestadLieferant.put(createBigAppleJuice(), 5);
+
         lagerbestadLieferant.put(createMars(),4);
         lagerbestadLieferant.put(createBigBeer(),4);
 
@@ -142,21 +184,14 @@ public class mainWindow {
     }
 
     public void multithreading(){
+        //TODO Mulithreading Aufgabe
 
     }
 
     public void goToCreateShoppingBasket(ActionEvent actionEvent) throws IOException {
-        /*
-         Node node=(Node) actionEvent.getSource();
-                Stage stage=(Stage) node.getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("addArticleToShoppingBasket.fxml"));
-                Parent root = loader.load();
-                addArticleToShoppingBasket display = loader.getController();
-                display.setCustomer(customerName.getText(),Integer.parseInt(customerAge.getText()));
-         */
         Node node=(Node) actionEvent.getSource();
         Stage stage=(Stage) node.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("addCustomer.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("customer/buy/addCustomer.fxml"));
         Parent root = loader.load();
         addCustomer ctrl = loader.getController();
         ctrl.setKiosk("Haselgasse", "Wald");
@@ -168,4 +203,11 @@ public class mainWindow {
     public void goToAddKiosk(ActionEvent actionEvent) throws IOException {
         sceneHandler.renderNextScene(actionEvent, "addKiosk");
     }
+
+    @FXML
+    private void handleButtonAction(ActionEvent event) {
+        // Button was clicked, do something...
+        System.out.println(event);
+    }
+
 }

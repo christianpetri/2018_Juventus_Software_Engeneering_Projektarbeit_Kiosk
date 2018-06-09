@@ -8,22 +8,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="buttonLeft" alignment="center" hgap="10" prefHeight="338.0" prefWidth="240.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.juventus.schule.semesterarbeit.presentation.AddKioskController">
-   <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints />
-      <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
-      <ColumnConstraints maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
-      <RowConstraints maxHeight="0.0" minHeight="0.0" prefHeight="0.0" />
-      <RowConstraints maxHeight="345.0" minHeight="327.0" prefHeight="327.0" />
-      <RowConstraints maxHeight="26.0" minHeight="8.0" prefHeight="26.0" />
-   </rowConstraints>
-   <children>
-      <Pane prefHeight="327.0" prefWidth="187.0" GridPane.columnIndex="2" GridPane.rowIndex="2">
+<GridPane fx:id="buttonLeft" alignment="center" hgap="10" prefHeight="348.0" prefWidth="212.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.juventus.schule.semesterarbeit.presentation.kiosk.create.AddKioskController">
+       <Pane prefHeight="327.0" prefWidth="187.0">
          <children>
             <Label layoutX="15.0" layoutY="8.0" text="Kiosk" />
             <Label layoutX="15.0" layoutY="38.0" text="Name" />
@@ -39,5 +25,12 @@
             <Button layoutX="15.0" layoutY="285.0" mnemonicParsing="false" onAction="#goBackToTheMainMenu" text="Abbrechen" />
          </children>
       </Pane>
-   </children>
+   <columnConstraints>
+      <ColumnConstraints />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints />
+   </rowConstraints>
+   
+
 </GridPane>

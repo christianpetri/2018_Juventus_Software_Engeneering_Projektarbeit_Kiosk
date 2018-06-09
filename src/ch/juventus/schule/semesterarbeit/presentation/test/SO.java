@@ -1,3 +1,5 @@
+package ch.juventus.schule.semesterarbeit.presentation.test;
+
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
 import ch.juventus.schule.semesterarbeit.persistence.DataBaseAccessMock;
 import javafx.application.Application;
@@ -5,7 +7,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -18,7 +19,6 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
-import java.lang.reflect.Array;
 import java.util.Set;
 
 public class SO extends Application {
@@ -54,7 +54,6 @@ public class SO extends Application {
                 public void handle(ActionEvent event) {
                     System.out.print("Inventory: ");
                     System.out.println(lastItem + " : " + event);
-
                 }
             });
             buttonOpenCloseKiosk.setOnAction(new EventHandler<ActionEvent>() {
@@ -62,6 +61,7 @@ public class SO extends Application {
                 public void handle(ActionEvent event) {
                     System.out.print("Open Close: ");
                     System.out.println(lastItem + " : " + event);
+                    System.out.println(lastItem );
 
                 }
             });
@@ -92,7 +92,7 @@ public class SO extends Application {
         dataBaseAccessMock.addKiosk("Winkelgasse", "Wald", "Hansi", 1000);
         Set<Kiosk> kiosks = dataBaseAccessMock.getKiosks();
         for(Kiosk kiosk : kiosks){
-            list.add(kiosk.getName() +" "+ kiosk.getStandort());
+            list.add(kiosk.getName() +" "+ kiosk.getLocation());
         }
         ListView<String> lv = new ListView<>(list);
         lv.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {

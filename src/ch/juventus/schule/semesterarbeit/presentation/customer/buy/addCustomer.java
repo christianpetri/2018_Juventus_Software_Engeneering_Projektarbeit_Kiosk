@@ -1,6 +1,8 @@
-package ch.juventus.schule.semesterarbeit.presentation;
+package ch.juventus.schule.semesterarbeit.presentation.customer.buy;
 
 import ch.juventus.schule.semesterarbeit.persistence.DataBaseAccessMock;
+import ch.juventus.schule.semesterarbeit.presentation.SceneHandler;
+import ch.juventus.schule.semesterarbeit.presentation.addArticleToShoppingBasket;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +24,10 @@ public class addCustomer {
     @FXML TextField customerName , customerAge;
     @FXML private Label customerInfoLabel, kioskName, kioskLocation;
 
+    public addCustomer(){
+
+    }
+
     public void createCustomer(ActionEvent actionEvent) throws IOException {
         System.out.println("Kunde erstellen");
         customerInfoLabel.setText("");
@@ -29,7 +35,7 @@ public class addCustomer {
             if(customerAge.getText().matches("\\d+")){
                 Node node=(Node) actionEvent.getSource();
                 Stage stage=(Stage) node.getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("addArticleToShoppingBasket.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("ch/juventus/schule/semesterarbeit/presentation/addArticleToShoppingBasket.fxml"));
                 Parent root = loader.load();
                 addArticleToShoppingBasket display = loader.getController();
                 display.setCustomer(customerName.getText(),Integer.parseInt(customerAge.getText()));

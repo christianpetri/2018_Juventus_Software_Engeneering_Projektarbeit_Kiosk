@@ -1,6 +1,7 @@
-package ch.juventus.schule.semesterarbeit.presentation;
+package ch.juventus.schule.semesterarbeit.presentation.kiosk.create;
 
 import ch.juventus.schule.semesterarbeit.persistence.DataBaseAccessMock;
+import ch.juventus.schule.semesterarbeit.presentation.SceneHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

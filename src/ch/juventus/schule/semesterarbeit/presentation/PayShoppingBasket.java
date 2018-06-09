@@ -22,7 +22,7 @@ public class PayShoppingBasket {
     Label kioskName, kioskLocation, customerName, customerAge;
 
     public void goBackToMainWindow(ActionEvent actionEvent) throws IOException {
-        customer.getShoppingBasket().payArticles(kiosk.getLager());
+        customer.getShoppingBasket().payArticles(kiosk.getStorage());
         customer.getShoppingBasket().deleteAllArticels();
         sceneHandler.goBackToTheMainMenu(actionEvent);
     }

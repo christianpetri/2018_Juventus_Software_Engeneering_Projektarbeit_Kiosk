@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="buttonLeft" alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.juventus.schule.semesterarbeit.presentation.addCustomer">
+<GridPane fx:id="buttonLeft" alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.juventus.schule.semesterarbeit.presentation.customer.buy.addCustomer">
    <columnConstraints>
       <ColumnConstraints />
       <ColumnConstraints />
