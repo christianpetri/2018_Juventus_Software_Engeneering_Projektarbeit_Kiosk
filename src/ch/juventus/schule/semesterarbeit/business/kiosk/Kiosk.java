@@ -17,33 +17,33 @@ public class Kiosk {
     private String name;
     private String location;
     private boolean isKioskOpen;
-    private List<Employee> employee = new ArrayList<>();
+    private List<Employee> employees = new ArrayList<>();
     private Map<BaseArticle, Integer> storage;
     private int amountOfMoneyInTheCashRegister;
     private Supplier supplier;
     private String createShoppingBasket;
     private String orderArticles;
-    private String getInventroy;
+    private String getInventory;
 
     public Kiosk(String name, String location, boolean isKioskOpen, Employee employee, Map<BaseArticle, Integer> storage, int amountOfMoneyInTheCashRegister, Supplier supplier) {
         this.name = name;
         this.location = location;
         this.isKioskOpen = isKioskOpen;
-        this.employee.add(employee);
+        this.employees.add(employee);
         this.storage = storage;
         this.amountOfMoneyInTheCashRegister = amountOfMoneyInTheCashRegister;
         this.supplier = supplier;
         this.createShoppingBasket = "Warenkorb erstellen";
         this.orderArticles = "Artikel bestellen";
-        this.getInventroy = "Inventar";
+        this.getInventory = "Inventar";
     }
 
-    public List<Employee> getEmployee() {
-        return employee;
+    public List<Employee> getEmployees() {
+        return employees;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee.add(employee);
+    public void setEmployees(Employee employees) {
+        this.employees.add(employees);
     }
 
     public Map<BaseArticle, Integer> getStorage() {
@@ -62,6 +62,10 @@ public class Kiosk {
         return isKioskOpen;
     }
 
+    public void toggleIsKioskOpen() {
+        this.isKioskOpen = !this.isKioskOpen;
+    }
+
     public String getCreateShoppingBasket() {
         return createShoppingBasket;
     }
@@ -70,16 +74,8 @@ public class Kiosk {
         return orderArticles;
     }
 
-    public String getGetInventroy() {
-        return getInventroy;
-    }
-
-    public void toggleKioskIsOpen() {
-        if(isKioskOpen){
-            this.isKioskOpen = false;
-        } else {
-            this.isKioskOpen = true;
-        }
+    public String getGetInventory() {
+        return getInventory;
     }
 
     @Override
@@ -88,7 +84,7 @@ public class Kiosk {
                 "name='" + name + '\'' +
                 ", Standort='" + location + '\'' +
                 ", Ist der Kiosk geöffnet=" + isKioskOpen +
-                ", Employee=" + employee +
+                ", Employee=" + employees +
                 ", Lager=" + storage +
                 ", Geldsumme in der Kasse=" + amountOfMoneyInTheCashRegister +
                 ", Supplier=" + supplier +

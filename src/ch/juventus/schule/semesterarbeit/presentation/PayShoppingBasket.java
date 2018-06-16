@@ -18,8 +18,23 @@ public class PayShoppingBasket {
     private Customer customer;
     private Kiosk kiosk;
     private DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
+    private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
     @FXML
-    Label kioskName, kioskLocation, customerName, customerAge;
+    Label kioskName, kioskLocation, customerName, customerAge, sumDue;
+
+    @FXML
+    private void initialize() {
+
+        this.kioskName.setText(sceneDataHandler.getKiosk().getName());
+        this.kioskLocation.setText(sceneDataHandler.getKiosk().getLocation());
+        this.kiosk = sceneDataHandler.getKiosk();
+
+        this.customerName.setText(sceneDataHandler.getCustomer().getName());
+        this.customerAge.setText(String.format ("%d", sceneDataHandler.getCustomer().getAge()));
+        this.customer = sceneDataHandler.getCustomer();
+        sumDue.setText( sceneDataHandler.getCustomer().getShoppingBasket().payArticles(sceneDataHandler.getKiosk().getStorage()));
+
+    }
 
     public void goBackToMainWindow(ActionEvent actionEvent) throws IOException {
         customer.getShoppingBasket().payArticles(kiosk.getStorage());
@@ -30,18 +45,5 @@ public class PayShoppingBasket {
     public void cancelAndGoBackToMainWindow(ActionEvent actionEvent) throws IOException {
         customer.getShoppingBasket().deleteAllArticels();
         sceneHandler.goBackToTheMainMenu(actionEvent);
-    }
-
-    public void setCustomer(String name, int age){
-        this.customerName.setText(name);
-        this.customerAge.setText(String.format ("%d", age));
-        this.customer = dataBaseAccessMock.getCustomer(name,age);
-        this.customer = dataBaseAccessMock.getCustomer(name,age);
-    }
-
-    public void setKiosk(String name, String location){
-        this.kioskName.setText(name);
-        this.kioskLocation.setText(location);
-        this.kiosk = dataBaseAccessMock.getKiosk(name, location);
     }
 }

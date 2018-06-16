@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.String?>
-<?import javafx.collections.FXCollections?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <GridPane fx:id="buttonLeft" alignment="center" hgap="10" prefHeight="373.0" prefWidth="631.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.juventus.schule.semesterarbeit.presentation.mainWindow">
    <AnchorPane GridPane.columnIndex="1">
       <children>
@@ -25,29 +14,20 @@
       <children>
          <TableView fx:id="tableViewKiosk" layoutX="-21.0" prefHeight="238.0" prefWidth="550.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columns>
-               <TableColumn fx:id="kioskName" prefWidth="75.0" text="Name" />
-               <TableColumn fx:id="kioskLocation" prefWidth="87.0" text="Standort" />
-               <TableColumn fx:id="kioskStatus" prefWidth="73.0" text="Status" />
-               <TableColumn fx:id="createCustomerForShoppingBasket" prefWidth="127.0" text="Warenkorb erstellen" />
-               <TableColumn fx:id="orderArticles" prefWidth="113.0" text="Artikel bestellen" />
-               <TableColumn fx:id="getInventory" prefWidth="82.0" text="Inventar"  />
+               <TableColumn fx:id="kioskName" prefWidth="104.0" text="Name" />
+               <TableColumn fx:id="kioskLocation" prefWidth="100.0" text="Standort" />
+               <TableColumn fx:id="kioskStatus" prefWidth="72.0" text="Status" />
+               <TableColumn fx:id="createCustomerForShoppingBasket" prefWidth="126.0" text="Warenkorb erstellen" />
+               <TableColumn fx:id="orderArticles" prefWidth="114.0" text="Artikel bestellen" />
+               <TableColumn fx:id="getInventory" prefWidth="79.0" text="Inventar" />
             </columns>
-   </TableView>
+         </TableView>
       </children>
    </AnchorPane>
    <Pane prefHeight="70.0" prefWidth="596.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" GridPane.rowSpan="2147483647">
       <children>
          <Button fx:id="createKiosk" layoutX="35.0" layoutY="21.0" mnemonicParsing="false" onAction="#goToAddKiosk" text="Kiosk erstellen" />
          <Button fx:id="multithreading" layoutX="147.0" layoutY="21.0" mnemonicParsing="false" onAction="#multithreading" text="Multithreading" />
-         <Button id="132" fx:id="createShoppingBasket" layoutX="251.0" layoutY="21.0" mnemonicParsing="false" onAction="#goToCreateShoppingBasket" text="Warenkorb erstellen" />
-         <ChoiceBox fx:id="kioskOpenClosed" layoutX="392.0" layoutY="21.0" value="Geschlossen">
-            <items>
-               <FXCollections fx:factory="observableArrayList">
-                  <String fx:id="kioskOpen" fx:value="Offen" />
-                  <String fx:id="kioskClosed" fx:value="Geschlossen" />
-               </FXCollections>
-            </items>
-         </ChoiceBox>
       </children>
    </Pane>
    <columnConstraints>

@@ -52,7 +52,7 @@ public class ShoppingBasket {
         */
     }
 
-    public void payArticles(Map<BaseArticle, Integer> storage){
+    public String payArticles(Map<BaseArticle, Integer> storage){
         System.out.println("Es sind " + shoppingBasket.size() +" Artikel im addCustomer");
         int sum = 0;
         for (Map.Entry<BaseArticle, Integer> article : shoppingBasket.entrySet()) {
@@ -69,6 +69,7 @@ public class ShoppingBasket {
             }
         }
         System.out.println("Bitte bezahlen Sie " + sum + " CHF");
+        return String.valueOf(sum);
     }
 
     public void deleteAllArticels(){

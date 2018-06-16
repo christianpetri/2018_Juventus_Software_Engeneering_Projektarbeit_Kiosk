@@ -47,6 +47,7 @@ public class SceneHandler {
         Node node=(Node) actionEvent.getSource();
         Stage stage=(Stage) node.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource(fileName + ".fxml"));
+
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

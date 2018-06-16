@@ -1,7 +1,5 @@
 package ch.juventus.schule.semesterarbeit.business.item;
 
-import ch.juventus.schule.semesterarbeit.business.customer.Customer;
-
 /**
  * @author : ${user}
  * @since: ${date}

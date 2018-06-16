@@ -1,13 +1,16 @@
 package ch.juventus.schule.semesterarbeit.persistence;
 
 import ch.juventus.schule.semesterarbeit.business.customer.Customer;
+import ch.juventus.schule.semesterarbeit.business.employee.Employee;
 import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
 import ch.juventus.schule.semesterarbeit.business.item.factory.ArticleFactory;
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
 import ch.juventus.schule.semesterarbeit.business.supplier.Supplier;
-import ch.juventus.schule.semesterarbeit.business.employee.Employee;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * This creates a Data Access Mockup to store the data

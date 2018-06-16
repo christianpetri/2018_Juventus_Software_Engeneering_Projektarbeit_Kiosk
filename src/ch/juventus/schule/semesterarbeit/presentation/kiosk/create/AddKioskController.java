@@ -16,34 +16,41 @@ import java.io.IOException;
 public class AddKioskController {
     SceneHandler sceneHandler = SceneHandler.getInstance();
     DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
-    @FXML private TextField kioskName;
-    @FXML private TextField kioskLocation;
-    @FXML private TextField kioskStartCapital;
-    @FXML private TextField kioskEmployeeName;
-    @FXML private Label kioskInfoLabel;
+    @FXML
+    private TextField kioskName;
+    @FXML
+    private TextField kioskLocation;
+    @FXML
+    private TextField kioskStartCapital;
+    @FXML
+    private TextField kioskEmployeeName;
+    @FXML
+    private Label kioskInfoLabel;
 
     public void addKiosk(ActionEvent actionEvent) throws IOException {
         boolean isCapitalValueAnInteger = false;
         int capital = 0;
         kioskInfoLabel.setText("");
-        if(kioskStartCapital.getText().matches("\\d+")){
-            capital =  Integer.parseInt(kioskStartCapital.getText());
-            isCapitalValueAnInteger = true;
-        }
-        if(!kioskName.getText().isEmpty() && !kioskLocation.getText().isEmpty() && !kioskStartCapital.getText().isEmpty() && !kioskEmployeeName.getText().isEmpty() && isCapitalValueAnInteger){
-            dataBaseAccessMock.addKiosk(kioskName.getText(), kioskLocation.getText(), kioskEmployeeName.getText(), capital);
-            sceneHandler.goBackToTheMainMenu(actionEvent);
+        if (kioskStartCapital.getText().matches("\\d+")) {
+            if (areAllKioskFieldsSet()) {
+                dataBaseAccessMock.addKiosk(kioskName.getText(), kioskLocation.getText(), kioskEmployeeName.getText(), Integer.parseInt(kioskStartCapital.getText()));
+                sceneHandler.goBackToTheMainMenu(actionEvent);
+            } else {
+                kioskInfoLabel.setText("Bitte Felder überpfrüfen");
+            }
         } else {
             kioskInfoLabel.setText("Startkapital muss Zahl sein");
-            if(isCapitalValueAnInteger)
-            kioskInfoLabel.setText("Bitte Felder überpfrüfen");
         }
+
     }
 
     public void goBackToTheMainMenu(ActionEvent actionEvent) throws IOException {
         sceneHandler.goBackToTheMainMenu(actionEvent);
     }
 
+    private boolean areAllKioskFieldsSet() {
+        return !kioskName.getText().isEmpty() && !kioskLocation.getText().isEmpty() && !kioskStartCapital.getText().isEmpty() && !kioskEmployeeName.getText().isEmpty();
+    }
 
 
 }
