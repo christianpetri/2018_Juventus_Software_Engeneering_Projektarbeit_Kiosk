@@ -76,6 +76,10 @@ public class ShoppingBasket {
         this.shoppingBasket.clear();
     }
 
+    public Map<BaseArticle, Integer> getShoppingBasket() {
+        return shoppingBasket;
+    }
+
     @Override
     public String toString() {
         return "addCustomer{" +

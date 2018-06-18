@@ -1,55 +1,52 @@
 package ch.juventus.schule.semesterarbeit.presentation;
 
-import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
+import ch.juventus.schule.semesterarbeit.business.multithreading.CustomerThread;
 import ch.juventus.schule.semesterarbeit.exporter.ExcelExporter;
 import ch.juventus.schule.semesterarbeit.persistence.DataBaseAccessMock;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * @author : ${user}
  * @since: ${date}
  */
 public class mainWindow {
-    public String kioskClosed;
-    public String kioskOpen;
-    public ChoiceBox kioskOpenClosed;
     @FXML
-    public Button createKiosk, createShoppingBasket;
+    public Button createKiosk;
     @FXML
     private TableView<Kiosk> tableViewKiosk;
     @FXML
     private TableColumn<Kiosk, String> kioskName, kioskLocation, createCustomerForShoppingBasket, orderArticles, getInventory;
     @FXML
     private TableColumn<Kiosk, Boolean> kioskStatus;
+    @FXML
+    private Label kioskMessage;
     private DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
     private SceneHandler sceneHandler = SceneHandler.getInstance();
     private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
-    private ExcelExporter excelExporter = new ExcelExporter();
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
+
 
     @FXML
     private void initialize() {
-        //dataBaseAccessMock.addKiosk("Haselgasse", "Wald", "Hansi", 1000);
-        dataBaseAccessMock.addKiosk("Haselgasse", "Wald", "Hansi", 1000);
+        dataBaseAccessMock.addKiosk("Haselgasse", "Seen", "Hansi", 1000);
         dataBaseAccessMock.addKiosk("s", "Wald", "Hansi", 1000);
-
+        kioskMessage.setText("");
         tableViewKiosk.setOnMouseClicked(event -> {
             //if (event.getClickCount() == 2) {
             Kiosk kiosk = tableViewKiosk.getSelectionModel().getSelectedItems().get(0);
@@ -62,12 +59,12 @@ public class mainWindow {
             if (isKioskToggleEvent(event)) {
                 toggleKioskState(kiosk);
             } else if (isKioskOpen) {
-                if ( isCreateCustomerForShoppingBasketEvent(event)) {
+                if (isCreateCustomerForShoppingBasketEvent(event)) {
 
                     System.out.println("Warenkorb für Kunden erstellen");
                     sceneDataHandler.setKiosk(kiosk);
                     try {
-                        sceneHandler.renderScene((Stage) tableViewKiosk.getScene().getWindow(),"customer/buy/addCustomer","Warenkorb erstellen");
+                        sceneHandler.renderScene((Stage) tableViewKiosk.getScene().getWindow(), "customer/buy/addCustomer", "Warenkorb erstellen");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -75,23 +72,16 @@ public class mainWindow {
                     sceneDataHandler.setKiosk(kiosk);
                 } else if (isOrderArticleEvent(event)) {
                     System.out.println("Artikel bestellen");
+                    sceneDataHandler.resetSecneDataHandler();
                     sceneDataHandler.setKiosk(kiosk);
-
                 } else if (isGetInventoryEvent(event)) {
-                    System.out.println("Kiosk Inventar");
-                    System.out.println(kiosk.getStorage().toString());
-                    excelExporter.writeStorageToFile(kiosk);
-
-
+                    exportInventoryToExcel(kiosk);
                 }
             } else {
-                System.out.println("Kiosk ist noch geschlossen");
+                kioskMessage.setTextFill(Color.RED);
+                kioskMessage.setText("Kiosk ist noch geschlossen");
             }
-
-
         });
-
-
         kioskName.setCellValueFactory(new PropertyValueFactory<>("name"));
         kioskLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
         kioskStatus.setCellValueFactory(new PropertyValueFactory<>("kioskOpen"));
@@ -100,7 +90,6 @@ public class mainWindow {
         getInventory.setCellValueFactory(new PropertyValueFactory<>("getInventory"));
 
         tableViewKiosk.getItems().setAll(parseKioskList());
-
     }
 
 
@@ -166,17 +155,41 @@ public class mainWindow {
 
     public void multithreading() {
         //TODO Mulithreading Aufgabe
+        /*
+        LOGGER.setLevel(Level.SEVERE);
+        LOGGER.severe("Info Log");
+        LOGGER.warning("Info Log");
+        LOGGER.info("Info Log");
+        LOGGER.finest("Really not important");
 
-    }
+        // set the LogLevel to Info, severe, warning and info will be written
+        // finest is still not written
+        LOGGER.setLevel(Level.INFO);
+        LOGGER.severe("Info Log");
+        LOGGER.warning("Info Log");
+        LOGGER.info("Info Log");
+        LOGGER.finest("Really not important");
+        */
+        Kiosk kiosk;
+        if(dataBaseAccessMock.getKiosk("Winkelgasse","Rapperswil") != null){
+            kiosk = dataBaseAccessMock.getKiosk("Winkelgasse","Rapperswil");
+        } else{
+            kiosk = dataBaseAccessMock.addKiosk("Winkelgasse", "Rapperswil", "Walter", 1000);
+        }
 
-    public void goToCreateShoppingBasket(ActionEvent actionEvent) throws IOException {
-        Node node = (Node) actionEvent.getSource();
-        Stage stage = (Stage) node.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("customer/buy/addCustomer.fxml"));
-        Parent root = loader.load();
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+
+
+        Thread multithreading0 = new CustomerThread("Kiosk Simulation Kunde 1", kiosk);
+        multithreading0.run();
+        Thread multithreading1 = new CustomerThread("Kiosk Simulation Kunde 2", kiosk);
+        multithreading1.run();
+        Thread multithreading2 = new CustomerThread("Kiosk Simulation Kunde 3", kiosk);
+        multithreading2.run();
+        Thread multithreading3 = new CustomerThread("Kiosk Simulation Kunde 4", kiosk);
+        multithreading3.run();
+        Thread multithreading4 = new CustomerThread("Kiosk Simulation Kunde 5", kiosk);
+        multithreading4.run();
+
     }
 
     public void goToAddKiosk(ActionEvent actionEvent) throws IOException {
@@ -210,6 +223,15 @@ public class mainWindow {
     }
 
     private boolean isCreateCustomerForShoppingBasketEvent(MouseEvent event) {
-        return getNodeIdentifier(event).equals("createCustomerForShoppingBasket") || getNodeIdentifier(event).equals("Warenkorb erstellen");
+        return getNodeIdentifier(event).equals("createCustomerForShoppingBasket") || getNodeIdentifier(event).equals("Einkauf tätigen");
+    }
+
+    private void exportInventoryToExcel(Kiosk kiosk) {
+        System.out.println("Kiosk Inventar");
+        System.out.println(kiosk.getStorage().toString());
+        kioskMessage.setTextFill(Color.BLACK);
+        kioskMessage.setText("Inventar in Excel exportiert");
+        ExcelExporter excelExporter = new ExcelExporter();
+        excelExporter.writeStorageToFile(kiosk);
     }
 }

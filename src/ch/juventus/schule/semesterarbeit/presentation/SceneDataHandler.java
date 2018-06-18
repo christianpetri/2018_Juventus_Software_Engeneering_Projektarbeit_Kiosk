@@ -39,7 +39,8 @@ public class SceneDataHandler {
         this.kiosk = kiosk;
     }
 
-    public void setDataBaseAccessMock(DataBaseAccessMock dataBaseAccessMock) {
-        this.dataBaseAccessMock = dataBaseAccessMock;
+    public void resetSecneDataHandler(){
+        this.customer = null;
+        this.kiosk = null;
     }
 }

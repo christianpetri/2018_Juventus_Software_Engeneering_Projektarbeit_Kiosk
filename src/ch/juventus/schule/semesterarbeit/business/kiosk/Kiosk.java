@@ -33,7 +33,7 @@ public class Kiosk {
         this.storage = storage;
         this.amountOfMoneyInTheCashRegister = amountOfMoneyInTheCashRegister;
         this.supplier = supplier;
-        this.createShoppingBasket = "Warenkorb erstellen";
+        this.createShoppingBasket = "Einkauf tätigen";
         this.orderArticles = "Artikel bestellen";
         this.getInventory = "Inventar";
     }

@@ -4,6 +4,8 @@ import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
 
 import java.io.*;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -116,7 +118,7 @@ public class ExcelExporter {
 
         titleForExcelColumns.add("Bezeichung");
         titleForExcelColumns.add("Preis CHF");
-        titleForExcelColumns.add("Anzahl");
+        titleForExcelColumns.add("Stueckzahl");
 
         List<List<String>> inventoryList = new ArrayList<>();
         inventoryList.add(titleForExcelColumns);
@@ -133,10 +135,9 @@ public class ExcelExporter {
         SimpleDateFormat ft = new SimpleDateFormat ("yyyyMMdd_HHmmss");
 
         String kioskName = kiosk.getName();
-        //System.out.println(kioskName);
         kioskName = kioskName.replaceAll("[^A-Za-z0-9]", "_").trim();
         try {
-            this.writeCSV(inventoryList, "C:\\Users\\-\\IdeaProjects\\2018_Juventus_Software_Engineering_Projektarbeit_Kiosk\\out\\fileOutput\\" + ft.format(dateNow)+"_"+ kioskName +"_kiosk_inventory.xls");
+            this.writeCSV(inventoryList, FileSystems.getDefault().getPath("").toAbsolutePath() + "\\out\\fileOutput\\" + ft.format(dateNow)+"_"+ kioskName +"_kiosk_inventory.xls");
         } catch (IOException e) {
             e.printStackTrace();
         }
