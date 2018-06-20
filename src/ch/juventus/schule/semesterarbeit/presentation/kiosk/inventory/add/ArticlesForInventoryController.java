@@ -1,7 +1,6 @@
 package ch.juventus.schule.semesterarbeit.presentation.kiosk.inventory.add;
 
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
-import ch.juventus.schule.semesterarbeit.business.supplier.KioskSupplier;
 import ch.juventus.schule.semesterarbeit.presentation.SceneDataHandler;
 import ch.juventus.schule.semesterarbeit.presentation.SceneStageHandler;
 import javafx.event.ActionEvent;
@@ -51,34 +50,20 @@ public class ArticlesForInventoryController {
 
         articleList.setOnMouseClicked(event -> {
             notificationLabel.setText("");
-            //if (event.getClickCount() == 2) {
             ArticleTableViewValueForInventory articleTableViewValueForInventory = articleList.getSelectionModel().getSelectedItems().get(0);
-            System.out.println("clicked");
-            System.out.println(event);
-            if(isAddArticleEvent(event)){
-                //this.kiosk = articleTableViewValueForInventory.getKiosk();
+            if (isAddArticleEvent(event)) {
                 try {
-                    if(sceneDataHandler.getKiosk().getAmountOfMoneyInTheCashRegister() >= articleTableViewValueForInventory.getBaseArticle().getPrice()){
-                        if(Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInInventory()) > 0){
-                            sceneDataHandler.getKiosk().setAmountOfMoneyInTheCashRegister(sceneDataHandler.getKiosk().getAmountOfMoneyInTheCashRegister() - articleTableViewValueForInventory.getBaseArticle().getPrice());
-                            sceneDataHandler.getKiosk().putItemIntoTheStorage(articleTableViewValueForInventory.getBaseArticle(), Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInShoppingBasket()) + 1);
-                            sceneDataHandler.getKiosk().getKioskSupplier().putItemIntoTheStorage(articleTableViewValueForInventory.getBaseArticle(), Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInInventory()) - 1);
-                            articleList.getItems().setAll(parseArticleList(sceneDataHandler.getKiosk()));
-                        }
-                    } else{
+                    if (isEnoughMoneyInTheCashRegisterToPayForArticle(articleTableViewValueForInventory)) {
+                        addArticleToKioskInventory(articleTableViewValueForInventory);
+                    } else {
                         notificationLabel.setText("Nicht genug Kapital in der Kasse");
                         throw new KioskCashRegisterException("Not enough money in the cash register!");
                     }
-                } catch (KioskCashRegisterException ex){
+                } catch (KioskCashRegisterException ex) {
                     LOGGER.warning(ex.toString());
                 }
-            } else if (isRemoveArticleEvent(event)){
-                if(Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInShoppingBasket()) > 0) {
-                    sceneDataHandler.getKiosk().setAmountOfMoneyInTheCashRegister(sceneDataHandler.getKiosk().getAmountOfMoneyInTheCashRegister() + articleTableViewValueForInventory.getBaseArticle().getPrice());
-                    sceneDataHandler.getKiosk().putItemIntoTheStorage(articleTableViewValueForInventory.getBaseArticle(), Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInShoppingBasket()) - 1);
-                    sceneDataHandler.getKiosk().getKioskSupplier().putItemIntoTheStorage(articleTableViewValueForInventory.getBaseArticle(), Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInInventory()) + 1);
-                    articleList.getItems().setAll(parseArticleList(sceneDataHandler.getKiosk()));
-                }
+            } else if (isRemoveArticleEvent(event)) {
+                removeArticleFromKioskInventory(articleTableViewValueForInventory);
             }
         });
         articleList.getItems().setAll(parseArticleList(sceneDataHandler.getKiosk()));
@@ -95,7 +80,9 @@ public class ArticlesForInventoryController {
     }
 
     public void cancelAndGoBackToMainWindow(ActionEvent actionEvent) throws IOException {
-        //customer.getShoppingBasket().clearAllArticlesOutOfTheShoppingBasket();
+
+        sceneDataHandler.resetSceneDataHandler();
+
         sceneStageHandler.goBackToTheMainMenu(actionEvent);
     }
 
@@ -109,7 +96,32 @@ public class ArticlesForInventoryController {
     private boolean isAddArticleEvent(MouseEvent event) {
         return getNodeIdentifier(event).equals("addArticleToShoppingBasket") || getNodeIdentifier(event).equals("+");
     }
+
     private boolean isRemoveArticleEvent(MouseEvent event) {
         return getNodeIdentifier(event).equals("removeArticleFromShoppingBasket") || getNodeIdentifier(event).equals("-");
+    }
+
+    private boolean isEnoughMoneyInTheCashRegisterToPayForArticle(ArticleTableViewValueForInventory articleTableViewValueForInventory) {
+        return sceneDataHandler.getKiosk().getAmountOfMoneyInTheCashRegister() >= articleTableViewValueForInventory.getBaseArticle().getPrice();
+    }
+
+    private void addArticleToKioskInventory(ArticleTableViewValueForInventory articleTableViewValueForInventory) {
+        if (Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInInventory()) > 0) {
+            sceneDataHandler.setAmountToPay(sceneDataHandler.getAmountToPay() + articleTableViewValueForInventory.getBaseArticle().getPrice());
+            sceneDataHandler.getKiosk().setAmountOfMoneyInTheCashRegister(sceneDataHandler.getKiosk().getAmountOfMoneyInTheCashRegister() - articleTableViewValueForInventory.getBaseArticle().getPrice());
+            sceneDataHandler.getKiosk().putItemIntoTheStorage(articleTableViewValueForInventory.getBaseArticle(), Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInShoppingBasket()) + 1);
+            sceneDataHandler.getKiosk().getKioskSupplier().putItemIntoTheStorage(articleTableViewValueForInventory.getBaseArticle(), Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInInventory()) - 1);
+            articleList.getItems().setAll(parseArticleList(sceneDataHandler.getKiosk()));
+        }
+    }
+
+    private void removeArticleFromKioskInventory(ArticleTableViewValueForInventory articleTableViewValueForInventory){
+        if (Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInShoppingBasket()) > 0) {
+            sceneDataHandler.setAmountToPay(sceneDataHandler.getAmountToPay() - articleTableViewValueForInventory.getBaseArticle().getPrice());
+            sceneDataHandler.getKiosk().setAmountOfMoneyInTheCashRegister(sceneDataHandler.getKiosk().getAmountOfMoneyInTheCashRegister() + articleTableViewValueForInventory.getBaseArticle().getPrice());
+            sceneDataHandler.getKiosk().putItemIntoTheStorage(articleTableViewValueForInventory.getBaseArticle(), Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInShoppingBasket()) - 1);
+            sceneDataHandler.getKiosk().getKioskSupplier().putItemIntoTheStorage(articleTableViewValueForInventory.getBaseArticle(), Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInInventory()) + 1);
+            articleList.getItems().setAll(parseArticleList(sceneDataHandler.getKiosk()));
+        }
     }
 }

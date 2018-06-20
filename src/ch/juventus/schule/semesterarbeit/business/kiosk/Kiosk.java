@@ -4,10 +4,7 @@ import ch.juventus.schule.semesterarbeit.business.employee.Employee;
 import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
 import ch.juventus.schule.semesterarbeit.business.supplier.KioskSupplier;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 /**
  * @author : ${user}
@@ -33,6 +30,21 @@ public class Kiosk {
         this.inventory = inventory;
         this.amountOfMoneyInTheCashRegister = amountOfMoneyInTheCashRegister;
         this.kioskSupplier = kioskSupplier;
+        this.createShoppingBasket = "Einkauf tätigen";
+        this.orderArticles = "Artikel bestellen";
+        this.getInventory = "Inventar";
+    }
+
+    public Kiosk(Kiosk orginal){
+        this.name = orginal.name;
+        this.location = orginal.location;
+        this.isKioskOpen = orginal.isKioskOpen;
+        this.employees  = orginal.employees;
+        Map<BaseArticle,Integer> inv = new HashMap<>();
+       // inv =
+        //this.inventory = Map<BaseArticle, Integer>  (orginal.inventory);
+        this.amountOfMoneyInTheCashRegister = orginal.amountOfMoneyInTheCashRegister;
+        this.kioskSupplier =  new KioskSupplier(orginal.kioskSupplier);
         this.createShoppingBasket = "Einkauf tätigen";
         this.orderArticles = "Artikel bestellen";
         this.getInventory = "Inventar";
@@ -98,6 +110,10 @@ public class Kiosk {
         return kioskSupplier;
     }
 
+    public void setKioskOpen(boolean kioskOpen) {
+        isKioskOpen = kioskOpen;
+    }
+
     @Override
     public String toString() {
         return "Kiosk{" +
@@ -125,3 +141,4 @@ public class Kiosk {
         return Objects.hash(name, location);
     }
 }
+

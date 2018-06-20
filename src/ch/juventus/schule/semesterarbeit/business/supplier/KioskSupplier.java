@@ -17,6 +17,10 @@ public class KioskSupplier {
         this.name = name;
         this.inventory = inventory;
     }
+    public KioskSupplier(KioskSupplier kioskSupplier) {
+        this.name = kioskSupplier.name;
+        this.inventory = kioskSupplier.inventory;
+    }
 
     public String getName() {
         return name;

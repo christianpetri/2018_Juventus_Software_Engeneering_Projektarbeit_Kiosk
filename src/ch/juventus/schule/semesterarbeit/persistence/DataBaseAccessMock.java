@@ -95,18 +95,6 @@ public class DataBaseAccessMock {
     }
     */
 
-    public Kiosk findKiosk(String name, String location) {
-        Kiosk tempKiosk = new Kiosk(name, location, false, null, null, 0, null);
-        if (this.kiosks.contains(tempKiosk)) {
-            for (Kiosk thisKiosk : kiosks) {
-                if (thisKiosk.equals(tempKiosk)) {
-                    return thisKiosk;
-                }
-            }
-        }
-        return null;
-    }
-
     public Set<Kiosk> getKiosks() {
         return kiosks;
     }
@@ -129,6 +117,7 @@ public class DataBaseAccessMock {
         return null;
     }
 
+    /*
     public Kiosk getKiosk(String name, String location) {
         Kiosk tempKiosk = new Kiosk(name, location, false, null, null, 1, null);
         if(kiosks.contains(tempKiosk)){
@@ -140,11 +129,11 @@ public class DataBaseAccessMock {
         }
         return null;
     }
-
-    public void setKioskStorage(Kiosk myKiosk, Map<BaseArticle, Integer> storage){
+    */
+    public void setKioskStorage(Kiosk myKiosk){
         for(Kiosk kiosk : kiosks){
             if(kiosk.equals(myKiosk)){
-                        kiosk.setInventory(storage);
+                        kiosk.setInventory( myKiosk.getInventory());
             }
         }
     }

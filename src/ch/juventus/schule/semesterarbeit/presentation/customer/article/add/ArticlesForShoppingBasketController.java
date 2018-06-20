@@ -22,8 +22,7 @@ import java.util.List;
  * @since: ${date}
  */
 public class ArticlesForShoppingBasketController {
-    private Kiosk kiosk;
-    private Customer customer;
+
     private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
     private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
     @FXML
@@ -41,8 +40,6 @@ public class ArticlesForShoppingBasketController {
         this.kioskLocation.setText(sceneDataHandler.getKiosk().getLocation());
         this.customerName.setText(sceneDataHandler.getCustomer().getName());
         this.customerAge.setText(String.format("%d", sceneDataHandler.getCustomer().getAge()));
-        this.kiosk = sceneDataHandler.getKiosk();
-        this.customer = sceneDataHandler.getCustomer();
 
         articleDescription.setCellValueFactory(new PropertyValueFactory<>("articleDescription"));
         articlePrice.setCellValueFactory(new PropertyValueFactory<>("articlePrice"));
@@ -60,18 +57,18 @@ public class ArticlesForShoppingBasketController {
             System.out.println(event);
             if(isAddArticleEvent(event)){
                 System.out.println("Add Article");
-                if(!customer.getShoppingBasket().addArticle(kiosk.getInventory(), articleTableViewValue.getBaseArticle(),1)){
+                if(!sceneDataHandler.getCustomer().getShoppingBasket().addArticle(sceneDataHandler.getKiosk().getInventory(), articleTableViewValue.getBaseArticle(),1)){
                     notificationAgeRestriction.setTextFill(Color.RED);
                     notificationAgeRestriction.setText("Der Kunde ist nicht alt genung!");
                 }
-                articleList.getItems().setAll(parseArticleList(kiosk,customer));
+                articleList.getItems().setAll(parseArticleList(sceneDataHandler.getKiosk(),sceneDataHandler.getCustomer()));
             } else if (isRemoveArticleEvent(event)){
-                customer.getShoppingBasket().removeArticle(kiosk.getInventory(), articleTableViewValue.getBaseArticle(),1);
+                sceneDataHandler.getCustomer().getShoppingBasket().removeArticle(sceneDataHandler.getKiosk().getInventory(), articleTableViewValue.getBaseArticle(),1);
                 System.out.println("Remove Article");
-                articleList.getItems().setAll(parseArticleList(kiosk,customer));
+                articleList.getItems().setAll(parseArticleList(sceneDataHandler.getKiosk(),sceneDataHandler.getCustomer()));
             }
         });
-        articleList.getItems().setAll(parseArticleList(kiosk,customer));
+        articleList.getItems().setAll(parseArticleList(sceneDataHandler.getKiosk(),sceneDataHandler.getCustomer()));
     }
 
     private List<ArticleTableViewValue> parseArticleList(Kiosk kiosk, Customer customer) {
@@ -85,7 +82,7 @@ public class ArticlesForShoppingBasketController {
     }
 
     public void cancelAndGoBackToMainWindow(ActionEvent actionEvent) throws IOException {
-        customer.getShoppingBasket().clearAllArticlesOutOfTheShoppingBasket();
+        sceneDataHandler.getCustomer().getShoppingBasket().clearAllArticlesOutOfTheShoppingBasket();
         sceneStageHandler.goBackToTheMainMenu(actionEvent);
     }
 

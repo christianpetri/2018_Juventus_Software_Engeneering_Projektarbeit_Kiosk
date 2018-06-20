@@ -37,21 +37,24 @@ public class KioskController {
     private TableColumn<Kiosk, Boolean> kioskStatus;
     @FXML
     private Label kioskMessage;
+
     private DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
     private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
     private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
-
-
     @FXML
     private void initialize() {
+        sceneDataHandler.resetSceneDataHandler();
         dataBaseAccessMock.addKiosk("Haselgasse", "Seen", "Hansi", 1000);
-        dataBaseAccessMock.addKiosk("s", "Wald", "Hansi", 1000);
+        //dataBaseAccessMock.addKiosk("s", "Wald", "Hansi", 1000);
         kioskMessage.setText("");
         tableViewKiosk.setOnMouseClicked(event -> {
+            sceneDataHandler.resetSceneDataHandler();
             Kiosk kiosk = tableViewKiosk.getSelectionModel().getSelectedItems().get(0);
-            boolean isKioskOpen = dataBaseAccessMock.getKiosk(kiosk.getName(), kiosk.getLocation()).isKioskOpen();
+            kiosk.isKioskOpen();
+            //boolean isKioskOpen = dataBaseAccessMock.getKiosk(kiosk.getName(), kiosk.getLocation()).isKioskOpen();
+            boolean isKioskOpen = kiosk.isKioskOpen();
             if (isKioskToggleEvent(event)) {
                 toggleKioskState(kiosk);
             } else if (isKioskOpen) {
@@ -82,7 +85,8 @@ public class KioskController {
         return dataBaseAccessMock.getKiosks();
     }
 
-    public void multithreading() {
+    @FXML
+    private void multithreading() {
         /*
         LOGGER.setLevel(Level.SEVERE);
         LOGGER.severe("Info Log");
@@ -98,12 +102,8 @@ public class KioskController {
         LOGGER.info("Info Log");
         LOGGER.finest("Really not important");
         */
-        Kiosk kiosk;
-        if(dataBaseAccessMock.getKiosk("Winkelgasse","Rapperswil") != null){
-            kiosk = dataBaseAccessMock.getKiosk("Winkelgasse","Rapperswil");
-        } else{
-            kiosk = dataBaseAccessMock.addKiosk("Winkelgasse", "Rapperswil", "Walter", 1000);
-        }
+        //dataBaseAccessMock.getKiosks().stream().findFirst();
+        Kiosk kiosk = dataBaseAccessMock.addKiosk("Winkelgasse", "Rapperswil", "Walter", 1000);
 
         Thread multithreading0 = new CustomerThread("Kiosk Simulation Kunde 1", kiosk);
         multithreading0.start();
@@ -117,7 +117,8 @@ public class KioskController {
         multithreading4.start();
     }
 
-    public void goToAddKiosk(ActionEvent actionEvent) throws IOException {
+    @FXML
+    private void goToAddKiosk(ActionEvent actionEvent) throws IOException {
         sceneStageHandler.renderNextScene(actionEvent, "kiosk/create/Kiosk");
     }
 
@@ -129,10 +130,10 @@ public class KioskController {
     }
 
     private void toggleKioskState(Kiosk kiosk) {
-        System.out.println("Kiosk");
-        dataBaseAccessMock.getKiosk(kiosk.getName(), kiosk.getLocation()).toggleIsKioskOpen();
+        //dataBaseAccessMock.getKiosk(kiosk.getName(), kiosk.getLocation()).toggleIsKioskOpen();
+        kiosk.setKioskOpen(!kiosk.isKioskOpen());
         tableViewKiosk.getItems().setAll(parseKioskList());
-        System.out.println(dataBaseAccessMock.getKiosk(kiosk.getName(), kiosk.getLocation()).isKioskOpen());
+        //System.out.println(dataBaseAccessMock.getKiosk(kiosk.getName(), kiosk.getLocation()).isKioskOpen());
     }
 
     private boolean isKioskToggleEvent(MouseEvent event) {
@@ -162,7 +163,6 @@ public class KioskController {
 
     private void renderSceneDoShopping(Kiosk kiosk){
         System.out.println("Warenkorb für Kunden erstellen");
-        sceneDataHandler.resetSceneDataHandler();
         sceneDataHandler.setKiosk(kiosk);
         try {
             sceneStageHandler.renderScene((Stage) tableViewKiosk.getScene().getWindow(), "customer/add/Customer", "Warenkorb erstellen");
@@ -174,7 +174,6 @@ public class KioskController {
 
     private void renderSceneOrderInventory(Kiosk kiosk){
         LOGGER.info("Artikel bestellen");
-        sceneDataHandler.resetSceneDataHandler();
         sceneDataHandler.setKiosk(kiosk);
         try {
             sceneStageHandler.renderScene((Stage) tableViewKiosk.getScene().getWindow(), "kiosk/inventory/add/ArticlesForInventroy", "Warenkorb erstellen");

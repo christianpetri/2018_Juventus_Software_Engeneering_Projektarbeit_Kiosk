@@ -21,4 +21,4 @@ Inventory<br/>
 
 ## Inital Class Diagramm
 
-![Class Diagramm](/ActivityDiagram/KlassenDiagramm.PNG)
+![Class Diagram](/ActivityDiagram/KlassenDiagramm.PNG)

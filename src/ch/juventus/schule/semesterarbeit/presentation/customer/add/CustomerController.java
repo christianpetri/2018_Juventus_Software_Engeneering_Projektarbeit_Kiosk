@@ -14,7 +14,6 @@ import java.io.IOException;
  * @since: ${date}
  */
 public class CustomerController {
-
     @FXML
     TextField customerName, customerAge;
     @FXML
