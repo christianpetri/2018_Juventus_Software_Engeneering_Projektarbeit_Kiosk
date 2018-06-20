@@ -7,14 +7,18 @@ An application is to be created which simulates a kiosk.
 [Project Requirements PDF](/Aufgabestellung_Vertiefungsarbeit_Kiosk.pdf)
 
 ## Activity Diagramm
-Create Kiosk
+Create Kiosk <br/>
 ![Create Kiosk](/ActivityDiagram/KioskErstellen.PNG)
 
-Do Shopping
+Do Shopping<br/>
 ![Do Shopping](/ActivityDiagram/EinkaufTaetigen.PNG)
 
-Order Articles
+Order Articles<br/>
 ![Order Articles](/ActivityDiagram/ArtikelBestellen.PNG)
 
-Inventory
+Inventory<br/>
 ![Inventory](/ActivityDiagram/Inventar.PNG)
+
+## Inital Class Diagramm
+
+![Class Diagramm](/ActivityDiagram/KlassenDiagramm.PNG)
