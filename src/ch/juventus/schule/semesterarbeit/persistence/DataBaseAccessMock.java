@@ -139,6 +139,13 @@ public class DataBaseAccessMock {
             }
         }
         return null;
+    }
 
+    public void setKioskStorage(Kiosk myKiosk, Map<BaseArticle, Integer> storage){
+        for(Kiosk kiosk : kiosks){
+            if(kiosk.equals(myKiosk)){
+                        kiosk.setStorage(storage);
+            }
+        }
     }
 }

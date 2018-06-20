@@ -1,8 +1,7 @@
-package ch.juventus.schule.semesterarbeit.presentation.customer.buy;
+package ch.juventus.schule.semesterarbeit.presentation.customer.add;
 
-import ch.juventus.schule.semesterarbeit.business.customer.Customer;
 import ch.juventus.schule.semesterarbeit.presentation.SceneDataHandler;
-import ch.juventus.schule.semesterarbeit.presentation.SceneHandler;
+import ch.juventus.schule.semesterarbeit.presentation.SceneStageHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -14,13 +13,13 @@ import java.io.IOException;
  * @author : ${user}
  * @since: ${date}
  */
-public class addCustomer {
+public class CustomerController {
 
     @FXML
     TextField customerName, customerAge;
     @FXML
     private Label customerInfoLabel, kioskName, kioskLocation;
-    private SceneHandler sceneHandler = SceneHandler.getInstance();
+    private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
     private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
 
     @FXML
@@ -34,8 +33,8 @@ public class addCustomer {
         customerInfoLabel.setText("");
         if (!customerName.getText().isEmpty() && !customerAge.getText().isEmpty()) {
             if (customerAge.getText().matches("\\d+")) {
-                sceneDataHandler.setCustomer(new Customer(customerName.getText(), Integer.parseInt(customerAge.getText())));
-                sceneHandler.renderNextScene(actionEvent, "addArticleToShoppingBasket");
+                sceneDataHandler.setCustomer(new ch.juventus.schule.semesterarbeit.business.customer.Customer(customerName.getText(), Integer.parseInt(customerAge.getText())));
+                sceneStageHandler.renderNextScene(actionEvent, "customer/article/add/ArticlesForShoppingBasket");
             }
             customerInfoLabel.setText("Alter muss eine Zahl sein");
         } else {
@@ -44,7 +43,7 @@ public class addCustomer {
     }
 
     public void goBackToTheMainMenu(ActionEvent actionEvent) throws IOException {
-        sceneHandler.goBackToTheMainMenu(actionEvent);
+        sceneStageHandler.goBackToTheMainMenu(actionEvent);
     }
 
     public void setKiosk(String name, String location) {

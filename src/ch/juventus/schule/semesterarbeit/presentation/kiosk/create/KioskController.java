@@ -1,7 +1,7 @@
 package ch.juventus.schule.semesterarbeit.presentation.kiosk.create;
 
 import ch.juventus.schule.semesterarbeit.persistence.DataBaseAccessMock;
-import ch.juventus.schule.semesterarbeit.presentation.SceneHandler;
+import ch.juventus.schule.semesterarbeit.presentation.SceneStageHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -13,8 +13,8 @@ import java.io.IOException;
  * @author : ${user}
  * @since: ${date}
  */
-public class AddKioskController {
-    SceneHandler sceneHandler = SceneHandler.getInstance();
+public class KioskController {
+    SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
     DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
     @FXML
     private TextField kioskName;
@@ -34,7 +34,7 @@ public class AddKioskController {
         if (kioskStartCapital.getText().matches("\\d+")) {
             if (areAllKioskFieldsSet()) {
                 dataBaseAccessMock.addKiosk(kioskName.getText(), kioskLocation.getText(), kioskEmployeeName.getText(), Integer.parseInt(kioskStartCapital.getText()));
-                sceneHandler.goBackToTheMainMenu(actionEvent);
+                sceneStageHandler.goBackToTheMainMenu(actionEvent);
             } else {
                 kioskInfoLabel.setText("Bitte Felder überpfrüfen");
             }
@@ -45,7 +45,7 @@ public class AddKioskController {
     }
 
     public void goBackToTheMainMenu(ActionEvent actionEvent) throws IOException {
-        sceneHandler.goBackToTheMainMenu(actionEvent);
+        sceneStageHandler.goBackToTheMainMenu(actionEvent);
     }
 
     private boolean areAllKioskFieldsSet() {

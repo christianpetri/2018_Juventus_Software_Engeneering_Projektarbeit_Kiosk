@@ -1,4 +1,4 @@
-package ch.juventus.schule.semesterarbeit.presentation;
+package ch.juventus.schule.semesterarbeit.presentation.customer.article.add;
 
 import ch.juventus.schule.semesterarbeit.business.customer.Customer;
 import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
@@ -12,15 +12,15 @@ public class ArticleTableViewValue {
     private Kiosk kiosk;
     private Customer customer;
     private BaseArticle baseArticle;
-    private int articleAmountInInventory;
-    private int articleAmountInShoppingBasket;
+    private String  articleAmountInInventory;
+    private String articleAmountInShoppingBasket;
     private String articleDescription;
     private String articlePrice;
     private String removeArticle;
     private String addArticle;
 
 
-    public ArticleTableViewValue(Kiosk kiosk, Customer customer, BaseArticle baseArticle, int articleAmountInInventory, int articleAmountInShoppingBasket, String articleDescription, String articlePrice) {
+    public ArticleTableViewValue(Kiosk kiosk, Customer customer, BaseArticle baseArticle, String articleAmountInInventory, String articleAmountInShoppingBasket, String articleDescription, String articlePrice) {
         this.kiosk = kiosk;
         this.customer = customer;
         this.baseArticle = baseArticle;
@@ -44,11 +44,11 @@ public class ArticleTableViewValue {
         return baseArticle;
     }
 
-    public int getArticleAmountInInventory() {
+    public String getArticleAmountInInventory() {
         return articleAmountInInventory;
     }
 
-    public int getArticleAmountInShoppingBasket() {
+    public String getArticleAmountInShoppingBasket() {
         return articleAmountInShoppingBasket;
     }
 

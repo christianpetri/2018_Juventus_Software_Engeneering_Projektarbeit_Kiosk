@@ -39,7 +39,7 @@ public class SceneDataHandler {
         this.kiosk = kiosk;
     }
 
-    public void resetSecneDataHandler(){
+    public void resetSceneDataHandler(){
         this.customer = null;
         this.kiosk = null;
     }

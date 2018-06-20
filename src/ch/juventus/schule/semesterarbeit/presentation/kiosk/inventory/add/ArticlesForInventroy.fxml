@@ -1,22 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-
-<GridPane alignment="CENTER" hgap="10" maxWidth="1.7976931348623157E308" minWidth="736.0" prefHeight="358.0" prefWidth="736.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.juventus.schule.semesterarbeit.presentation.addArticleToShoppingBasket">
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<GridPane alignment="CENTER" hgap="10" maxWidth="1.7976931348623157E308" minWidth="736.0" prefHeight="358.0" prefWidth="736.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.juventus.schule.semesterarbeit.presentation.kiosk.inventory.add.ArticlesForInventoryController">
 
 
    <children>
       <Pane prefHeight="60.0" prefWidth="691.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <children>
-            <Label fx:id="customerName" layoutX="165.0" layoutY="12.0" prefHeight="17.0" prefWidth="44.0" />
-            <Label fx:id="customerAge" layoutX="287.0" layoutY="12.0" prefHeight="17.0" prefWidth="44.0" />
+            <Label fx:id="supplierName" layoutX="165.0" layoutY="12.0" prefHeight="17.0" prefWidth="44.0" />
             <Label fx:id="kioskName" layoutX="165.0" layoutY="30.0" prefHeight="17.0" prefWidth="44.0" />
             <Label fx:id="kioskLocation" layoutX="243.0" layoutY="30.0" prefHeight="17.0" prefWidth="44.0" />
             <Button fx:id="payArticle" layoutX="582.0" layoutY="26.0" mnemonicParsing="false" onAction="#goToPayShoppingCart" text="Ware bezahlen" />

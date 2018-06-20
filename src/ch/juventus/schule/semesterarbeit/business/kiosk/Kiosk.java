@@ -78,6 +78,10 @@ public class Kiosk {
         return getInventory;
     }
 
+    public void setStorage(Map<BaseArticle, Integer> storage) {
+        this.storage = storage;
+    }
+
     @Override
     public String toString() {
         return "Kiosk{" +

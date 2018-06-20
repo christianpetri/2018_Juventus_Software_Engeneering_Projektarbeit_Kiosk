@@ -13,19 +13,20 @@ import java.io.IOException;
  * @author : ${user}
  * @since: ${date}
  */
-public class SceneHandler {
-    private static SceneHandler instance;
-    private SceneHandler(){
+public class SceneStageHandler {
+    private static SceneStageHandler instance;
 
+    private SceneStageHandler() {
     }
-    public static SceneHandler getInstance(){
-        if(SceneHandler.instance == null){
-            SceneHandler.instance = new SceneHandler();
+
+    public static SceneStageHandler getInstance() {
+        if (SceneStageHandler.instance == null) {
+            SceneStageHandler.instance = new SceneStageHandler();
         }
-        return SceneHandler.instance;
+        return SceneStageHandler.instance;
     }
 
-    public void renderScene(Stage primaryStage , String fileName, String sceneName) throws IOException {
+    public void renderScene(Stage primaryStage, String fileName, String sceneName) throws IOException {
         Stage window = primaryStage;
         Parent parent = FXMLLoader.load(getClass().getResource(fileName + ".fxml"));
         Scene scene = new Scene(parent);
@@ -35,17 +36,17 @@ public class SceneHandler {
     }
 
     public void goBackToTheMainMenu(ActionEvent actionEvent) throws IOException {
-        Node node=(Node) actionEvent.getSource();
-        Stage stage=(Stage) node.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("mainWindow.fxml"));
+        Node node = (Node) actionEvent.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("kiosk/select/Kiosk.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
     public void renderNextScene(ActionEvent actionEvent, String fileName) throws IOException {
-        Node node=(Node) actionEvent.getSource();
-        Stage stage=(Stage) node.getScene().getWindow();
+        Node node = (Node) actionEvent.getSource();
+        Stage stage = (Stage) node.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource(fileName + ".fxml"));
 
         Scene scene = new Scene(root);

@@ -1,9 +1,11 @@
-package ch.juventus.schule.semesterarbeit.presentation;
+package ch.juventus.schule.semesterarbeit.presentation.kiosk.select;
 
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
 import ch.juventus.schule.semesterarbeit.business.multithreading.CustomerThread;
 import ch.juventus.schule.semesterarbeit.exporter.ExcelExporter;
 import ch.juventus.schule.semesterarbeit.persistence.DataBaseAccessMock;
+import ch.juventus.schule.semesterarbeit.presentation.SceneDataHandler;
+import ch.juventus.schule.semesterarbeit.presentation.SceneStageHandler;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -24,7 +26,7 @@ import java.util.logging.Logger;
  * @author : ${user}
  * @since: ${date}
  */
-public class mainWindow {
+public class KioskController {
     @FXML
     public Button createKiosk;
     @FXML
@@ -36,7 +38,7 @@ public class mainWindow {
     @FXML
     private Label kioskMessage;
     private DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
-    private SceneHandler sceneHandler = SceneHandler.getInstance();
+    private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
     private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
@@ -51,28 +53,26 @@ public class mainWindow {
             //if (event.getClickCount() == 2) {
             Kiosk kiosk = tableViewKiosk.getSelectionModel().getSelectedItems().get(0);
             //System.out.println(kiosk);
-            //System.out.println("Name " + kiosk.getName() + " Ort: " + kiosk.getLocation());
             //System.out.println(getNodeIdentifier(event));
 
             boolean isKioskOpen = dataBaseAccessMock.getKiosk(kiosk.getName(), kiosk.getLocation()).isKioskOpen();
-
             if (isKioskToggleEvent(event)) {
                 toggleKioskState(kiosk);
             } else if (isKioskOpen) {
                 if (isCreateCustomerForShoppingBasketEvent(event)) {
-
                     System.out.println("Warenkorb für Kunden erstellen");
                     sceneDataHandler.setKiosk(kiosk);
                     try {
-                        sceneHandler.renderScene((Stage) tableViewKiosk.getScene().getWindow(), "customer/buy/addCustomer", "Warenkorb erstellen");
+                        sceneStageHandler.renderScene((Stage) tableViewKiosk.getScene().getWindow(), "customer/add/Customer", "Warenkorb erstellen");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    System.out.println("Artikel bestellen");
+                    LOGGER.info("Einkauf");
+                    sceneDataHandler.resetSceneDataHandler();
                     sceneDataHandler.setKiosk(kiosk);
                 } else if (isOrderArticleEvent(event)) {
-                    System.out.println("Artikel bestellen");
-                    sceneDataHandler.resetSecneDataHandler();
+                    LOGGER.info("Artikel bestellen");
+                    sceneDataHandler.resetSceneDataHandler();
                     sceneDataHandler.setKiosk(kiosk);
                 } else if (isGetInventoryEvent(event)) {
                     exportInventoryToExcel(kiosk);
@@ -97,7 +97,7 @@ public class mainWindow {
         return dataBaseAccessMock.getKiosks();
     }
 
-    public mainWindow() {
+    public KioskController() {
         /*
         List<Employee> employee = new ArrayList<>();
         Employee hans = new Employee("Hans");
@@ -134,7 +134,7 @@ public class mainWindow {
         }
 */
         /*
-        Customer walter = new Customer("Walter" , 18);
+        CustomerController walter = new CustomerController("Walter" , 18);
 
         System.out.println(lagerbestandKiosk);
         walter.getShoppingBasket().artikelHinzufuegen(lagerbestandKiosk,createBigAppleJuice(),4);
@@ -154,7 +154,6 @@ public class mainWindow {
     }
 
     public void multithreading() {
-        //TODO Mulithreading Aufgabe
         /*
         LOGGER.setLevel(Level.SEVERE);
         LOGGER.severe("Info Log");
@@ -180,20 +179,20 @@ public class mainWindow {
 
 
         Thread multithreading0 = new CustomerThread("Kiosk Simulation Kunde 1", kiosk);
-        multithreading0.run();
+        multithreading0.start();
         Thread multithreading1 = new CustomerThread("Kiosk Simulation Kunde 2", kiosk);
-        multithreading1.run();
+        multithreading1.start();
         Thread multithreading2 = new CustomerThread("Kiosk Simulation Kunde 3", kiosk);
-        multithreading2.run();
+        multithreading2.start();
         Thread multithreading3 = new CustomerThread("Kiosk Simulation Kunde 4", kiosk);
-        multithreading3.run();
+        multithreading3.start();
         Thread multithreading4 = new CustomerThread("Kiosk Simulation Kunde 5", kiosk);
-        multithreading4.run();
+        multithreading4.start();
 
     }
 
     public void goToAddKiosk(ActionEvent actionEvent) throws IOException {
-        sceneHandler.renderNextScene(actionEvent, "kiosk/create/addKiosk");
+        sceneStageHandler.renderNextScene(actionEvent, "kiosk/create/Kiosk");
     }
 
     private String getNodeIdentifier(MouseEvent event) {
