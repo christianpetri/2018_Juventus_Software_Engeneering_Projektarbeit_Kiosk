@@ -1,1 +1,4 @@
-Es soll eine Applikation erstellt werden, welche einen Kiosk simuliert.
+An application is to be created which simulates a kiosk.
+
+##Requirements
+[Project Requirements PDF](/Aufgabestellung_Vertiefungsarbeit_Kiosk.pdf)

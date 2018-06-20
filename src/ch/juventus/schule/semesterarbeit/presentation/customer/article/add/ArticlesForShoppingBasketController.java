@@ -60,13 +60,13 @@ public class ArticlesForShoppingBasketController {
             System.out.println(event);
             if(isAddArticleEvent(event)){
                 System.out.println("Add Article");
-                if(!customer.getShoppingBasket().addArticle(kiosk.getStorage(), articleTableViewValue.getBaseArticle(),1)){
+                if(!customer.getShoppingBasket().addArticle(kiosk.getInventory(), articleTableViewValue.getBaseArticle(),1)){
                     notificationAgeRestriction.setTextFill(Color.RED);
                     notificationAgeRestriction.setText("Der Kunde ist nicht alt genung!");
                 }
                 articleList.getItems().setAll(parseArticleList(kiosk,customer));
             } else if (isRemoveArticleEvent(event)){
-                customer.getShoppingBasket().removeArticle(kiosk.getStorage(), articleTableViewValue.getBaseArticle(),1);
+                customer.getShoppingBasket().removeArticle(kiosk.getInventory(), articleTableViewValue.getBaseArticle(),1);
                 System.out.println("Remove Article");
                 articleList.getItems().setAll(parseArticleList(kiosk,customer));
             }

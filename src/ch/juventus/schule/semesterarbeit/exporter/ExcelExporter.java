@@ -5,7 +5,6 @@ import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
 
 import java.io.*;
 import java.nio.file.FileSystems;
-import java.nio.file.Path;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -99,7 +98,7 @@ public class ExcelExporter {
 
     public void writeStorageToFile(Kiosk kiosk){
 
-        Map<BaseArticle, Integer> storage = kiosk.getStorage();
+        Map<BaseArticle, Integer> storage = kiosk.getInventory();
 
         List<BaseArticle> itemsInStorage = new ArrayList<>();
 

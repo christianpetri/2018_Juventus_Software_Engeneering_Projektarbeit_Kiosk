@@ -18,10 +18,10 @@ public class ArticleTableViewValueFactory {
     public ArticleTableViewValueFactory(Kiosk kiosk, Customer customer) {
         inventoryPlaceholder = new ArrayList<>();
         inventoryPlaceholder.clear();
-        kiosk.getStorage();
+        kiosk.getInventory();
         customer.getShoppingBasket().getShoppingBasket();
 
-        Map<BaseArticle, Integer> kioskInventory = kiosk.getStorage();
+        Map<BaseArticle, Integer> kioskInventory = kiosk.getInventory();
 
         Map<BaseArticle, Integer> shoppingBasket = customer.getShoppingBasket().getShoppingBasket();
 
@@ -38,7 +38,6 @@ public class ArticleTableViewValueFactory {
             inventoryPlaceholder.add(new ArticleTableViewValue(kiosk, customer, entry.getKey(),  String.valueOf(entry.getValue()), String.valueOf(amountOfArticleInShoppingBasket), entry.getKey().getDescription(), String.valueOf(entry.getKey().getPrice())));
         }
     }
-
     public List<ArticleTableViewValue> getInventoryPlaceholder() {
         return inventoryPlaceholder;
     }

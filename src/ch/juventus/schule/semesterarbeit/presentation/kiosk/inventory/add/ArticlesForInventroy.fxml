@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Font?>
+
 <GridPane alignment="CENTER" hgap="10" maxWidth="1.7976931348623157E308" minWidth="736.0" prefHeight="358.0" prefWidth="736.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.juventus.schule.semesterarbeit.presentation.kiosk.inventory.add.ArticlesForInventoryController">
 
 
@@ -12,7 +12,7 @@
             <Label fx:id="supplierName" layoutX="165.0" layoutY="12.0" prefHeight="17.0" prefWidth="44.0" />
             <Label fx:id="kioskName" layoutX="165.0" layoutY="30.0" prefHeight="17.0" prefWidth="44.0" />
             <Label fx:id="kioskLocation" layoutX="243.0" layoutY="30.0" prefHeight="17.0" prefWidth="44.0" />
-            <Button fx:id="payArticle" layoutX="582.0" layoutY="26.0" mnemonicParsing="false" onAction="#goToPayShoppingCart" text="Ware bezahlen" />
+            <Button fx:id="payArticle" layoutX="582.0" layoutY="26.0" mnemonicParsing="false" onAction="#goToPayInventory" text="Ware bezahlen" />
             <Button layoutX="14.0" layoutY="26.0" mnemonicParsing="false" onAction="#cancelAndGoBackToMainWindow" text="Abbrechen" />
          </children>
       </Pane>
@@ -20,11 +20,10 @@
            <columns>
                <TableColumn fx:id="articleDescription" prefWidth="167.0" text="Name" />
                <TableColumn fx:id="articlePrice" prefWidth="88.0" text="Preis CHF" />
-               <TableColumn fx:id="articleAmountInInventory" prefWidth="69.0" text="An Lager" />
+               <TableColumn fx:id="articleAmountInInventory" prefWidth="69.0" text="Lieferanten Lager" />
                <TableColumn fx:id="addArticleToShoppingBasket" prefWidth="123.0" text="Artikel hinzufügen" />
                <TableColumn fx:id="removeArticleFromShoppingBasket" prefWidth="106.0" text="Artikel entfernen" />
-               <TableColumn fx:id="articleAmountInShoppingBasket" prefWidth="147.0" text="Anzahl im Warenkorb" />
-
+               <TableColumn fx:id="articleAmountInShoppingBasket" prefWidth="147.0" text="Kiosk Lager" />
            </columns>
        </TableView>
    </children>

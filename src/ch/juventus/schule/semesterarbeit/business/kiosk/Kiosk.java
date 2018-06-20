@@ -2,7 +2,7 @@ package ch.juventus.schule.semesterarbeit.business.kiosk;
 
 import ch.juventus.schule.semesterarbeit.business.employee.Employee;
 import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
-import ch.juventus.schule.semesterarbeit.business.supplier.Supplier;
+import ch.juventus.schule.semesterarbeit.business.supplier.KioskSupplier;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,21 +18,21 @@ public class Kiosk {
     private String location;
     private boolean isKioskOpen;
     private List<Employee> employees = new ArrayList<>();
-    private Map<BaseArticle, Integer> storage;
+    private Map<BaseArticle, Integer> inventory;
     private int amountOfMoneyInTheCashRegister;
-    private Supplier supplier;
+    private KioskSupplier kioskSupplier;
     private String createShoppingBasket;
     private String orderArticles;
     private String getInventory;
 
-    public Kiosk(String name, String location, boolean isKioskOpen, Employee employee, Map<BaseArticle, Integer> storage, int amountOfMoneyInTheCashRegister, Supplier supplier) {
+    public Kiosk(String name, String location, boolean isKioskOpen, Employee employee, Map<BaseArticle, Integer> inventory, int amountOfMoneyInTheCashRegister, KioskSupplier kioskSupplier) {
         this.name = name;
         this.location = location;
         this.isKioskOpen = isKioskOpen;
         this.employees.add(employee);
-        this.storage = storage;
+        this.inventory = inventory;
         this.amountOfMoneyInTheCashRegister = amountOfMoneyInTheCashRegister;
-        this.supplier = supplier;
+        this.kioskSupplier = kioskSupplier;
         this.createShoppingBasket = "Einkauf tätigen";
         this.orderArticles = "Artikel bestellen";
         this.getInventory = "Inventar";
@@ -46,8 +46,8 @@ public class Kiosk {
         this.employees.add(employees);
     }
 
-    public Map<BaseArticle, Integer> getStorage() {
-        return storage;
+    public Map<BaseArticle, Integer> getInventory() {
+        return inventory;
     }
 
     public String getName() {
@@ -78,8 +78,24 @@ public class Kiosk {
         return getInventory;
     }
 
-    public void setStorage(Map<BaseArticle, Integer> storage) {
-        this.storage = storage;
+    public void setInventory(Map<BaseArticle, Integer> inventory) {
+        this.inventory = inventory;
+    }
+
+    public void putItemIntoTheStorage(BaseArticle baseArticle, Integer amount) {
+            inventory.put(baseArticle , amount);
+    }
+
+    public int getAmountOfMoneyInTheCashRegister() {
+        return amountOfMoneyInTheCashRegister;
+    }
+
+    public void setAmountOfMoneyInTheCashRegister(int amountOfMoneyInTheCashRegister) {
+        this.amountOfMoneyInTheCashRegister = amountOfMoneyInTheCashRegister;
+    }
+
+    public KioskSupplier getKioskSupplier() {
+        return kioskSupplier;
     }
 
     @Override
@@ -89,9 +105,9 @@ public class Kiosk {
                 ", Standort='" + location + '\'' +
                 ", Ist der Kiosk geöffnet=" + isKioskOpen +
                 ", Employee=" + employees +
-                ", Lager=" + storage +
+                ", Lager=" + inventory +
                 ", Geldsumme in der Kasse=" + amountOfMoneyInTheCashRegister +
-                ", Supplier=" + supplier +
+                ", KioskSupplier=" + kioskSupplier +
                 '}';
     }
 

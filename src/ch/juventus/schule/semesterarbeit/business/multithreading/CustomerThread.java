@@ -56,8 +56,8 @@ public class CustomerThread extends Thread{
     private void addArticleToShoppingBasket() throws InterruptedException {
         Thread.sleep(2000);
         System.out.println(threadName);
-        this.customer.getShoppingBasket().addArticle(this.kiosk.getStorage(), articleFactory.createBigAppleJuice(),1);
-        this.customer.getShoppingBasket().addArticle(this.kiosk.getStorage(), articleFactory.createMars(),1);
+        this.customer.getShoppingBasket().addArticle(this.kiosk.getInventory(), articleFactory.createBigAppleJuice(),1);
+        this.customer.getShoppingBasket().addArticle(this.kiosk.getInventory(), articleFactory.createMars(),1);
     }
 
     private void payShoppingBasket() throws InterruptedException {

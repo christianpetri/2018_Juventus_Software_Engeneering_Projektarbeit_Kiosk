@@ -50,30 +50,15 @@ public class KioskController {
         dataBaseAccessMock.addKiosk("s", "Wald", "Hansi", 1000);
         kioskMessage.setText("");
         tableViewKiosk.setOnMouseClicked(event -> {
-            //if (event.getClickCount() == 2) {
             Kiosk kiosk = tableViewKiosk.getSelectionModel().getSelectedItems().get(0);
-            //System.out.println(kiosk);
-            //System.out.println(getNodeIdentifier(event));
-
             boolean isKioskOpen = dataBaseAccessMock.getKiosk(kiosk.getName(), kiosk.getLocation()).isKioskOpen();
             if (isKioskToggleEvent(event)) {
                 toggleKioskState(kiosk);
             } else if (isKioskOpen) {
                 if (isCreateCustomerForShoppingBasketEvent(event)) {
-                    System.out.println("Warenkorb für Kunden erstellen");
-                    sceneDataHandler.setKiosk(kiosk);
-                    try {
-                        sceneStageHandler.renderScene((Stage) tableViewKiosk.getScene().getWindow(), "customer/add/Customer", "Warenkorb erstellen");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    LOGGER.info("Einkauf");
-                    sceneDataHandler.resetSceneDataHandler();
-                    sceneDataHandler.setKiosk(kiosk);
+                    renderSceneDoShopping(kiosk);
                 } else if (isOrderArticleEvent(event)) {
-                    LOGGER.info("Artikel bestellen");
-                    sceneDataHandler.resetSceneDataHandler();
-                    sceneDataHandler.setKiosk(kiosk);
+                    renderSceneOrderInventory(kiosk);
                 } else if (isGetInventoryEvent(event)) {
                     exportInventoryToExcel(kiosk);
                 }
@@ -95,62 +80,6 @@ public class KioskController {
 
     private Set<Kiosk> parseKioskList() {
         return dataBaseAccessMock.getKiosks();
-    }
-
-    public KioskController() {
-        /*
-        List<Employee> employee = new ArrayList<>();
-        Employee hans = new Employee("Hans");
-        employee.add(new Employee("Hans"));
-        System.out.println(employee);
-
-        Map<BaseArticle, Integer> lagerbestandKiosk = new HashMap<>();
-        lagerbestandKiosk.put( createBigVodka()    , 9 );
-        lagerbestandKiosk.put( createGlamourMagazin()  , 9 );
-
-        Map<BaseArticle, Integer> lagerbestadLieferant = new HashMap<>();
-
-        lagerbestadLieferant.put(createMars(),4);
-        lagerbestadLieferant.put(createBigBeer(),4);
-
-        List<Supplier> supplier = new ArrayList<>();
-        supplier.add(new Supplier("Meier", lagerbestadLieferant));
-
-       Kiosk kiosk = new Kiosk("Engelgasse", "Rapperswil SG", false, hans, lagerbestandKiosk, 0, supplier.get(0));
-
-        System.out.println(lagerbestadLieferant.containsKey(createBigBeer()));
-        /*
-        if(bier.isAlterMussUeberprueftWerden() && customerAge >= bier)
-        System.out.println(lagerbestadLieferant.keySet());
-        */
-        /*
-       //System.out.println(kiosk);
-       System.out.println(lagerbestandKiosk.size());
-       Alcohol bier = createBigBeer();
-       */
-/*
-        for (Map.Entry<BaseArticle, Integer> entry : lagerbestandKiosk.entrySet()) {
-            System.out.println("Artikel = " + entry.getKey() + ", Lagerbestand = " + entry.getValue());
-        }
-*/
-        /*
-        CustomerController walter = new CustomerController("Walter" , 18);
-
-        System.out.println(lagerbestandKiosk);
-        walter.getShoppingBasket().artikelHinzufuegen(lagerbestandKiosk,createBigAppleJuice(),4);
-        walter.getShoppingBasket().artikelHinzufuegen(lagerbestandKiosk,createBigAppleJuice(),1);
-        walter.getShoppingBasket().artikelHinzufuegen(lagerbestandKiosk,createMars(),4);
-        walter.getShoppingBasket().artikelHinzufuegen(lagerbestandKiosk,createCigarettePack(),4);
-        walter.getShoppingBasket().artikelHinzufuegen(lagerbestandKiosk,createBigBeer(),4);
-
-
-        System.out.println(walter);
-
-        walter.getShoppingBasket().artikelBezahlen();
-        //System.out.println(lagerbestandKiosk.get(createBigBeer()));
-        System.out.println(lagerbestandKiosk);
-        //ListIterator iterator = lagerbestandKiosk.values();
-         */
     }
 
     public void multithreading() {
@@ -176,8 +105,6 @@ public class KioskController {
             kiosk = dataBaseAccessMock.addKiosk("Winkelgasse", "Rapperswil", "Walter", 1000);
         }
 
-
-
         Thread multithreading0 = new CustomerThread("Kiosk Simulation Kunde 1", kiosk);
         multithreading0.start();
         Thread multithreading1 = new CustomerThread("Kiosk Simulation Kunde 2", kiosk);
@@ -188,7 +115,6 @@ public class KioskController {
         multithreading3.start();
         Thread multithreading4 = new CustomerThread("Kiosk Simulation Kunde 5", kiosk);
         multithreading4.start();
-
     }
 
     public void goToAddKiosk(ActionEvent actionEvent) throws IOException {
@@ -227,10 +153,33 @@ public class KioskController {
 
     private void exportInventoryToExcel(Kiosk kiosk) {
         System.out.println("Kiosk Inventar");
-        System.out.println(kiosk.getStorage().toString());
+        System.out.println(kiosk.getInventory().toString());
         kioskMessage.setTextFill(Color.BLACK);
         kioskMessage.setText("Inventar in Excel exportiert");
         ExcelExporter excelExporter = new ExcelExporter();
         excelExporter.writeStorageToFile(kiosk);
+    }
+
+    private void renderSceneDoShopping(Kiosk kiosk){
+        System.out.println("Warenkorb für Kunden erstellen");
+        sceneDataHandler.resetSceneDataHandler();
+        sceneDataHandler.setKiosk(kiosk);
+        try {
+            sceneStageHandler.renderScene((Stage) tableViewKiosk.getScene().getWindow(), "customer/add/Customer", "Warenkorb erstellen");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        LOGGER.info("Einkauf tätigen");
+    }
+
+    private void renderSceneOrderInventory(Kiosk kiosk){
+        LOGGER.info("Artikel bestellen");
+        sceneDataHandler.resetSceneDataHandler();
+        sceneDataHandler.setKiosk(kiosk);
+        try {
+            sceneStageHandler.renderScene((Stage) tableViewKiosk.getScene().getWindow(), "kiosk/inventory/add/ArticlesForInventroy", "Warenkorb erstellen");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

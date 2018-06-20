@@ -5,7 +5,7 @@ import ch.juventus.schule.semesterarbeit.business.employee.Employee;
 import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
 import ch.juventus.schule.semesterarbeit.business.item.factory.ArticleFactory;
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
-import ch.juventus.schule.semesterarbeit.business.supplier.Supplier;
+import ch.juventus.schule.semesterarbeit.business.supplier.KioskSupplier;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -22,12 +22,12 @@ import java.util.Set;
 public class DataBaseAccessMock {
     private static DataBaseAccessMock instance;
     private Set<Kiosk> kiosks;
-    private Set<Supplier> suppliers;
+    private Set<KioskSupplier> kioskSuppliers;
     private Set<Customer> customers;
 
     private DataBaseAccessMock() {
         this.kiosks = new HashSet<>();
-        this.suppliers = new HashSet<>();
+        this.kioskSuppliers = new HashSet<>();
         this.customers = new HashSet<>();
     }
 
@@ -54,9 +54,9 @@ public class DataBaseAccessMock {
         storageSupplier.put(articel.createMars(), 4);
         storageSupplier.put(articel.createBigBeer(), 4);
 
-        Supplier supplier = new Supplier("Meier", storageSupplier);
+        KioskSupplier kioskSupplier = new KioskSupplier("Meier", storageSupplier);
 
-        Kiosk kiosk = new Kiosk(kioskName, locationName, false, employee, storageKiosk, startCapital, supplier);
+        Kiosk kiosk = new Kiosk(kioskName, locationName, false, employee, storageKiosk, startCapital, kioskSupplier);
         if(kiosks.contains(kiosk)){
             for (Kiosk thisKiosk : kiosks) {
                 if (thisKiosk.equals(kiosk)) {
@@ -73,22 +73,22 @@ public class DataBaseAccessMock {
     }
 
   /*
-  public Supplier lieferantHinzufuegen(Supplier supplier) {
-        if (suppliers.isEmpty()) {
-            this.suppliers.add(supplier);
-            //System.out.println(suppliers);
+  public KioskSupplier lieferantHinzufuegen(KioskSupplier supplier) {
+        if (kioskSuppliers.isEmpty()) {
+            this.kioskSuppliers.add(supplier);
+            //System.out.println(kioskSuppliers);
             System.out.println("Lieferanten Liste war noch leer: " + supplier);
             return supplier;
-        } else if (suppliers.contains(supplier)) {
-            for (Supplier thisSupplier : suppliers) {
+        } else if (kioskSuppliers.contains(supplier)) {
+            for (KioskSupplier thisSupplier : kioskSuppliers) {
                 if (thisSupplier.equals(supplier)) {
-                    System.out.println("Der Supplier existiert bereits " + supplier);
+                    System.out.println("Der KioskSupplier existiert bereits " + supplier);
                     return supplier;
                 }
             }
         } else {
-            this.suppliers.add(supplier);
-            System.out.println("Supplier wurde zur Liste hinzugefuet " + supplier);
+            this.kioskSuppliers.add(supplier);
+            System.out.println("KioskSupplier wurde zur Liste hinzugefuet " + supplier);
             return supplier;
         }
         return null;
@@ -144,7 +144,7 @@ public class DataBaseAccessMock {
     public void setKioskStorage(Kiosk myKiosk, Map<BaseArticle, Integer> storage){
         for(Kiosk kiosk : kiosks){
             if(kiosk.equals(myKiosk)){
-                        kiosk.setStorage(storage);
+                        kiosk.setInventory(storage);
             }
         }
     }

@@ -1,13 +1,12 @@
 package ch.juventus.schule.semesterarbeit.presentation.kiosk.inventory.add;
 
-import ch.juventus.schule.semesterarbeit.business.customer.Customer;
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
+import ch.juventus.schule.semesterarbeit.business.supplier.KioskSupplier;
 import ch.juventus.schule.semesterarbeit.presentation.SceneDataHandler;
 import ch.juventus.schule.semesterarbeit.presentation.SceneStageHandler;
-import ch.juventus.schule.semesterarbeit.presentation.customer.article.add.ArticleTableViewValue;
-import ch.juventus.schule.semesterarbeit.presentation.customer.article.add.ArticleTableViewValueFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -23,13 +22,16 @@ import java.util.List;
  * @since: ${date}
  */
 public class ArticlesForInventoryController {
+    @FXML
+    public Button payArticle;
     private Kiosk kiosk;
     private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
     private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
+    private KioskSupplier kioskSupplier;
     @FXML
-    private TableView<ArticleTableViewValue> articleList;
+    private TableView<ArticleTableViewValueForInventory> articleList;
     @FXML
-    private TableColumn<ArticleTableViewValue, String> articleDescription, articlePrice, articleAmountInInventory, addArticleToShoppingBasket, removeArticleFromShoppingBasket, articleAmountInShoppingBasket;
+    private TableColumn<ArticleTableViewValueForInventory, String> articleDescription, articlePrice, articleAmountInInventory, addArticleToShoppingBasket, removeArticleFromShoppingBasket, articleAmountInShoppingBasket;
     @FXML
     private Label supplierName, kioskName, kioskLocation;
 
@@ -52,37 +54,48 @@ public class ArticlesForInventoryController {
         articleList.setOnMouseClicked(event -> {
 
             //if (event.getClickCount() == 2) {
-            ArticleTableViewValue articleTableViewValue = articleList.getSelectionModel().getSelectedItems().get(0);
-            System.out.println(articleTableViewValue.getBaseArticle());
+            ArticleTableViewValueForInventory articleTableViewValueForInventory = articleList.getSelectionModel().getSelectedItems().get(0);
             System.out.println("clicked");
             System.out.println(event);
             if(isAddArticleEvent(event)){
-                /*
                 System.out.println("Add Article");
-                if(!customer.getShoppingBasket().addArticle(kiosk.getStorage(), articleTableViewValue.getBaseArticle(),1)){
-                    notificationAgeRestriction.setTextFill(Color.RED);
-                    notificationAgeRestriction.setText("Der Kunde ist nicht alt genung!");
+                this.kiosk = articleTableViewValueForInventory.getKiosk();
+                this.kioskSupplier = kiosk.getKioskSupplier();
+                System.out.println( kiosk.getAmountOfMoneyInTheCashRegister());
+                System.out.println(articleTableViewValueForInventory.getArticlePrice());
+
+                /*
+                if(kiosk.getAmountOfMoneyInTheCashRegister() >= articleTableViewValueForInventory.getArticlePrice() ){
+
                 }
-                articleList.getItems().setAll(parseArticleList(kiosk,customer));
+*/
+                if(Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInInventory()) > 0){
+                    kiosk.putItemIntoTheStorage(articleTableViewValueForInventory.getBaseArticle(), Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInShoppingBasket()) + 1);
+                    kioskSupplier.putItemIntoTheStorage(articleTableViewValueForInventory.getBaseArticle(), Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInInventory()) - 1);
+                    articleList.getItems().setAll(parseArticleList(kiosk));
+                }
             } else if (isRemoveArticleEvent(event)){
-                customer.getShoppingBasket().removeArticle(kiosk.getStorage(), articleTableViewValue.getBaseArticle(),1);
                 System.out.println("Remove Article");
-                articleList.getItems().setAll(parseArticleList(kiosk,customer));
-                */
+                if(Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInShoppingBasket()) > 0) {
+                    kiosk.putItemIntoTheStorage(articleTableViewValueForInventory.getBaseArticle(), Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInShoppingBasket()) - 1);
+                    kioskSupplier.putItemIntoTheStorage(articleTableViewValueForInventory.getBaseArticle(), Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInInventory()) + 1);
+                    articleList.getItems().setAll(parseArticleList(kiosk));
+                }
             }
         });
-        //articleList.getItems().setAll(parseArticleList(kiosk,customer));
+        articleList.getItems().setAll(parseArticleList(kiosk));
     }
 
-    private List<ArticleTableViewValue> parseArticleList(Kiosk kiosk, Customer customer) {
-        ArticleTableViewValueFactory articleTableViewValueFactory = new ArticleTableViewValueFactory( kiosk, customer);
-        return articleTableViewValueFactory.getInventoryPlaceholder();
+    private List<ArticleTableViewValueForInventory> parseArticleList(Kiosk kiosk) {
+        ArticleTableViewValueForInventoryFactory articleTableViewValueForInventoryFactory = new ArticleTableViewValueForInventoryFactory(kiosk);
+        return articleTableViewValueForInventoryFactory.getInventoryPlaceholder();
     }
 
-    public void goToPayShoppingCart(ActionEvent actionEvent) throws IOException {
-        System.out.println("Artikel bezahlen");
-        sceneStageHandler.renderNextScene(actionEvent, "common/article/pay/ShoppingBasket");
+    public void goToPayInventory(ActionEvent actionEvent) throws IOException {
+        System.out.println("Bestelltes Inventar bezahlen");
+        sceneStageHandler.renderNextScene(actionEvent, "kiosk/inventory/pay/Inventory");
     }
+    //ch/juventus/schule/semesterarbeit/presentation/.fxml
 
     public void cancelAndGoBackToMainWindow(ActionEvent actionEvent) throws IOException {
         //customer.getShoppingBasket().clearAllArticlesOutOfTheShoppingBasket();
