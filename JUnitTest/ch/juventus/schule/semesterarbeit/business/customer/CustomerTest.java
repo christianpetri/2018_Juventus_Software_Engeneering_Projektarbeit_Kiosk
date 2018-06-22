@@ -25,22 +25,15 @@ public class CustomerTest {
             "'}'";
     //shoppingBasket
     @Before
-    public void setup(){
+    public void initialize(){
         customer = new Customer(CUSTOMER_NAME, CUSTOMER_AGE);
         customer.toString();
     }
 
     @Test
-    public void toString() {
-        System.out.println("Testing toString method for customer");
-        Assert.assertEquals(expectedCustomerName, customer.toString());
-    }
+    public void compareCustomerName(){
+       Customer testCustomer = new Customer(CUSTOMER_NAME, CUSTOMER_AGE);
+       assertEquals(customer.getName(),testCustomer.getName());
 
-    @Test
-    public void equals() {
-    }
-
-    @Test
-    public void hashCode() {
     }
 }

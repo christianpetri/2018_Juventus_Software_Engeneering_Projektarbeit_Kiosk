@@ -52,7 +52,7 @@ public class KioskController {
         tableViewKiosk.setOnMouseClicked(event -> {
             sceneDataHandler.resetSceneDataHandler();
             Kiosk kiosk = tableViewKiosk.getSelectionModel().getSelectedItems().get(0);
-            kiosk.isKioskOpen();
+            //kiosk.isKioskOpen();
             //boolean isKioskOpen = dataBaseAccessMock.getKiosk(kiosk.getName(), kiosk.getLocation()).isKioskOpen();
             boolean isKioskOpen = kiosk.isKioskOpen();
             if (isKioskToggleEvent(event)) {

@@ -17,6 +17,8 @@ import java.util.Set;
  *
  * @author : ${user}
  * @since: ${date}
+ *
+ *
  */
 
 public class DataBaseAccessMock {
@@ -53,6 +55,7 @@ public class DataBaseAccessMock {
         storageSupplier.put(articel.createBigAppleJuice(), 5);
         storageSupplier.put(articel.createMars(), 4);
         storageSupplier.put(articel.createBigBeer(), 4);
+        storageSupplier.put(articel.createSmallVodka(), 4);
 
         KioskSupplier kioskSupplier = new KioskSupplier("Meier", storageSupplier);
 
@@ -98,25 +101,6 @@ public class DataBaseAccessMock {
     public Set<Kiosk> getKiosks() {
         return kiosks;
     }
-
-    public void setCustomer(String name, int age){
-       if(!this.customers.contains(new Customer(name, age))){
-            this.customers.add(new Customer(name, age));
-        }
-    }
-
-    public Customer getCustomer(String name, int age) {
-        Customer tempCustomer = new Customer(name, age);
-        if (customers.contains(tempCustomer)) {
-            for (Customer customer : customers) {
-                if (customer.equals(tempCustomer)) {
-                    return customer;
-                }
-            }
-        }
-        return null;
-    }
-
     /*
     public Kiosk getKiosk(String name, String location) {
         Kiosk tempKiosk = new Kiosk(name, location, false, null, null, 1, null);
@@ -131,9 +115,26 @@ public class DataBaseAccessMock {
     }
     */
     public void setKioskStorage(Kiosk myKiosk){
+        Map<BaseArticle,Integer> newInventory = new HashMap<>();
+        for(Map.Entry<BaseArticle,Integer> article : myKiosk.getInventory().entrySet()){
+            newInventory.put(article.getKey(),article.getValue());
+        }
         for(Kiosk kiosk : kiosks){
             if(kiosk.equals(myKiosk)){
-                        kiosk.setInventory( myKiosk.getInventory());
+                kiosk.setInventory(newInventory);
+                break;
+            }
+        }
+    }
+    public void setKioskSupplierInventroy(Kiosk myKiosk){
+        Map<BaseArticle,Integer> newInventory = new HashMap<>();
+        for(Map.Entry<BaseArticle,Integer> article : myKiosk.getKioskSupplier().getInventory().entrySet()){
+            newInventory.put(article.getKey(),article.getValue());
+        }
+        for(Kiosk kiosk : kiosks){
+            if(kiosk.equals(myKiosk)){
+                kiosk.getKioskSupplier().setInventory(newInventory);
+                break;
             }
         }
     }

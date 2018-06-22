@@ -2,6 +2,7 @@ package ch.juventus.schule.semesterarbeit.business.supplier;
 
 import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -17,9 +18,13 @@ public class KioskSupplier {
         this.name = name;
         this.inventory = inventory;
     }
-    public KioskSupplier(KioskSupplier kioskSupplier) {
-        this.name = kioskSupplier.name;
-        this.inventory = kioskSupplier.inventory;
+    public KioskSupplier(KioskSupplier originalKioskSupplier) {
+        this.name = originalKioskSupplier.getName();
+        Map<BaseArticle, Integer> newInventory = new HashMap<>();
+        for(Map.Entry<BaseArticle,Integer> article : originalKioskSupplier.getInventory().entrySet()){
+            newInventory.put(article.getKey(),article.getValue());
+        }
+        this.inventory = newInventory;
     }
 
     public String getName() {
@@ -39,6 +44,10 @@ public class KioskSupplier {
                 "name='" + name + '\'' +
                 ", item=" + inventory +
                 '}';
+    }
+
+    public void setInventory(Map<BaseArticle, Integer> inventory) {
+        this.inventory = inventory;
     }
 
     @Override

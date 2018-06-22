@@ -10,7 +10,7 @@ import java.util.Collections;
  * @author : ${user}
  * @since: ${date}
  */
-public class SceneDataHandler implements Cloneable {
+public class SceneDataHandler {
     private static SceneDataHandler instance;
     private Customer customer;
     private Kiosk kiosk;
@@ -46,9 +46,7 @@ public class SceneDataHandler implements Cloneable {
     }
 
     public void setKiosk(Kiosk kiosk) {
-
          this.kiosk = new Kiosk(kiosk);
-
     }
 
     public void resetSceneDataHandler(){

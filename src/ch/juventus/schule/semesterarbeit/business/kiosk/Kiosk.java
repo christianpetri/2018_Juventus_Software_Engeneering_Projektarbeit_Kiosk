@@ -36,15 +36,17 @@ public class Kiosk {
     }
 
     public Kiosk(Kiosk orginal){
-        this.name = orginal.name;
-        this.location = orginal.location;
-        this.isKioskOpen = orginal.isKioskOpen;
-        this.employees  = orginal.employees;
-        Map<BaseArticle,Integer> inv = new HashMap<>();
-       // inv =
-        //this.inventory = Map<BaseArticle, Integer>  (orginal.inventory);
-        this.amountOfMoneyInTheCashRegister = orginal.amountOfMoneyInTheCashRegister;
-        this.kioskSupplier =  new KioskSupplier(orginal.kioskSupplier);
+        this.name = orginal.getName();
+        this.location = orginal.getLocation();
+        this.isKioskOpen = orginal.isKioskOpen();
+        this.employees  = orginal.getEmployees();
+        Map<BaseArticle,Integer> newInventory = new HashMap<>();
+        for(Map.Entry<BaseArticle,Integer> article : orginal.getInventory().entrySet()){
+            newInventory.put(article.getKey(), article.getValue());
+        }
+        this.inventory = newInventory;
+        this.amountOfMoneyInTheCashRegister = orginal.getAmountOfMoneyInTheCashRegister();
+        this.kioskSupplier =  new KioskSupplier(orginal.getKioskSupplier());
         this.createShoppingBasket = "Einkauf tätigen";
         this.orderArticles = "Artikel bestellen";
         this.getInventory = "Inventar";

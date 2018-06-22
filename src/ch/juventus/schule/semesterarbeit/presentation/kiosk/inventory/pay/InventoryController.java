@@ -30,6 +30,7 @@ public class InventoryController {
 
     public void goBackToMainWindow(ActionEvent actionEvent) throws IOException {
         dataBaseAccessMock.setKioskStorage(sceneDataHandler.getKiosk());
+        dataBaseAccessMock.setKioskSupplierInventroy(sceneDataHandler.getKiosk());
         sceneStageHandler.goBackToTheMainMenu(actionEvent);
     }
 

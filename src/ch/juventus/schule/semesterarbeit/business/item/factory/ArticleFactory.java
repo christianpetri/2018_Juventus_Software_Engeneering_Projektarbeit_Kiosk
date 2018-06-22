@@ -12,19 +12,19 @@ public class ArticleFactory {
     }
 
     public Softdrink createBigAppleJuice(){
-        return new Softdrink("Apfelsaft", 5, 100);
+        return new Softdrink("Apfelsaft 1l", 5, 100);
     }
 
     public Alcohol createBigBeer(){
-        return new Alcohol("Quellfrisch", 5, 5,16);
+        return new Alcohol("Quellfrisch 5dl", 5, 5,16);
     }
 
     public Alcohol createSmallVodka(){
-        return new Alcohol("Vodka", 10, 5,18);
+        return new Alcohol("Vodka 3dl", 10, 3,18);
     }
 
     public Alcohol createBigVodka(){
-        return new Alcohol("Vodka", 6, 3,18);
+        return new Alcohol("Vodka 5dl", 6, 5,18);
     }
 
     public Tobacco createCigarettePack(){
