@@ -1,12 +1,13 @@
-package ch.juventus.schule.semesterarbeit.business.item;
+package ch.juventus.schule.semesterarbeit.business.article;
 
 import java.util.Objects;
 
 /**
+ *  BaseArticle provides the foundation for all articles that are sold in the kiosk and the supplier can supply
  * @author : ${user}
  * @since: ${date}
  */
- public class BaseArticle {
+public class BaseArticle {
     protected String description;
     protected int price;
 

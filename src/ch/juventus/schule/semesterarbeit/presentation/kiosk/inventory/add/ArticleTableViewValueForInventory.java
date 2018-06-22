@@ -1,9 +1,11 @@
 package ch.juventus.schule.semesterarbeit.presentation.kiosk.inventory.add;
 
-import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
+import ch.juventus.schule.semesterarbeit.business.article.BaseArticle;
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
 
 /**
+ * Provides the Values for the TableView(JavaFX) for the scene: kiosk add inventory
+ *
  * @author : ${user}
  * @since: ${date}
  */

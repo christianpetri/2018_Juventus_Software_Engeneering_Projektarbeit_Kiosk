@@ -1,4 +1,4 @@
-package ch.juventus.schule.semesterarbeit.business.item;
+package ch.juventus.schule.semesterarbeit.business.article;
 
 /**
  * @author : ${user}

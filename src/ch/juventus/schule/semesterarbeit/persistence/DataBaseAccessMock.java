@@ -1,8 +1,8 @@
 package ch.juventus.schule.semesterarbeit.persistence;
 
 import ch.juventus.schule.semesterarbeit.business.employee.Employee;
-import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
-import ch.juventus.schule.semesterarbeit.business.item.factory.ArticleFactory;
+import ch.juventus.schule.semesterarbeit.business.article.BaseArticle;
+import ch.juventus.schule.semesterarbeit.business.article.factory.ArticleFactory;
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
 import ch.juventus.schule.semesterarbeit.business.supplier.KioskSupplier;
 
@@ -21,9 +21,8 @@ import java.util.logging.Logger;
 
 
 public class DataBaseAccessMock {
-    private static DataBaseAccessMock instance;
     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-
+    private static DataBaseAccessMock instance;
     private Set<Kiosk> kiosks;
 
     private DataBaseAccessMock() {
@@ -88,7 +87,8 @@ public class DataBaseAccessMock {
     }
 
     /**
-     *  Updates the kiosk storage (and "overrides" the old storage)
+     * Updates the kiosk storage (and "overrides" the old storage)
+     *
      * @param myKiosk is the kiosk that was "temporally" was stored in the SceneDataHandler
      */
 
@@ -107,7 +107,8 @@ public class DataBaseAccessMock {
     }
 
     /**
-     *  Updates the kiosk supplier storage (and "overrides" the old storage)
+     * Updates the kiosk supplier storage (and "overrides" the old storage)
+     *
      * @param myKiosk is the kiosk that was "temporally" was stored in the SceneDataHandler
      */
 

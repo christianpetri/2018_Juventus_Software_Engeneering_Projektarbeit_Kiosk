@@ -1,12 +1,13 @@
 package ch.juventus.schule.semesterarbeit.business.kiosk;
 
 import ch.juventus.schule.semesterarbeit.business.employee.Employee;
-import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
+import ch.juventus.schule.semesterarbeit.business.article.BaseArticle;
 import ch.juventus.schule.semesterarbeit.business.supplier.KioskSupplier;
 
 import java.util.*;
 
 /**
+ *  The Kiosk
  * @author : ${user}
  * @since: ${date}
  */
@@ -30,23 +31,23 @@ public class Kiosk {
         this.inventory = inventory;
         this.amountOfMoneyInTheCashRegister = amountOfMoneyInTheCashRegister;
         this.kioskSupplier = kioskSupplier;
-        this.createShoppingBasket = "Einkauf tätigen";
+        this.createShoppingBasket = "Verkauf tätigen";
         this.orderArticles = "Artikel bestellen";
-        this.getInventory = "Inventar";
+        this.getInventory = "Inventar anzeigen";
     }
 
-    public Kiosk(Kiosk orginal){
+    public Kiosk(Kiosk orginal) {
         this.name = orginal.getName();
         this.location = orginal.getLocation();
         this.isKioskOpen = orginal.isKioskOpen();
-        this.employees  = orginal.getEmployees();
-        Map<BaseArticle,Integer> newInventory = new HashMap<>();
-        for(Map.Entry<BaseArticle,Integer> article : orginal.getInventory().entrySet()){
+        this.employees = orginal.getEmployees();
+        Map<BaseArticle, Integer> newInventory = new HashMap<>();
+        for (Map.Entry<BaseArticle, Integer> article : orginal.getInventory().entrySet()) {
             newInventory.put(article.getKey(), article.getValue());
         }
         this.inventory = newInventory;
         this.amountOfMoneyInTheCashRegister = orginal.getAmountOfMoneyInTheCashRegister();
-        this.kioskSupplier =  new KioskSupplier(orginal.getKioskSupplier());
+        this.kioskSupplier = new KioskSupplier(orginal.getKioskSupplier());
         this.createShoppingBasket = "Einkauf tätigen";
         this.orderArticles = "Artikel bestellen";
         this.getInventory = "Inventar";
@@ -64,6 +65,10 @@ public class Kiosk {
         return inventory;
     }
 
+    public void setInventory(Map<BaseArticle, Integer> inventory) {
+        this.inventory = inventory;
+    }
+
     public String getName() {
         return name;
     }
@@ -74,6 +79,10 @@ public class Kiosk {
 
     public boolean isKioskOpen() {
         return isKioskOpen;
+    }
+
+    public void setKioskOpen(boolean kioskOpen) {
+        isKioskOpen = kioskOpen;
     }
 
     public void toggleIsKioskOpen() {
@@ -92,12 +101,8 @@ public class Kiosk {
         return getInventory;
     }
 
-    public void setInventory(Map<BaseArticle, Integer> inventory) {
-        this.inventory = inventory;
-    }
-
     public void putItemIntoTheStorage(BaseArticle baseArticle, Integer amount) {
-            inventory.put(baseArticle , amount);
+        inventory.put(baseArticle, amount);
     }
 
     public int getAmountOfMoneyInTheCashRegister() {
@@ -110,10 +115,6 @@ public class Kiosk {
 
     public KioskSupplier getKioskSupplier() {
         return kioskSupplier;
-    }
-
-    public void setKioskOpen(boolean kioskOpen) {
-        isKioskOpen = kioskOpen;
     }
 
     @Override

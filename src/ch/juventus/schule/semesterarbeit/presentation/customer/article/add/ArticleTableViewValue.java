@@ -1,10 +1,11 @@
 package ch.juventus.schule.semesterarbeit.presentation.customer.article.add;
 
 import ch.juventus.schule.semesterarbeit.business.customer.Customer;
-import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
+import ch.juventus.schule.semesterarbeit.business.article.BaseArticle;
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
 
 /**
+ * Provides the values for the TableView(JavaFX) for the scene: customer add articles to the shopping basket
  * @author : ${user}
  * @since: ${date}
  */
@@ -12,7 +13,7 @@ public class ArticleTableViewValue {
     private Kiosk kiosk;
     private Customer customer;
     private BaseArticle baseArticle;
-    private String  articleAmountInInventory;
+    private String articleAmountInInventory;
     private String articleAmountInShoppingBasket;
     private String articleDescription;
     private String articlePrice;

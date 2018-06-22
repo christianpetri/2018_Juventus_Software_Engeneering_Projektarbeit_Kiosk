@@ -1,10 +1,11 @@
-package ch.juventus.schule.semesterarbeit.exporter;
+package ch.juventus.schule.semesterarbeit.business.exporter;
 
-import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
+import ch.juventus.schule.semesterarbeit.business.article.BaseArticle;
 
 import java.util.Comparator;
 
 /**
+ *  Orders the kiosk inventory articles by highest to lowest price
  * @author : ${user}
  * @since: ${date}
  */

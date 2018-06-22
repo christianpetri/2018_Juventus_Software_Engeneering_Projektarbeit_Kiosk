@@ -2,11 +2,10 @@ package ch.juventus.schule.semesterarbeit.presentation;
 
 import ch.juventus.schule.semesterarbeit.business.customer.Customer;
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
-import ch.juventus.schule.semesterarbeit.persistence.DataBaseAccessMock;
-
-import java.util.Collections;
 
 /**
+ * Handles and holds the data in a "temporary" storage and provides the data for the JavaFX scene
+ *
  * @author : ${user}
  * @since: ${date}
  */
@@ -16,10 +15,11 @@ public class SceneDataHandler {
     private Kiosk kiosk;
     private int amountToPay;
 
-    private SceneDataHandler(){}
+    private SceneDataHandler() {
+    }
 
-    public static SceneDataHandler getInstance(){
-        if(SceneDataHandler.instance == null){
+    public static SceneDataHandler getInstance() {
+        if (SceneDataHandler.instance == null) {
             SceneDataHandler.instance = new SceneDataHandler();
         }
         return SceneDataHandler.instance;
@@ -46,10 +46,14 @@ public class SceneDataHandler {
     }
 
     public void setKiosk(Kiosk kiosk) {
-         this.kiosk = new Kiosk(kiosk);
+        this.kiosk = new Kiosk(kiosk);
     }
 
-    public void resetSceneDataHandler(){
+    /**
+     * if the user cancelled a procedure, it resets the DataHandler
+     */
+
+    public void resetSceneDataHandler() {
         this.customer = null;
         this.kiosk = null;
         this.amountToPay = 0;

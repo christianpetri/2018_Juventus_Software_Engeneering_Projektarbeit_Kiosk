@@ -2,7 +2,7 @@ package ch.juventus.schule.semesterarbeit.presentation.kiosk.select;
 
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
 import ch.juventus.schule.semesterarbeit.business.multithreading.CustomerThread;
-import ch.juventus.schule.semesterarbeit.exporter.ExcelExporter;
+import ch.juventus.schule.semesterarbeit.business.exporter.ExcelExporter;
 import ch.juventus.schule.semesterarbeit.persistence.DataBaseAccessMock;
 import ch.juventus.schule.semesterarbeit.presentation.SceneDataHandler;
 import ch.juventus.schule.semesterarbeit.presentation.SceneStageHandler;
@@ -23,10 +23,13 @@ import java.util.Set;
 import java.util.logging.Logger;
 
 /**
+ * The controller for the scene: kiosk select
+ *
  * @author : ${user}
  * @since: ${date}
  */
 public class KioskController {
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     @FXML
     public Button createKiosk;
     @FXML
@@ -37,11 +40,9 @@ public class KioskController {
     private TableColumn<Kiosk, Boolean> kioskStatus;
     @FXML
     private Label kioskMessage;
-
     private DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
     private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
     private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
-    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     @FXML
     private void initialize() {
@@ -52,8 +53,6 @@ public class KioskController {
         tableViewKiosk.setOnMouseClicked(event -> {
             sceneDataHandler.resetSceneDataHandler();
             Kiosk kiosk = tableViewKiosk.getSelectionModel().getSelectedItems().get(0);
-            //kiosk.isKioskOpen();
-            //boolean isKioskOpen = dataBaseAccessMock.getKiosk(kiosk.getName(), kiosk.getLocation()).isKioskOpen();
             boolean isKioskOpen = kiosk.isKioskOpen();
             if (isKioskToggleEvent(event)) {
                 toggleKioskState(kiosk);
@@ -143,23 +142,23 @@ public class KioskController {
     }
 
     private boolean isGetInventoryEvent(MouseEvent event) {
-        return getNodeIdentifier(event).equals("getInventory") || getNodeIdentifier(event).equals("Inventar");
+        return getNodeIdentifier(event).equals("getInventory") || getNodeIdentifier(event).equals("Inventar anzeigen");
     }
 
     private boolean isCreateCustomerForShoppingBasketEvent(MouseEvent event) {
-        return getNodeIdentifier(event).equals("createCustomerForShoppingBasket") || getNodeIdentifier(event).equals("Einkauf tätigen");
+        return getNodeIdentifier(event).equals("createCustomerForShoppingBasket") || getNodeIdentifier(event).equals("Verkauf tätigen");
     }
 
     private void exportInventoryToExcel(Kiosk kiosk) {
-        System.out.println("Kiosk Inventar");
-        System.out.println(kiosk.getInventory().toString());
+        LOGGER.info("Kiosk Inventar");
+        LOGGER.info( kiosk.getInventory().toString());
         kioskMessage.setTextFill(Color.BLACK);
         kioskMessage.setText("Inventar in Excel exportiert");
         ExcelExporter excelExporter = new ExcelExporter();
         excelExporter.writeStorageToFile(kiosk);
     }
 
-    private void renderSceneDoShopping(Kiosk kiosk){
+    private void renderSceneDoShopping(Kiosk kiosk) {
         System.out.println("Warenkorb für Kunden erstellen");
         sceneDataHandler.setKiosk(kiosk);
         try {
@@ -170,7 +169,7 @@ public class KioskController {
         LOGGER.info("Einkauf tätigen");
     }
 
-    private void renderSceneOrderInventory(Kiosk kiosk){
+    private void renderSceneOrderInventory(Kiosk kiosk) {
         LOGGER.info("Artikel bestellen");
         sceneDataHandler.setKiosk(kiosk);
         try {

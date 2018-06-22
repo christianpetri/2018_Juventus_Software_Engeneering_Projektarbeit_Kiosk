@@ -10,15 +10,16 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 
 /**
+ * The controller for the scene: kiosk pay the articles that were added to the inventory from the supplier
  * @author : ${user}
  * @since: ${date}
  */
 public class InventoryController {
+    @FXML
+    Label kioskName, kioskLocation, supplierName, sumDue;
     private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
     private DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
     private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
-    @FXML
-    Label kioskName, kioskLocation, supplierName, sumDue;
 
     @FXML
     private void initialize() {

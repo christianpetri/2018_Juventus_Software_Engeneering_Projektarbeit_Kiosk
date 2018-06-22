@@ -1,4 +1,4 @@
-package ch.juventus.schule.semesterarbeit.business.item;
+package ch.juventus.schule.semesterarbeit.business.article;
 
 import java.util.logging.Logger;
 
@@ -15,7 +15,7 @@ public class Tobacco extends BaseArticle {
 
     public boolean checkLegalAge(int customerAge) {
         LOGGER.info("Altersüberprüfung");
-        if(customerAge >= 16){
+        if (customerAge >= 16) {
             return true;
         } else {
             return false;

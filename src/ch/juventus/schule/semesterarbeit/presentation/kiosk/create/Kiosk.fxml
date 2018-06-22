@@ -5,29 +5,32 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<GridPane fx:id="buttonLeft" alignment="center" hgap="10" prefHeight="348.0" prefWidth="212.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.juventus.schule.semesterarbeit.presentation.kiosk.create.KioskController">
-       <Pane prefHeight="327.0" prefWidth="187.0">
-         <children>
-            <Label layoutX="15.0" layoutY="8.0" text="Kiosk" />
-            <Label layoutX="15.0" layoutY="38.0" text="Name" />
-            <TextField fx:id="kioskName" layoutX="15.0" layoutY="58.0" />
-            <Label layoutX="15.0" layoutY="91.0" text="Standort" />
-            <TextField fx:id="kioskLocation" layoutX="15.0" layoutY="114.0" />
-            <Label layoutX="15.0" layoutY="147.0" text="Startkapital in CHF" />
-            <TextField fx:id="kioskStartCapital" layoutX="15.0" layoutY="166.0" />
-            <Label layoutX="15.0" layoutY="200.0" text="Mitarbeitername" />
-            <TextField fx:id="kioskEmployeeName" layoutX="14.0" layoutY="215.0" />
-            <Label fx:id="kioskInfoLabel" layoutX="17.0" layoutY="248.0" minHeight="16" minWidth="69" />
-            <Button layoutX="126.0" layoutY="285.0" mnemonicParsing="false" onAction="#addKiosk" text="Ok" />
-            <Button layoutX="15.0" layoutY="285.0" mnemonicParsing="false" onAction="#goBackToTheMainMenu" text="Abbrechen" />
-         </children>
-      </Pane>
-   <columnConstraints>
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-   </rowConstraints>
-   
+<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="buttonLeft" alignment="center" hgap="10" prefHeight="348.0" prefWidth="212.0"
+          vgap="10" xmlns="http://javafx.com/javafx/8.0.121"
+          fx:controller="ch.juventus.schule.semesterarbeit.presentation.kiosk.create.KioskController">
+    <Pane prefHeight="327.0" prefWidth="187.0">
+        <children>
+            <Label layoutX="15.0" layoutY="8.0" text="Kiosk"/>
+            <Label layoutX="15.0" layoutY="38.0" text="Name"/>
+            <TextField fx:id="kioskName" layoutX="15.0" layoutY="58.0"/>
+            <Label layoutX="15.0" layoutY="91.0" text="Standort"/>
+            <TextField fx:id="kioskLocation" layoutX="15.0" layoutY="114.0"/>
+            <Label layoutX="15.0" layoutY="147.0" text="Startkapital in CHF"/>
+            <TextField fx:id="kioskStartCapital" layoutX="15.0" layoutY="166.0"/>
+            <Label layoutX="15.0" layoutY="200.0" text="Mitarbeitername"/>
+            <TextField fx:id="kioskEmployeeName" layoutX="14.0" layoutY="215.0"/>
+            <Label fx:id="kioskInfoLabel" layoutX="17.0" layoutY="248.0" minHeight="16" minWidth="69"/>
+            <Button layoutX="126.0" layoutY="285.0" mnemonicParsing="false" onAction="#addKiosk" text="Ok"/>
+            <Button layoutX="15.0" layoutY="285.0" mnemonicParsing="false" onAction="#goBackToTheMainMenu"
+                    text="Abbrechen"/>
+        </children>
+    </Pane>
+    <columnConstraints>
+        <ColumnConstraints/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints/>
+    </rowConstraints>
+
 
 </GridPane>

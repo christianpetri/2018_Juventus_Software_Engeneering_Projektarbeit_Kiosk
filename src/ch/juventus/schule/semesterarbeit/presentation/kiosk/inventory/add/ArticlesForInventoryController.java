@@ -18,15 +18,17 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
+ * the controller for the scene kiosk add inventory
+ *
  * @author : ${user}
  * @since: ${date}
  */
 public class ArticlesForInventoryController {
     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
-    private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
-    private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
     @FXML
     public Button payArticle;
+    private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
+    private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
     @FXML
     private TableView<ArticleTableViewValueForInventory> articleList;
     @FXML
@@ -75,7 +77,7 @@ public class ArticlesForInventoryController {
     }
 
     public void goToPayInventory(ActionEvent actionEvent) throws IOException {
-       LOGGER.info("Bestelltes Inventar bezahlen");
+        LOGGER.info("Bestelltes Inventar bezahlen");
         sceneStageHandler.renderNextScene(actionEvent, "kiosk/inventory/pay/Inventory");
     }
 
@@ -115,7 +117,7 @@ public class ArticlesForInventoryController {
         }
     }
 
-    private void removeArticleFromKioskInventory(ArticleTableViewValueForInventory articleTableViewValueForInventory){
+    private void removeArticleFromKioskInventory(ArticleTableViewValueForInventory articleTableViewValueForInventory) {
         if (Integer.parseInt(articleTableViewValueForInventory.getArticleAmountInShoppingBasket()) > 0) {
             sceneDataHandler.setAmountToPay(sceneDataHandler.getAmountToPay() - articleTableViewValueForInventory.getBaseArticle().getPrice());
             sceneDataHandler.getKiosk().setAmountOfMoneyInTheCashRegister(sceneDataHandler.getKiosk().getAmountOfMoneyInTheCashRegister() + articleTableViewValueForInventory.getBaseArticle().getPrice());

@@ -19,14 +19,15 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
+ *  The controller for the scene: customer add articles into the shopping basket
  * @author : ${user}
  * @since: ${date}
  */
 public class ArticlesForShoppingBasketController {
 
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
     private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
-    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     @FXML
     private TableView<ArticleTableViewValue> articleList;
     @FXML
@@ -57,25 +58,25 @@ public class ArticlesForShoppingBasketController {
 
             LOGGER.info("Benutzer hat auf die Tabelle geklickt");
 
-            if(isAddArticleEvent(event)){
+            if (isAddArticleEvent(event)) {
                 LOGGER.info("Artikel hinzufügen");
-                if(!sceneDataHandler.getCustomer().getShoppingBasket().addArticle(sceneDataHandler.getKiosk().getInventory(), articleTableViewValue.getBaseArticle(),1)){
+                if (!sceneDataHandler.getCustomer().getShoppingBasket().addArticle(sceneDataHandler.getKiosk().getInventory(), articleTableViewValue.getBaseArticle(), 1)) {
                     notificationAgeRestriction.setTextFill(Color.RED);
                     notificationAgeRestriction.setText("Der Kunde ist nicht alt genung!");
                     LOGGER.info("Der Kunde ist nicht alt genug!");
                 }
-                articleList.getItems().setAll(parseArticleList(sceneDataHandler.getKiosk(),sceneDataHandler.getCustomer()));
-            } else if (isRemoveArticleEvent(event)){
-                sceneDataHandler.getCustomer().getShoppingBasket().removeArticle(sceneDataHandler.getKiosk().getInventory(), articleTableViewValue.getBaseArticle(),1);
+                articleList.getItems().setAll(parseArticleList(sceneDataHandler.getKiosk(), sceneDataHandler.getCustomer()));
+            } else if (isRemoveArticleEvent(event)) {
+                sceneDataHandler.getCustomer().getShoppingBasket().removeArticle(sceneDataHandler.getKiosk().getInventory(), articleTableViewValue.getBaseArticle(), 1);
                 LOGGER.info("Artikel entfernt");
-                articleList.getItems().setAll(parseArticleList(sceneDataHandler.getKiosk(),sceneDataHandler.getCustomer()));
+                articleList.getItems().setAll(parseArticleList(sceneDataHandler.getKiosk(), sceneDataHandler.getCustomer()));
             }
         });
-        articleList.getItems().setAll(parseArticleList(sceneDataHandler.getKiosk(),sceneDataHandler.getCustomer()));
+        articleList.getItems().setAll(parseArticleList(sceneDataHandler.getKiosk(), sceneDataHandler.getCustomer()));
     }
 
     private List<ArticleTableViewValue> parseArticleList(Kiosk kiosk, Customer customer) {
-        ArticleTableViewValueFactory articleTableViewValueFactory = new ArticleTableViewValueFactory( kiosk, customer);
+        ArticleTableViewValueFactory articleTableViewValueFactory = new ArticleTableViewValueFactory(kiosk, customer);
         return articleTableViewValueFactory.getInventoryPlaceholder();
     }
 
@@ -99,6 +100,7 @@ public class ArticlesForShoppingBasketController {
     private boolean isAddArticleEvent(MouseEvent event) {
         return getNodeIdentifier(event).equals("addArticleToShoppingBasket") || getNodeIdentifier(event).equals("+");
     }
+
     private boolean isRemoveArticleEvent(MouseEvent event) {
         return getNodeIdentifier(event).equals("removeArticleFromShoppingBasket") || getNodeIdentifier(event).equals("-");
     }

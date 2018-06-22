@@ -10,12 +10,13 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 /**
+ * The controller for the scene: kiosk create
  * @author : ${user}
  * @since: ${date}
  */
 public class KioskController {
-    SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
-    DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
+    private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
+    private DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
     @FXML
     private TextField kioskName;
     @FXML

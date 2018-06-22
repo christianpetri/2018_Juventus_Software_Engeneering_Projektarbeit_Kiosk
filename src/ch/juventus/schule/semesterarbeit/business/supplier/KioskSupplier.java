@@ -1,12 +1,13 @@
 package ch.juventus.schule.semesterarbeit.business.supplier;
 
-import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
+import ch.juventus.schule.semesterarbeit.business.article.BaseArticle;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 /**
+ * The kiosk supplier which supplies articles to the kiosk
  * @author : ${user}
  * @since: ${date}
  */
@@ -18,11 +19,12 @@ public class KioskSupplier {
         this.name = name;
         this.inventory = inventory;
     }
+
     public KioskSupplier(KioskSupplier originalKioskSupplier) {
         this.name = originalKioskSupplier.getName();
         Map<BaseArticle, Integer> newInventory = new HashMap<>();
-        for(Map.Entry<BaseArticle,Integer> article : originalKioskSupplier.getInventory().entrySet()){
-            newInventory.put(article.getKey(),article.getValue());
+        for (Map.Entry<BaseArticle, Integer> article : originalKioskSupplier.getInventory().entrySet()) {
+            newInventory.put(article.getKey(), article.getValue());
         }
         this.inventory = newInventory;
     }
@@ -35,19 +37,20 @@ public class KioskSupplier {
         return inventory;
     }
 
-    public void putItemIntoTheStorage(BaseArticle baseArticle, Integer amount) {
-        inventory.put(baseArticle , amount);
+    public void setInventory(Map<BaseArticle, Integer> inventory) {
+        this.inventory = inventory;
     }
+
+    public void putItemIntoTheStorage(BaseArticle baseArticle, Integer amount) {
+        inventory.put(baseArticle, amount);
+    }
+
     @Override
     public String toString() {
         return "KioskSupplier{" +
                 "name='" + name + '\'' +
-                ", item=" + inventory +
+                ", article=" + inventory +
                 '}';
-    }
-
-    public void setInventory(Map<BaseArticle, Integer> inventory) {
-        this.inventory = inventory;
     }
 
     @Override

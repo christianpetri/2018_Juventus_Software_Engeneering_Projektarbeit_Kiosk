@@ -10,42 +10,42 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane fx:id="buttonLeft" alignment="center" hgap="10" prefHeight="373.0" prefWidth="631.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.juventus.schule.semesterarbeit.presentation.kiosk.select.KioskController">
-   <AnchorPane GridPane.columnIndex="1">
-      <children>
-         <Label prefHeight="25.0" prefWidth="174.0" style="-fx-font: NORMAL 20 Tahoma;" text="Hauptfenster Kiosk">
-   </Label>
-      </children>
-   </AnchorPane>
-    
-   <AnchorPane prefHeight="238.0" prefWidth="541.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-      <children>
-         <TableView fx:id="tableViewKiosk" layoutX="-21.0" prefHeight="238.0" prefWidth="550.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <columns>
-               <TableColumn fx:id="kioskName" prefWidth="104.0" text="Kiosk-Name" />
-               <TableColumn fx:id="kioskLocation" prefWidth="100.0" text="Kiosk-Standort" />
-               <TableColumn fx:id="kioskStatus" prefWidth="88.0" text="Kiosl geöffnet" />
-               <TableColumn fx:id="createCustomerForShoppingBasket" prefWidth="110.0" text="Kunde" />
-               <TableColumn fx:id="orderArticles" prefWidth="114.0" text="Kiosk" />
-               <TableColumn fx:id="getInventory" prefWidth="79.0" text="Kiosk" />
-            </columns>
-         </TableView>
-      </children>
-   </AnchorPane>
-   <Pane prefHeight="70.0" prefWidth="596.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" GridPane.rowSpan="2147483647">
-      <children>
-         <Button fx:id="createKiosk" layoutX="35.0" layoutY="21.0" mnemonicParsing="false" onAction="#goToAddKiosk" text="Kiosk erstellen" />
-         <Button fx:id="multithreading" layoutX="147.0" layoutY="21.0" mnemonicParsing="false" onAction="#multithreading" text="Automatischer Durchlauf" />
-         <Label fx:id="kioskMessage" layoutX="309.0" layoutY="23.0" prefHeight="25.0" prefWidth="286.0" style="-fx-font: NORMAL 20 Tahoma;" />
-      </children>
-   </Pane>
-   <columnConstraints>
-      <ColumnConstraints />
-      <ColumnConstraints />
-   </columnConstraints>
-   <rowConstraints>
-      <RowConstraints />
-      <RowConstraints />
-      <RowConstraints />
-   </rowConstraints>
+<GridPane fx:id="buttonLeft" alignment="center" hgap="10" prefHeight="373.0" prefWidth="695.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.juventus.schule.semesterarbeit.presentation.kiosk.select.KioskController">
+    <AnchorPane GridPane.columnIndex="1">
+        <children>
+            <Label prefHeight="25.0" prefWidth="174.0" style="-fx-font: NORMAL 20 Tahoma;" text="Hauptfenster Kiosk">
+            </Label>
+        </children>
+    </AnchorPane>
+
+    <AnchorPane prefHeight="238.0" prefWidth="541.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <children>
+            <TableView fx:id="tableViewKiosk" layoutX="-28.0" prefHeight="238.0" prefWidth="644.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="-28.0" AnchorPane.rightAnchor="-20.0" AnchorPane.topAnchor="0.0">
+                <columns>
+                    <TableColumn fx:id="kioskName" prefWidth="104.0" text="Name" />
+                    <TableColumn fx:id="kioskLocation" prefWidth="100.0" text="Standort" />
+                    <TableColumn fx:id="kioskStatus" prefWidth="88.0" text="Geöffnet" />
+                    <TableColumn fx:id="createCustomerForShoppingBasket" prefWidth="110.0" text="" />
+                    <TableColumn fx:id="orderArticles" prefWidth="114.0" text="" />
+                    <TableColumn fx:id="getInventory" prefWidth="134.0" text="" />
+                </columns>
+            </TableView>
+        </children>
+    </AnchorPane>
+    <Pane prefHeight="71.0" prefWidth="603.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" GridPane.rowSpan="2147483647">
+        <children>
+            <Button fx:id="createKiosk" layoutX="35.0" layoutY="21.0" mnemonicParsing="false" onAction="#goToAddKiosk" text="Kiosk erstellen" />
+            <Button fx:id="multithreading" layoutX="147.0" layoutY="21.0" mnemonicParsing="false" onAction="#multithreading" text="Automatischer Durchlauf" />
+            <Label fx:id="kioskMessage" layoutX="309.0" layoutY="23.0" prefHeight="25.0" prefWidth="286.0" style="-fx-font: NORMAL 20 Tahoma;" />
+        </children>
+    </Pane>
+    <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+        <RowConstraints />
+    </rowConstraints>
 </GridPane>

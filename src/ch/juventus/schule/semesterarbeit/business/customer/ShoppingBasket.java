@@ -1,21 +1,22 @@
 package ch.juventus.schule.semesterarbeit.business.customer;
 
-import ch.juventus.schule.semesterarbeit.business.item.Alcohol;
-import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
-import ch.juventus.schule.semesterarbeit.business.item.Tobacco;
+import ch.juventus.schule.semesterarbeit.business.article.Alcohol;
+import ch.juventus.schule.semesterarbeit.business.article.BaseArticle;
+import ch.juventus.schule.semesterarbeit.business.article.Tobacco;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 
 /**
+ *  The shopping basket for the customer
  * @author : ${user}
  * @since: ${date}
  */
 public class ShoppingBasket {
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private final int customerAge;
     private Map<BaseArticle, Integer> shoppingBasket = new HashMap<>();
-    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     public ShoppingBasket(final int customerAge) {
         this.customerAge = customerAge;
@@ -76,7 +77,7 @@ public class ShoppingBasket {
     public void removeArticle(Map<BaseArticle, Integer> storage, BaseArticle article, int amount) {
         if (((shoppingBasket.get(article) == null) ? 0 : shoppingBasket.get(article)) > 0) {
             storage.put(article, storage.get(article) + amount);
-            shoppingBasket.put(article , shoppingBasket.get(article) - amount);
+            shoppingBasket.put(article, shoppingBasket.get(article) - amount);
         }
     }
 }
