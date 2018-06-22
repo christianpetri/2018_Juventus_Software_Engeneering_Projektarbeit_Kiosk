@@ -1,6 +1,5 @@
 package ch.juventus.schule.semesterarbeit.persistence;
 
-import ch.juventus.schule.semesterarbeit.business.customer.Customer;
 import ch.juventus.schule.semesterarbeit.business.employee.Employee;
 import ch.juventus.schule.semesterarbeit.business.item.BaseArticle;
 import ch.juventus.schule.semesterarbeit.business.item.factory.ArticleFactory;
@@ -11,26 +10,24 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.logging.Logger;
 
 /**
  * This creates a Data Access Mockup to store the data
  *
  * @author : ${user}
  * @since: ${date}
- *
- *
  */
+
 
 public class DataBaseAccessMock {
     private static DataBaseAccessMock instance;
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+
     private Set<Kiosk> kiosks;
-    private Set<KioskSupplier> kioskSuppliers;
-    private Set<Customer> customers;
 
     private DataBaseAccessMock() {
         this.kiosks = new HashSet<>();
-        this.kioskSuppliers = new HashSet<>();
-        this.customers = new HashSet<>();
     }
 
     public static DataBaseAccessMock getInstance() {
@@ -40,102 +37,91 @@ public class DataBaseAccessMock {
         return DataBaseAccessMock.instance;
     }
 
+    /**
+     * Creates a new kiosk, inits the kiosk storage, inits the employee and inits the supplier and his storage. And adds it into the kiosks
+     *
+     * @param kioskName    the name of the Kiosk
+     * @param locationName the location of the Kiosk
+     * @param employeeName the name of the employee that works in that particular Kiosk
+     * @param startCapital the amount of money that is in the Cash Register when the kiosk opens for the first time
+     * @return the kiosk that was added to the kiosks
+     */
+
     public Kiosk addKiosk(String kioskName, String locationName, String employeeName, int startCapital) {
         Employee employee = new Employee(employeeName);
-        ArticleFactory articel = new ArticleFactory();
+        ArticleFactory articleFactory = new ArticleFactory();
         Map<BaseArticle, Integer> storageKiosk = new HashMap<>();
-        storageKiosk.put(articel.createBigAppleJuice(), 5);
-        storageKiosk.put(articel.createMars(), 8);
-        storageKiosk.put(articel.createBigBeer(), 9);
-        storageKiosk.put(articel.createCigarettePack(), 9);
-        storageKiosk.put(articel.createBigVodka(), 9);
-        storageKiosk.put(articel.createGlamourMagazin(), 9);
+        storageKiosk.put(articleFactory.createBigAppleJuice(), 5);
+        storageKiosk.put(articleFactory.createMars(), 8);
+        storageKiosk.put(articleFactory.createBigBeer(), 9);
+        storageKiosk.put(articleFactory.createCigarettePack(), 9);
+        storageKiosk.put(articleFactory.createBigVodka(), 9);
+        storageKiosk.put(articleFactory.createGlamourMagazin(), 9);
 
         Map<BaseArticle, Integer> storageSupplier = new HashMap<>();
-        storageSupplier.put(articel.createBigAppleJuice(), 5);
-        storageSupplier.put(articel.createMars(), 4);
-        storageSupplier.put(articel.createBigBeer(), 4);
-        storageSupplier.put(articel.createSmallVodka(), 4);
+        storageSupplier.put(articleFactory.createBigAppleJuice(), 5);
+        storageSupplier.put(articleFactory.createMars(), 4);
+        storageSupplier.put(articleFactory.createBigBeer(), 4);
+        storageSupplier.put(articleFactory.createSmallVodka(), 4);
 
         KioskSupplier kioskSupplier = new KioskSupplier("Meier", storageSupplier);
 
         Kiosk kiosk = new Kiosk(kioskName, locationName, false, employee, storageKiosk, startCapital, kioskSupplier);
-        if(kiosks.contains(kiosk)){
+
+        if (kiosks.contains(kiosk)) {
             for (Kiosk thisKiosk : kiosks) {
                 if (thisKiosk.equals(kiosk)) {
-                    System.out.println("Der Kiosk existiert bereits " + kiosk);
+                    LOGGER.warning("Der Kiosk existiert bereits " + kiosk);
                     return thisKiosk;
                 }
             }
-        } else{
+        } else {
             this.kiosks.add(kiosk);
-            System.out.println("Kiosk wurde zur Liste hinzugefuet " + kiosk);
+            LOGGER.info("Kiosk wurde zur Liste hinzugefuet " + kiosk);
             return kiosk;
         }
         return null;
     }
 
-  /*
-  public KioskSupplier lieferantHinzufuegen(KioskSupplier supplier) {
-        if (kioskSuppliers.isEmpty()) {
-            this.kioskSuppliers.add(supplier);
-            //System.out.println(kioskSuppliers);
-            System.out.println("Lieferanten Liste war noch leer: " + supplier);
-            return supplier;
-        } else if (kioskSuppliers.contains(supplier)) {
-            for (KioskSupplier thisSupplier : kioskSuppliers) {
-                if (thisSupplier.equals(supplier)) {
-                    System.out.println("Der KioskSupplier existiert bereits " + supplier);
-                    return supplier;
-                }
-            }
-        } else {
-            this.kioskSuppliers.add(supplier);
-            System.out.println("KioskSupplier wurde zur Liste hinzugefuet " + supplier);
-            return supplier;
-        }
-        return null;
-    }
-    */
-
     public Set<Kiosk> getKiosks() {
         return kiosks;
     }
-    /*
-    public Kiosk getKiosk(String name, String location) {
-        Kiosk tempKiosk = new Kiosk(name, location, false, null, null, 1, null);
-        if(kiosks.contains(tempKiosk)){
-            for(Kiosk kiosk : kiosks){
-                if(kiosk.equals(tempKiosk)){
-                    return kiosk;
-                }
-            }
+
+    /**
+     *  Updates the kiosk storage (and "overrides" the old storage)
+     * @param myKiosk is the kiosk that was "temporally" was stored in the SceneDataHandler
+     */
+
+    public void setKioskStorage(Kiosk myKiosk) {
+        Map<BaseArticle, Integer> newInventory = new HashMap<>();
+        for (Map.Entry<BaseArticle, Integer> article : myKiosk.getInventory().entrySet()) {
+            newInventory.put(article.getKey(), article.getValue());
         }
-        return null;
-    }
-    */
-    public void setKioskStorage(Kiosk myKiosk){
-        Map<BaseArticle,Integer> newInventory = new HashMap<>();
-        for(Map.Entry<BaseArticle,Integer> article : myKiosk.getInventory().entrySet()){
-            newInventory.put(article.getKey(),article.getValue());
-        }
-        for(Kiosk kiosk : kiosks){
-            if(kiosk.equals(myKiosk)){
+        for (Kiosk kiosk : kiosks) {
+            if (kiosk.equals(myKiosk)) {
                 kiosk.setInventory(newInventory);
                 break;
             }
         }
+        LOGGER.info("Das Lager wurde erfolgreich gespeichert");
     }
-    public void setKioskSupplierInventroy(Kiosk myKiosk){
-        Map<BaseArticle,Integer> newInventory = new HashMap<>();
-        for(Map.Entry<BaseArticle,Integer> article : myKiosk.getKioskSupplier().getInventory().entrySet()){
-            newInventory.put(article.getKey(),article.getValue());
+
+    /**
+     *  Updates the kiosk supplier storage (and "overrides" the old storage)
+     * @param myKiosk is the kiosk that was "temporally" was stored in the SceneDataHandler
+     */
+
+    public void setKioskSupplierInventory(Kiosk myKiosk) {
+        Map<BaseArticle, Integer> newInventory = new HashMap<>();
+        for (Map.Entry<BaseArticle, Integer> article : myKiosk.getKioskSupplier().getInventory().entrySet()) {
+            newInventory.put(article.getKey(), article.getValue());
         }
-        for(Kiosk kiosk : kiosks){
-            if(kiosk.equals(myKiosk)){
+        for (Kiosk kiosk : kiosks) {
+            if (kiosk.equals(myKiosk)) {
                 kiosk.getKioskSupplier().setInventory(newInventory);
                 break;
             }
         }
+        LOGGER.info("Das Lager wurde erfolgreich gespeichert");
     }
 }

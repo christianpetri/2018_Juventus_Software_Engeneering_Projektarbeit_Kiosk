@@ -7,6 +7,7 @@ import java.io.*;
 import java.nio.file.FileSystems;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Logger;
 
 import static java.util.Map.Entry.comparingByKey;
 
@@ -19,6 +20,7 @@ import static java.util.Map.Entry.comparingByKey;
 public class ExcelExporter {
 
     private static final String DEFAULT_SEPARATOR = "\t";
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     private void writeLine(Writer w, List<String> values) throws IOException {
         writeLine(w, values, DEFAULT_SEPARATOR, ' ');
@@ -137,6 +139,7 @@ public class ExcelExporter {
         kioskName = kioskName.replaceAll("[^A-Za-z0-9]", "_").trim();
         try {
             this.writeCSV(inventoryList, FileSystems.getDefault().getPath("").toAbsolutePath() + "\\out\\fileOutput\\" + ft.format(dateNow)+"_"+ kioskName +"_kiosk_inventory.xls");
+            LOGGER.info("Excel erfolgreich exportiert");
         } catch (IOException e) {
             e.printStackTrace();
         }

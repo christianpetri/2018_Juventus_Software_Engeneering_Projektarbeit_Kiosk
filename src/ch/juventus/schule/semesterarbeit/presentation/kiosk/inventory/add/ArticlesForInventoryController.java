@@ -75,7 +75,7 @@ public class ArticlesForInventoryController {
     }
 
     public void goToPayInventory(ActionEvent actionEvent) throws IOException {
-        System.out.println("Bestelltes Inventar bezahlen");
+       LOGGER.info("Bestelltes Inventar bezahlen");
         sceneStageHandler.renderNextScene(actionEvent, "kiosk/inventory/pay/Inventory");
     }
 

@@ -8,6 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
  * @author : ${user}
@@ -20,6 +21,7 @@ public class CustomerController {
     private Label customerInfoLabel, kioskName, kioskLocation;
     private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
     private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
 
     @FXML
     private void initialize() {
@@ -28,24 +30,22 @@ public class CustomerController {
     }
 
     public void createCustomer(ActionEvent actionEvent) throws IOException {
-        System.out.println("Kunde erstellen");
         customerInfoLabel.setText("");
         if (!customerName.getText().isEmpty() && !customerAge.getText().isEmpty()) {
             if (customerAge.getText().matches("\\d+")) {
                 sceneDataHandler.setCustomer(new ch.juventus.schule.semesterarbeit.business.customer.Customer(customerName.getText(), Integer.parseInt(customerAge.getText())));
                 sceneStageHandler.renderNextScene(actionEvent, "customer/article/add/ArticlesForShoppingBasket");
+                LOGGER.info("Kunde erstellt");
             }
             customerInfoLabel.setText("Alter muss eine Zahl sein");
+            LOGGER.info("Kunden Alter überprüfen");
         } else {
             customerInfoLabel.setText("Name und Alter ist erforderlich");
+            LOGGER.info("Der Kunde muss ein Name und ein Alter haben");
         }
     }
 
     public void goBackToTheMainMenu(ActionEvent actionEvent) throws IOException {
         sceneStageHandler.goBackToTheMainMenu(actionEvent);
-    }
-
-    public void setKiosk(String name, String location) {
-
     }
 }

@@ -130,10 +130,8 @@ public class KioskController {
     }
 
     private void toggleKioskState(Kiosk kiosk) {
-        //dataBaseAccessMock.getKiosk(kiosk.getName(), kiosk.getLocation()).toggleIsKioskOpen();
-        kiosk.setKioskOpen(!kiosk.isKioskOpen());
+        kiosk.toggleIsKioskOpen();
         tableViewKiosk.getItems().setAll(parseKioskList());
-        //System.out.println(dataBaseAccessMock.getKiosk(kiosk.getName(), kiosk.getLocation()).isKioskOpen());
     }
 
     private boolean isKioskToggleEvent(MouseEvent event) {

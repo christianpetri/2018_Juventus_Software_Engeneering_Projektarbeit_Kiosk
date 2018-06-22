@@ -16,6 +16,7 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * @author : ${user}
@@ -25,6 +26,7 @@ public class ArticlesForShoppingBasketController {
 
     private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
     private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     @FXML
     private TableView<ArticleTableViewValue> articleList;
     @FXML
@@ -52,19 +54,20 @@ public class ArticlesForShoppingBasketController {
             notificationAgeRestriction.setText("");
             //if (event.getClickCount() == 2) {
             ArticleTableViewValue articleTableViewValue = articleList.getSelectionModel().getSelectedItems().get(0);
-            System.out.println(articleTableViewValue.getBaseArticle());
-            System.out.println("clicked");
-            System.out.println(event);
+
+            LOGGER.info("Benutzer hat auf die Tabelle geklickt");
+
             if(isAddArticleEvent(event)){
-                System.out.println("Add Article");
+                LOGGER.info("Artikel hinzufügen");
                 if(!sceneDataHandler.getCustomer().getShoppingBasket().addArticle(sceneDataHandler.getKiosk().getInventory(), articleTableViewValue.getBaseArticle(),1)){
                     notificationAgeRestriction.setTextFill(Color.RED);
                     notificationAgeRestriction.setText("Der Kunde ist nicht alt genung!");
+                    LOGGER.info("Der Kunde ist nicht alt genug!");
                 }
                 articleList.getItems().setAll(parseArticleList(sceneDataHandler.getKiosk(),sceneDataHandler.getCustomer()));
             } else if (isRemoveArticleEvent(event)){
                 sceneDataHandler.getCustomer().getShoppingBasket().removeArticle(sceneDataHandler.getKiosk().getInventory(), articleTableViewValue.getBaseArticle(),1);
-                System.out.println("Remove Article");
+                LOGGER.info("Artikel entfernt");
                 articleList.getItems().setAll(parseArticleList(sceneDataHandler.getKiosk(),sceneDataHandler.getCustomer()));
             }
         });
@@ -77,7 +80,7 @@ public class ArticlesForShoppingBasketController {
     }
 
     public void goToPayShoppingCart(ActionEvent actionEvent) throws IOException {
-        System.out.println("Artikel bezahlen");
+        LOGGER.info("Artikel bezahlen");
         sceneStageHandler.renderNextScene(actionEvent, "customer/article/pay/ShoppingBasket");
     }
 

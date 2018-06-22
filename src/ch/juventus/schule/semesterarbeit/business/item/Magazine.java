@@ -7,8 +7,8 @@ package ch.juventus.schule.semesterarbeit.business.item;
 public class Magazine extends BaseArticle {
     private MagazineType type;
 
-    public Magazine(String bezeichung, int preis, MagazineType type) {
-        super(bezeichung, preis);
+    public Magazine(String description, int price, MagazineType type) {
+        super(description, price);
         this.type = type;
     }
 
