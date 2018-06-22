@@ -3,7 +3,6 @@ package ch.juventus.schule.semesterarbeit.business.multithreading;
 import ch.juventus.schule.semesterarbeit.business.article.factory.ArticleFactory;
 import ch.juventus.schule.semesterarbeit.business.customer.Customer;
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
-import ch.juventus.schule.semesterarbeit.persistence.DataBaseAccessMock;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -40,7 +39,7 @@ public class CustomerThread extends Thread {
             this.customer = createNewCustomer();
             addArticleToShoppingBasket();
             payShoppingBasket();
-            System.out.println(threadName +": Ist beendet");
+            System.out.println(threadName + ": Ist beendet");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -58,6 +57,7 @@ public class CustomerThread extends Thread {
 
     /**
      * Creates an new customer
+     *
      * @return the customer object
      * @throws InterruptedException
      */
@@ -70,6 +70,7 @@ public class CustomerThread extends Thread {
 
     /**
      * The customer adds an articles in to the shopping basket
+     *
      * @throws InterruptedException
      */
     private void addArticleToShoppingBasket() throws InterruptedException {
@@ -81,6 +82,7 @@ public class CustomerThread extends Thread {
 
     /**
      * the customer pays all items that are in the shopping basket
+     *
      * @throws InterruptedException
      */
     private void payShoppingBasket() throws InterruptedException {

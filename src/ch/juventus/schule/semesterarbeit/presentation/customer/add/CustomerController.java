@@ -17,11 +17,11 @@ import java.util.logging.Logger;
  * @since: ${date}
  */
 public class CustomerController {
-    private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
-    private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     @FXML
     TextField customerName, customerAge;
+    private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
+    private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
     @FXML
     private Label customerInfoLabel, kioskName, kioskLocation;
 

@@ -7,6 +7,7 @@ import java.util.Set;
 
 /**
  * Provides support for TableView for the scene: kiosk select
+ *
  * @author : ${user}
  * @since: ${date}
  */

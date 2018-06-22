@@ -24,10 +24,11 @@ public class ShoppingBasket {
     }
 
     /**
-     *  Add article into the shopping basket
+     * Add article into the shopping basket
+     *
      * @param storage The kiosks storage
      * @param article The article that needs to be added
-     * @param amount How many article items need to be added into the shopping basket
+     * @param amount  How many article items need to be added into the shopping basket
      */
     public boolean addArticle(Map<BaseArticle, Integer> storage, BaseArticle article, int amount) {
         boolean isCustomerAbleToBuyArticleAgeWise = true;
@@ -57,10 +58,11 @@ public class ShoppingBasket {
 
 
     /**
-     *  Take item out of the shopping basket
+     * Take item out of the shopping basket
+     *
      * @param storage The kiosks storage
      * @param article The article that needs to be removed
-     * @param amount How many article items need to be removed out of the shopping basket
+     * @param amount  How many article items need to be removed out of the shopping basket
      */
     public void removeArticle(Map<BaseArticle, Integer> storage, BaseArticle article, int amount) {
         if (((shoppingBasket.get(article) == null) ? 0 : shoppingBasket.get(article)) > 0) {
@@ -70,7 +72,8 @@ public class ShoppingBasket {
     }
 
     /**
-     *  Pay all the articles that are in the shopping basket
+     * Pay all the articles that are in the shopping basket
+     *
      * @return the amount in CHF that the customer has to pay the kiosk
      */
     public String payArticles() {

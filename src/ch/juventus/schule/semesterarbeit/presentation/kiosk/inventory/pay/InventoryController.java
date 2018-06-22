@@ -16,11 +16,11 @@ import java.io.IOException;
  * @since: ${date}
  */
 public class InventoryController {
+    @FXML
+    Label kioskName, kioskLocation, supplierName, sumDue;
     private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
     private DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
     private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
-    @FXML
-    Label kioskName, kioskLocation, supplierName, sumDue;
 
     @FXML
     private void initialize() {

@@ -3,7 +3,8 @@ package ch.juventus.schule.semesterarbeit.business.article.factory;
 import ch.juventus.schule.semesterarbeit.business.article.*;
 
 /**
- *  The article factory creates all the articles that can be bought in the kiosk and from the supplier
+ * The article factory creates all the articles that can be bought in the kiosk and from the supplier
+ *
  * @author : ${user}
  * @since: ${date}
  */

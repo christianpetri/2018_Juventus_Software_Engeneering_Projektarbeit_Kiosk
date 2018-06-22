@@ -85,9 +85,10 @@ public class Kiosk {
     }
 
     /**
-     *  The kiosk gets an article form supplier and puts it into its inventory
+     * The kiosk gets an article form supplier and puts it into its inventory
+     *
      * @param baseArticle The article that is put into the inventory
-     * @param amount How many article items are put into the inventory
+     * @param amount      How many article items are put into the inventory
      */
     public void putItemIntoTheStorage(BaseArticle baseArticle, Integer amount) {
         inventory.put(baseArticle, amount);

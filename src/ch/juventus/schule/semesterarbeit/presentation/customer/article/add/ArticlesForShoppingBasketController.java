@@ -26,9 +26,9 @@ import java.util.logging.Logger;
  */
 public class ArticlesForShoppingBasketController {
 
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
     private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
-    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     @FXML
     private TableView<ArticleTableViewValue> articleList;
     @FXML
@@ -77,7 +77,8 @@ public class ArticlesForShoppingBasketController {
 
     /**
      * get the values that are needed for the TableView(JavaFX)
-     * @param kiosk the Kiosk where tha customer is shopping in
+     *
+     * @param kiosk    the Kiosk where tha customer is shopping in
      * @param customer the customer that is shopping in the kiosk
      * @return The values that are need for the TableView(JavaFX)
      */
