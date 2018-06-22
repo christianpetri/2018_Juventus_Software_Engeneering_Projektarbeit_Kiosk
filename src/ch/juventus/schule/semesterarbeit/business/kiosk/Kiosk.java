@@ -31,18 +31,18 @@ public class Kiosk {
         this.kioskSupplier = kioskSupplier;
     }
 
-    public Kiosk(Kiosk orginal) {
-        this.name = orginal.getName();
-        this.location = orginal.getLocation();
-        this.isKioskOpen = orginal.isKioskOpen();
-        this.employees = orginal.getEmployees();
+    public Kiosk(Kiosk originalKiosk) {
+        this.name = originalKiosk.getName();
+        this.location = originalKiosk.getLocation();
+        this.isKioskOpen = originalKiosk.isKioskOpen();
+        this.employees = originalKiosk.getEmployees();
         Map<BaseArticle, Integer> newInventory = new HashMap<>();
-        for (Map.Entry<BaseArticle, Integer> article : orginal.getInventory().entrySet()) {
+        for (Map.Entry<BaseArticle, Integer> article : originalKiosk.getInventory().entrySet()) {
             newInventory.put(article.getKey(), article.getValue());
         }
         this.inventory = newInventory;
-        this.amountOfMoneyInTheCashRegister = orginal.getAmountOfMoneyInTheCashRegister();
-        this.kioskSupplier = new KioskSupplier(orginal.getKioskSupplier());
+        this.amountOfMoneyInTheCashRegister = originalKiosk.getAmountOfMoneyInTheCashRegister();
+        this.kioskSupplier = new KioskSupplier(originalKiosk.getKioskSupplier());
     }
 
     public List<Employee> getEmployees() {
@@ -77,10 +77,18 @@ public class Kiosk {
         isKioskOpen = kioskOpen;
     }
 
+    /**
+     * Toggles the "is Kiosk open" from true to false and from false to true
+     */
     public void toggleIsKioskOpen() {
         this.isKioskOpen = !this.isKioskOpen;
     }
 
+    /**
+     *  The kiosk gets an article form supplier and puts it into its inventory
+     * @param baseArticle The article that is put into the inventory
+     * @param amount How many article items are put into the inventory
+     */
     public void putItemIntoTheStorage(BaseArticle baseArticle, Integer amount) {
         inventory.put(baseArticle, amount);
     }

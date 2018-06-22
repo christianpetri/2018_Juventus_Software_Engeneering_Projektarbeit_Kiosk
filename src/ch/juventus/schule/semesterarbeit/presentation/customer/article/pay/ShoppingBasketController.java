@@ -31,6 +31,7 @@ public class ShoppingBasketController {
         sumDue.setText(sceneDataHandler.getCustomer().getShoppingBasket().payArticles());
     }
 
+    @FXML
     public void goBackToMainWindow(ActionEvent actionEvent) throws IOException {
         sceneDataHandler.getCustomer().getShoppingBasket().payArticles();
         sceneDataHandler.getCustomer().getShoppingBasket().clearAllArticlesOutOfTheShoppingBasket();
@@ -38,6 +39,7 @@ public class ShoppingBasketController {
         sceneStageHandler.goBackToTheMainMenu(actionEvent);
     }
 
+    @FXML
     public void cancelAndGoBackToMainWindow(ActionEvent actionEvent) throws IOException {
         sceneDataHandler.getCustomer().getShoppingBasket().clearAllArticlesOutOfTheShoppingBasket();
         sceneStageHandler.goBackToTheMainMenu(actionEvent);

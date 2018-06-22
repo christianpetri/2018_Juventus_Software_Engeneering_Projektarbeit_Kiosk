@@ -23,6 +23,12 @@ public class ShoppingBasket {
         this.customerAge = customerAge;
     }
 
+    /**
+     *  Add article into the shopping basket
+     * @param storage The kiosks storage
+     * @param article The article that needs to be added
+     * @param amount How many article items need to be added into the shopping basket
+     */
     public boolean addArticle(Map<BaseArticle, Integer> storage, BaseArticle article, int amount) {
         boolean isCustomerAbleToBuyArticleAgeWise = true;
         if ((article instanceof Alcohol)) {
@@ -49,6 +55,24 @@ public class ShoppingBasket {
         return isCustomerAbleToBuyArticleAgeWise;
     }
 
+
+    /**
+     *  Take item out of the shopping basket
+     * @param storage The kiosks storage
+     * @param article The article that needs to be removed
+     * @param amount How many article items need to be removed out of the shopping basket
+     */
+    public void removeArticle(Map<BaseArticle, Integer> storage, BaseArticle article, int amount) {
+        if (((shoppingBasket.get(article) == null) ? 0 : shoppingBasket.get(article)) > 0) {
+            storage.put(article, storage.get(article) + amount);
+            shoppingBasket.put(article, shoppingBasket.get(article) - amount);
+        }
+    }
+
+    /**
+     *  Pay all the articles that are in the shopping basket
+     * @return the amount in CHF that the customer has to pay the kiosk
+     */
     public String payArticles() {
         LOGGER.info("Es sind " + shoppingBasket.size() + " Artikel im Warenkorb");
         int sum = 0;
@@ -59,6 +83,10 @@ public class ShoppingBasket {
         LOGGER.info("Bitte bezahlen Sie " + sum + " CHF");
         return String.valueOf(sum);
     }
+
+    /**
+     * Clear all articles out of the shopping basket
+     */
 
     public void clearAllArticlesOutOfTheShoppingBasket() {
         this.shoppingBasket.clear();
@@ -75,10 +103,5 @@ public class ShoppingBasket {
                 '}';
     }
 
-    public void removeArticle(Map<BaseArticle, Integer> storage, BaseArticle article, int amount) {
-        if (((shoppingBasket.get(article) == null) ? 0 : shoppingBasket.get(article)) > 0) {
-            storage.put(article, storage.get(article) + amount);
-            shoppingBasket.put(article, shoppingBasket.get(article) - amount);
-        }
-    }
+
 }

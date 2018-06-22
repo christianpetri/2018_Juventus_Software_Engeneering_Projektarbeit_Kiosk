@@ -11,19 +11,19 @@ import java.io.IOException;
 import java.util.logging.Logger;
 
 /**
- * The controller fot the scene: add a customer that wants to buy articles from the kiosk to the queue
+ * The controller for the scene: add a customer that wants to buy articles from the kiosk to the queue
  *
  * @author : ${user}
  * @since: ${date}
  */
 public class CustomerController {
+    private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
+    private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
     private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     @FXML
     TextField customerName, customerAge;
     @FXML
     private Label customerInfoLabel, kioskName, kioskLocation;
-    private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
-    private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
 
     @FXML
     private void initialize() {

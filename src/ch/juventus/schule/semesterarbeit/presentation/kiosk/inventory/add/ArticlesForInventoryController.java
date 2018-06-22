@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -18,7 +19,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * the controller for the scene kiosk add inventory
+ * The controller for the scene kiosk: kiosk add inventory
  *
  * @author : ${user}
  * @since: ${date}
@@ -52,12 +53,14 @@ public class ArticlesForInventoryController {
 
         articleList.setOnMouseClicked(event -> {
             notificationLabel.setText("");
+            notificationLabel.setTextFill(Color.BLACK);
             ArticleTableViewValueForInventory articleTableViewValueForInventory = articleList.getSelectionModel().getSelectedItems().get(0);
             if (isAddArticleEvent(event)) {
                 try {
                     if (isEnoughMoneyInTheCashRegisterToPayForArticle(articleTableViewValueForInventory)) {
                         addArticleToKioskInventory(articleTableViewValueForInventory);
                     } else {
+                        notificationLabel.setTextFill(Color.RED);
                         notificationLabel.setText("Nicht genug Kapital in der Kasse");
                         throw new KioskCashRegisterException("Not enough money in the cash register!");
                     }

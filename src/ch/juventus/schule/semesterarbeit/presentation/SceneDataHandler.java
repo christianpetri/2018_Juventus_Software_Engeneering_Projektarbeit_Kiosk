@@ -52,7 +52,6 @@ public class SceneDataHandler {
     /**
      * if the user cancelled a procedure, it resets the DataHandler
      */
-
     public void resetSceneDataHandler() {
         this.customer = null;
         this.kiosk = null;

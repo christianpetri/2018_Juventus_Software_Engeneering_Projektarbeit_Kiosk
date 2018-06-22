@@ -3,6 +3,7 @@ package ch.juventus.schule.semesterarbeit.presentation.kiosk.select;
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
 
 /**
+ * Provides the Values for the TableView(JavaFX) for the scene: kiosk select
  * @author : ${user}
  * @since: ${date}
  */

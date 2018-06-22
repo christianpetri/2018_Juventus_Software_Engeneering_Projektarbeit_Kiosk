@@ -48,7 +48,6 @@ public class KioskController {
     private void initialize() {
         sceneDataHandler.resetSceneDataHandler();
         dataBaseAccessMock.addKiosk("Haselgasse", "Seen", "Hansi", 1000);
-        //dataBaseAccessMock.addKiosk("s", "Wald", "Hansi", 1000);
         kioskMessage.setText("");
         tableViewKiosk.setOnMouseClicked(event -> {
             sceneDataHandler.resetSceneDataHandler();

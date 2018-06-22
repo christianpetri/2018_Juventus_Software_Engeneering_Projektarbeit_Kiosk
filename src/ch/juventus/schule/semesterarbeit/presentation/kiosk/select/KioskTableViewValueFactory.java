@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * Provides support for TableView for the scene: kiosk select
  * @author : ${user}
  * @since: ${date}
  */
@@ -13,7 +14,7 @@ public class KioskTableViewValueFactory {
     private Set<KioskTableViewValue> kiosksPlaceholder;
 
     public KioskTableViewValueFactory(Set<Kiosk> kiosks) {
-        kiosksPlaceholder = new HashSet<>(); 
+        kiosksPlaceholder = new HashSet<>();
         for (Kiosk kiosk : kiosks) {
             kiosksPlaceholder.add(new KioskTableViewValue(kiosk, kiosk.getName(), kiosk.getLocation(), kiosk.isKioskOpen()));
         }

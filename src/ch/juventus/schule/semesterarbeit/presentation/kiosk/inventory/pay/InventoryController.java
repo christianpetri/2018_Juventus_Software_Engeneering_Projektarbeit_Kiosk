@@ -16,11 +16,11 @@ import java.io.IOException;
  * @since: ${date}
  */
 public class InventoryController {
-    @FXML
-    Label kioskName, kioskLocation, supplierName, sumDue;
     private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
     private DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
     private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
+    @FXML
+    Label kioskName, kioskLocation, supplierName, sumDue;
 
     @FXML
     private void initialize() {
@@ -30,12 +30,14 @@ public class InventoryController {
         sumDue.setText(String.valueOf(sceneDataHandler.getAmountToPay()));
     }
 
+    @FXML
     public void goBackToMainWindow(ActionEvent actionEvent) throws IOException {
         dataBaseAccessMock.setKioskStorage(sceneDataHandler.getKiosk());
         dataBaseAccessMock.setKioskSupplierInventory(sceneDataHandler.getKiosk());
         sceneStageHandler.goBackToTheMainMenu(actionEvent);
     }
 
+    @FXML
     public void cancelAndGoBackToMainWindow(ActionEvent actionEvent) throws IOException {
         sceneDataHandler.resetSceneDataHandler();
         sceneStageHandler.goBackToTheMainMenu(actionEvent);

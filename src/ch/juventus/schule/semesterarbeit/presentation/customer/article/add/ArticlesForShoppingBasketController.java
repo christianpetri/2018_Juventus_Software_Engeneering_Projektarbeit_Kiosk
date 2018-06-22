@@ -26,9 +26,9 @@ import java.util.logging.Logger;
  */
 public class ArticlesForShoppingBasketController {
 
-    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     private SceneStageHandler sceneStageHandler = SceneStageHandler.getInstance();
     private SceneDataHandler sceneDataHandler = SceneDataHandler.getInstance();
+    private final static Logger LOGGER = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     @FXML
     private TableView<ArticleTableViewValue> articleList;
     @FXML
@@ -38,7 +38,6 @@ public class ArticlesForShoppingBasketController {
 
     @FXML
     private void initialize() {
-
         //Set Labels
         this.kioskName.setText(sceneDataHandler.getKiosk().getName());
         this.kioskLocation.setText(sceneDataHandler.getKiosk().getLocation());
@@ -76,16 +75,24 @@ public class ArticlesForShoppingBasketController {
         articleList.getItems().setAll(parseArticleList(sceneDataHandler.getKiosk(), sceneDataHandler.getCustomer()));
     }
 
+    /**
+     * get the values that are needed for the TableView(JavaFX)
+     * @param kiosk the Kiosk where tha customer is shopping in
+     * @param customer the customer that is shopping in the kiosk
+     * @return The values that are need for the TableView(JavaFX)
+     */
     private List<ArticleTableViewValue> parseArticleList(Kiosk kiosk, Customer customer) {
         ArticleTableViewValueFactory articleTableViewValueFactory = new ArticleTableViewValueFactory(kiosk, customer);
         return articleTableViewValueFactory.getInventoryPlaceholder();
     }
 
+    @FXML
     public void goToPayShoppingCart(ActionEvent actionEvent) throws IOException {
         LOGGER.info("Artikel bezahlen");
         sceneStageHandler.renderNextScene(actionEvent, "customer/article/pay/ShoppingBasket");
     }
 
+    @FXML
     public void cancelAndGoBackToMainWindow(ActionEvent actionEvent) throws IOException {
         sceneDataHandler.getCustomer().getShoppingBasket().clearAllArticlesOutOfTheShoppingBasket();
         sceneStageHandler.goBackToTheMainMenu(actionEvent);
