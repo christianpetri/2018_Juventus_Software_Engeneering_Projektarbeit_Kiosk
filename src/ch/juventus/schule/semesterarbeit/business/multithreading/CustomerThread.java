@@ -1,7 +1,7 @@
 package ch.juventus.schule.semesterarbeit.business.multithreading;
 
-import ch.juventus.schule.semesterarbeit.business.customer.Customer;
 import ch.juventus.schule.semesterarbeit.business.article.factory.ArticleFactory;
+import ch.juventus.schule.semesterarbeit.business.customer.Customer;
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
 import ch.juventus.schule.semesterarbeit.persistence.DataBaseAccessMock;
 
@@ -9,6 +9,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Simulates 5 customers that are simultaneous adding articles to their shopping basket and are paying it
+ *
  * @author : ${user}
  * @since: ${date}
  */

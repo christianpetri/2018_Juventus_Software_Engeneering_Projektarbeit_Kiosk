@@ -11,6 +11,7 @@ import java.io.IOException;
 
 /**
  * The controller for the scene: kiosk pay the articles that were added to the inventory from the supplier
+ *
  * @author : ${user}
  * @since: ${date}
  */

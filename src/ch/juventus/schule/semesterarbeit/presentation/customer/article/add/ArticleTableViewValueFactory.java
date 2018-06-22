@@ -1,7 +1,7 @@
 package ch.juventus.schule.semesterarbeit.presentation.customer.article.add;
 
-import ch.juventus.schule.semesterarbeit.business.customer.Customer;
 import ch.juventus.schule.semesterarbeit.business.article.BaseArticle;
+import ch.juventus.schule.semesterarbeit.business.customer.Customer;
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
 
 import java.util.ArrayList;
@@ -10,6 +10,7 @@ import java.util.Map;
 
 /**
  * Creates the values for the TableView(JavaFX) for the scene: customer add articles to the shopping basket
+ *
  * @author : ${user}
  * @since: ${date}
  */

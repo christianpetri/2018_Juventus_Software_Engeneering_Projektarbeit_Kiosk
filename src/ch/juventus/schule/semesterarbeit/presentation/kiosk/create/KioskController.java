@@ -11,6 +11,7 @@ import java.io.IOException;
 
 /**
  * The controller for the scene: kiosk create
+ *
  * @author : ${user}
  * @since: ${date}
  */

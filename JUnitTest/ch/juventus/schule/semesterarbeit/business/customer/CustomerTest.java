@@ -7,6 +7,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Customer Test
  * @author : ${user}
  * @since: ${date}
  */

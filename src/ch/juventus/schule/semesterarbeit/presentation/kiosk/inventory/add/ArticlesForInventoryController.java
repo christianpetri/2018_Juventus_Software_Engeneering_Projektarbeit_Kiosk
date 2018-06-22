@@ -82,9 +82,7 @@ public class ArticlesForInventoryController {
     }
 
     public void cancelAndGoBackToMainWindow(ActionEvent actionEvent) throws IOException {
-
         sceneDataHandler.resetSceneDataHandler();
-
         sceneStageHandler.goBackToTheMainMenu(actionEvent);
     }
 

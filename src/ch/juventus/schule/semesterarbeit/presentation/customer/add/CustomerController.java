@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 
 /**
  * The controller fot the scene: add a customer that wants to buy articles from the kiosk to the queue
+ *
  * @author : ${user}
  * @since: ${date}
  */

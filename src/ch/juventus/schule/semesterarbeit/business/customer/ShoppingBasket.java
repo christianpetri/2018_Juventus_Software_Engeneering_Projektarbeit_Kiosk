@@ -9,7 +9,8 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 /**
- *  The shopping basket for the customer
+ * The shopping basket for the customer
+ *
  * @author : ${user}
  * @since: ${date}
  */

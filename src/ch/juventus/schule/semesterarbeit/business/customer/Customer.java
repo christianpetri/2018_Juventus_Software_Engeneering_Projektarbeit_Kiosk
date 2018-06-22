@@ -3,7 +3,8 @@ package ch.juventus.schule.semesterarbeit.business.customer;
 import java.util.Objects;
 
 /**
- *  The customer that buys articles from the kiosk
+ * The customer that buys articles from the kiosk
+ *
  * @author : ${user}
  * @since: ${date}
  */

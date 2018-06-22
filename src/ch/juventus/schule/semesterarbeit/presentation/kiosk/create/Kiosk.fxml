@@ -5,7 +5,8 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="buttonLeft" alignment="center" hgap="10" prefHeight="348.0" prefWidth="212.0"
+<GridPane xmlns:fx="http://javafx.com/fxml/1" fx:id="buttonLeft" alignment="center" hgap="10" prefHeight="348.0"
+          prefWidth="212.0"
           vgap="10" xmlns="http://javafx.com/javafx/8.0.121"
           fx:controller="ch.juventus.schule.semesterarbeit.presentation.kiosk.create.KioskController">
     <Pane prefHeight="327.0" prefWidth="187.0">

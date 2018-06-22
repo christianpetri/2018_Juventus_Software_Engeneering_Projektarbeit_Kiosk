@@ -1,7 +1,6 @@
 package ch.juventus.schule.semesterarbeit.business.article;
 
 /**
- *
  * @author : ${user}
  * @since: ${date}
  */

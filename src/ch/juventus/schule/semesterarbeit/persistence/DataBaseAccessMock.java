@@ -1,8 +1,8 @@
 package ch.juventus.schule.semesterarbeit.persistence;
 
-import ch.juventus.schule.semesterarbeit.business.employee.Employee;
 import ch.juventus.schule.semesterarbeit.business.article.BaseArticle;
 import ch.juventus.schule.semesterarbeit.business.article.factory.ArticleFactory;
+import ch.juventus.schule.semesterarbeit.business.employee.Employee;
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
 import ch.juventus.schule.semesterarbeit.business.supplier.KioskSupplier;
 
@@ -66,7 +66,6 @@ public class DataBaseAccessMock {
         KioskSupplier kioskSupplier = new KioskSupplier("Meier", storageSupplier);
 
         Kiosk kiosk = new Kiosk(kioskName, locationName, false, employee, storageKiosk, startCapital, kioskSupplier);
-
         if (kiosks.contains(kiosk)) {
             for (Kiosk thisKiosk : kiosks) {
                 if (thisKiosk.equals(kiosk)) {

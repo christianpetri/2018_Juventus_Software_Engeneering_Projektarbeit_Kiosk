@@ -1,0 +1,17 @@
+ch.juventus.schule.semesterarbeit.business.article
+ch.juventus.schule.semesterarbeit.business.article.factory
+ch.juventus.schule.semesterarbeit.business.customer
+ch.juventus.schule.semesterarbeit.business.employee
+ch.juventus.schule.semesterarbeit.business.exporter
+ch.juventus.schule.semesterarbeit.business.kiosk
+ch.juventus.schule.semesterarbeit.business.multithreading
+ch.juventus.schule.semesterarbeit.business.supplier
+ch.juventus.schule.semesterarbeit.persistence
+ch.juventus.schule.semesterarbeit.presentation
+ch.juventus.schule.semesterarbeit.presentation.customer.add
+ch.juventus.schule.semesterarbeit.presentation.customer.article.add
+ch.juventus.schule.semesterarbeit.presentation.customer.article.pay
+ch.juventus.schule.semesterarbeit.presentation.kiosk.create
+ch.juventus.schule.semesterarbeit.presentation.kiosk.inventory.add
+ch.juventus.schule.semesterarbeit.presentation.kiosk.inventory.pay
+ch.juventus.schule.semesterarbeit.presentation.kiosk.select

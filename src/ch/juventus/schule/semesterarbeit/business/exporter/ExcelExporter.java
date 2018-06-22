@@ -10,7 +10,8 @@ import java.util.*;
 import java.util.logging.Logger;
 
 /**
- *  Exports the inventory of a particular kiosk to an excel sheet
+ * Exports the inventory of a particular kiosk to an excel sheet
+ *
  * @author : ${user}
  * @since: ${date}
  */

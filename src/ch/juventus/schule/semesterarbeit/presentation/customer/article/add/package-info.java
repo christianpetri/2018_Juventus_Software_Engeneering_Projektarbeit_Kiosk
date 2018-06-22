@@ -1,5 +1,6 @@
 /**
- *  Scene: Add article to Shopping Basket
+ * Scene: Add article to Shopping Basket
+ *
  * @author : ${user}
  * @since: ${date}
  */

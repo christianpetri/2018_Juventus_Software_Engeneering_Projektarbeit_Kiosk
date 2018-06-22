@@ -5,7 +5,8 @@ import ch.juventus.schule.semesterarbeit.business.article.BaseArticle;
 import java.util.Comparator;
 
 /**
- *  Orders the kiosk inventory articles by highest to lowest price
+ * Orders the kiosk inventory articles by highest to lowest price
+ *
  * @author : ${user}
  * @since: ${date}
  */

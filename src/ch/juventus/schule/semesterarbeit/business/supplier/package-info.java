@@ -1,5 +1,6 @@
 /**
  * The supplier that supplies articles to the kiosk
+ *
  * @author : ${user}
  * @since: ${date}
  */

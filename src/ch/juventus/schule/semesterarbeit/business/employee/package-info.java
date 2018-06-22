@@ -1,5 +1,6 @@
 /**
  * The employee that is employed by the kiosk
+ *
  * @author : ${user}
  * @since: ${date}
  */

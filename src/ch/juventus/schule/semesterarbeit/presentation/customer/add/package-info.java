@@ -1,5 +1,6 @@
 /**
- *  Scene: Add customer
+ * Scene: Add customer
+ *
  * @author : ${user}
  * @since: ${date}
  */

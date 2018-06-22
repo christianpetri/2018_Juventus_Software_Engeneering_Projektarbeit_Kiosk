@@ -1,13 +1,14 @@
 package ch.juventus.schule.semesterarbeit.business.kiosk;
 
-import ch.juventus.schule.semesterarbeit.business.employee.Employee;
 import ch.juventus.schule.semesterarbeit.business.article.BaseArticle;
+import ch.juventus.schule.semesterarbeit.business.employee.Employee;
 import ch.juventus.schule.semesterarbeit.business.supplier.KioskSupplier;
 
 import java.util.*;
 
 /**
- *  The Kiosk
+ * The Kiosk
+ *
  * @author : ${user}
  * @since: ${date}
  */
@@ -19,9 +20,6 @@ public class Kiosk {
     private Map<BaseArticle, Integer> inventory;
     private int amountOfMoneyInTheCashRegister;
     private KioskSupplier kioskSupplier;
-    private String createShoppingBasket;
-    private String orderArticles;
-    private String getInventory;
 
     public Kiosk(String name, String location, boolean isKioskOpen, Employee employee, Map<BaseArticle, Integer> inventory, int amountOfMoneyInTheCashRegister, KioskSupplier kioskSupplier) {
         this.name = name;
@@ -31,9 +29,6 @@ public class Kiosk {
         this.inventory = inventory;
         this.amountOfMoneyInTheCashRegister = amountOfMoneyInTheCashRegister;
         this.kioskSupplier = kioskSupplier;
-        this.createShoppingBasket = "Verkauf tätigen";
-        this.orderArticles = "Artikel bestellen";
-        this.getInventory = "Inventar anzeigen";
     }
 
     public Kiosk(Kiosk orginal) {
@@ -48,9 +43,6 @@ public class Kiosk {
         this.inventory = newInventory;
         this.amountOfMoneyInTheCashRegister = orginal.getAmountOfMoneyInTheCashRegister();
         this.kioskSupplier = new KioskSupplier(orginal.getKioskSupplier());
-        this.createShoppingBasket = "Einkauf tätigen";
-        this.orderArticles = "Artikel bestellen";
-        this.getInventory = "Inventar";
     }
 
     public List<Employee> getEmployees() {
@@ -87,18 +79,6 @@ public class Kiosk {
 
     public void toggleIsKioskOpen() {
         this.isKioskOpen = !this.isKioskOpen;
-    }
-
-    public String getCreateShoppingBasket() {
-        return createShoppingBasket;
-    }
-
-    public String getOrderArticles() {
-        return orderArticles;
-    }
-
-    public String getGetInventory() {
-        return getInventory;
     }
 
     public void putItemIntoTheStorage(BaseArticle baseArticle, Integer amount) {

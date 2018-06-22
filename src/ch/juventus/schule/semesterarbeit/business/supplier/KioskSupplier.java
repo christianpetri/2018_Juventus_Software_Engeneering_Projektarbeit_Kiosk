@@ -8,6 +8,7 @@ import java.util.Objects;
 
 /**
  * The kiosk supplier which supplies articles to the kiosk
+ *
  * @author : ${user}
  * @since: ${date}
  */

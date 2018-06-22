@@ -1,6 +1,6 @@
 /**
- *
  * Scene: Kiosk pay purchased inventory
+ *
  * @author : ${user}
  * @since: ${date}
  */

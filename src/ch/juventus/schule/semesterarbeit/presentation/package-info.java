@@ -1,5 +1,6 @@
 /**
  * The GUI for the project
+ *
  * @author : ${user}
  * @since: ${date}
  */

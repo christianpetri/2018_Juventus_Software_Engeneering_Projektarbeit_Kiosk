@@ -1,6 +1,6 @@
 /**
- *
  * The factory that creates all the different articles
+ *
  * @author : ${user}
  * @since: ${date}
  */

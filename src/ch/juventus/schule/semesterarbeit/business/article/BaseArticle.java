@@ -3,7 +3,8 @@ package ch.juventus.schule.semesterarbeit.business.article;
 import java.util.Objects;
 
 /**
- *  BaseArticle provides the foundation for all articles that are sold in the kiosk and the supplier can supply
+ * BaseArticle provides the foundation for all articles that are sold in the kiosk and the supplier can supply
+ *
  * @author : ${user}
  * @since: ${date}
  */

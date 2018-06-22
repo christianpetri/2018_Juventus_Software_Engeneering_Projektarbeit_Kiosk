@@ -3,7 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Text?>
-<GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" hgap="10" maxWidth="1.7976931348623157E308" minWidth="736.0"
+<GridPane xmlns:fx="http://javafx.com/fxml/1" alignment="CENTER" hgap="10" maxWidth="1.7976931348623157E308"
+          minWidth="736.0"
           prefHeight="336.0" prefWidth="736.0" vgap="10" xmlns="http://javafx.com/javafx/8.0.121"
           fx:controller="ch.juventus.schule.semesterarbeit.presentation.kiosk.inventory.add.ArticlesForInventoryController">
 

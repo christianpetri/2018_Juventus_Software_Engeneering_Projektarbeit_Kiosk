@@ -19,7 +19,8 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- *  The controller for the scene: customer add articles into the shopping basket
+ * The controller for the scene: customer add articles into the shopping basket
+ *
  * @author : ${user}
  * @since: ${date}
  */

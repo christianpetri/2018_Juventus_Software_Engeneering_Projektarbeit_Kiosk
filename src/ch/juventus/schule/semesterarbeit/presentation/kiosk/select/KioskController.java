@@ -1,8 +1,8 @@
 package ch.juventus.schule.semesterarbeit.presentation.kiosk.select;
 
+import ch.juventus.schule.semesterarbeit.business.exporter.ExcelExporter;
 import ch.juventus.schule.semesterarbeit.business.kiosk.Kiosk;
 import ch.juventus.schule.semesterarbeit.business.multithreading.CustomerThread;
-import ch.juventus.schule.semesterarbeit.business.exporter.ExcelExporter;
 import ch.juventus.schule.semesterarbeit.persistence.DataBaseAccessMock;
 import ch.juventus.schule.semesterarbeit.presentation.SceneDataHandler;
 import ch.juventus.schule.semesterarbeit.presentation.SceneStageHandler;
@@ -33,11 +33,11 @@ public class KioskController {
     @FXML
     public Button createKiosk;
     @FXML
-    private TableView<Kiosk> tableViewKiosk;
+    private TableView<KioskTableViewValue> tableViewKiosk;
     @FXML
-    private TableColumn<Kiosk, String> kioskName, kioskLocation, createCustomerForShoppingBasket, orderArticles, getInventory;
+    private TableColumn<KioskTableViewValue, String> kioskName, kioskLocation, createCustomerForShoppingBasket, orderArticles, getInventory;
     @FXML
-    private TableColumn<Kiosk, Boolean> kioskStatus;
+    private TableColumn<KioskTableViewValue, Boolean> kioskStatus;
     @FXML
     private Label kioskMessage;
     private DataBaseAccessMock dataBaseAccessMock = DataBaseAccessMock.getInstance();
@@ -52,7 +52,7 @@ public class KioskController {
         kioskMessage.setText("");
         tableViewKiosk.setOnMouseClicked(event -> {
             sceneDataHandler.resetSceneDataHandler();
-            Kiosk kiosk = tableViewKiosk.getSelectionModel().getSelectedItems().get(0);
+            Kiosk kiosk = tableViewKiosk.getSelectionModel().getSelectedItems().get(0).getKiosk();
             boolean isKioskOpen = kiosk.isKioskOpen();
             if (isKioskToggleEvent(event)) {
                 toggleKioskState(kiosk);
@@ -79,9 +79,9 @@ public class KioskController {
         tableViewKiosk.getItems().setAll(parseKioskList());
     }
 
-
-    private Set<Kiosk> parseKioskList() {
-        return dataBaseAccessMock.getKiosks();
+    private Set<KioskTableViewValue> parseKioskList() {
+        KioskTableViewValueFactory kioskTableViewValueFactory = new KioskTableViewValueFactory(dataBaseAccessMock.getKiosks());
+        return kioskTableViewValueFactory.getKiosksPlaceholder();
     }
 
     @FXML
@@ -151,7 +151,7 @@ public class KioskController {
 
     private void exportInventoryToExcel(Kiosk kiosk) {
         LOGGER.info("Kiosk Inventar");
-        LOGGER.info( kiosk.getInventory().toString());
+        LOGGER.info(kiosk.getInventory().toString());
         kioskMessage.setTextFill(Color.BLACK);
         kioskMessage.setText("Inventar in Excel exportiert");
         ExcelExporter excelExporter = new ExcelExporter();
@@ -173,7 +173,7 @@ public class KioskController {
         LOGGER.info("Artikel bestellen");
         sceneDataHandler.setKiosk(kiosk);
         try {
-            sceneStageHandler.renderScene((Stage) tableViewKiosk.getScene().getWindow(), "kiosk/inventory/add/ArticlesForInventroy", "Warenkorb erstellen");
+            sceneStageHandler.renderScene((Stage) tableViewKiosk.getScene().getWindow(), "kiosk/inventory/add/ArticlesForInventroy", "Artikel bestellen");
         } catch (IOException e) {
             e.printStackTrace();
         }

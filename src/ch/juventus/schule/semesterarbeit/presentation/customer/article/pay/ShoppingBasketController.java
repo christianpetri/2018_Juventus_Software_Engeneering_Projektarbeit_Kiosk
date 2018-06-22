@@ -11,6 +11,7 @@ import java.io.IOException;
 
 /**
  * The controller for the scene: customer pay articles in the shopping basket
+ *
  * @author : ${user}
  * @since: ${date}
  */

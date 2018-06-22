@@ -1,5 +1,6 @@
 /**
  * Scene: Kiosk add inventory
+ *
  * @author : ${user}
  * @since: ${date}
  */
